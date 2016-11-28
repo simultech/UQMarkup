@@ -14,10 +14,10 @@ UQMarkup is a research project which allows students to receive various forms of
 User Manual
 ==================
 
-Guide for Administrators
-Guide for Academics
-Guide for Tutors
-Guide for Students
+* :ref:`Guide for Administrators`
+* :ref:`Guide for Academics`
+* :ref:`Guide for Tutors`
+* :ref:`Guide for Students`
 * :ref:`todo`
 
 
