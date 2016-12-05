@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1807" systemVersion="12B19" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Annotation" representedClassName="Annotation" syncable="YES">
+        <attribute name="annotationType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="colour" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="height" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="layer" optional="YES" attributeType="String" defaultValueString="toStudent" syncable="YES"/>
+        <attribute name="localFileName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pageNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" defaultValueString="Annotation" syncable="YES"/>
+        <attribute name="width" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="xPos" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="yPos" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="submission" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Submission" inverseName="annotations" inverseEntity="Submission" syncable="YES"/>
+    </entity>
+    <entity name="LibraryAnnotation" representedClassName="LibraryAnnotation" syncable="YES">
+        <attribute name="annotationType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="colour" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="height" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="inLibrary" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="localFileName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orderIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="pageNumber" optional="YES" attributeType="Integer 16" defaultValueString="1" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" defaultValueString="Annotation" syncable="YES"/>
+        <attribute name="width" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="xPos" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="yPos" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <entity name="Mark" representedClassName="Mark" syncable="YES">
+        <attribute name="projectId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="rubricId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="submission" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Submission" inverseName="marks" inverseEntity="Submission" syncable="YES"/>
+    </entity>
+    <entity name="Submission" representedClassName="Submission" syncable="YES">
+        <attribute name="courseUid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasLocalChanges" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="isPublished" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="localDirectoryName" attributeType="String" syncable="YES"/>
+        <attribute name="openedAtPage" optional="YES" attributeType="Integer 16" defaultValueString="1" syncable="YES"/>
+        <attribute name="projectId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selectedForModeration" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="submissionId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="annotations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Annotation" inverseName="submission" inverseEntity="Annotation" syncable="YES"/>
+        <relationship name="marks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Mark" inverseName="submission" inverseEntity="Mark" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Annotation" positionX="0" positionY="0" width="128" height="210"/>
+        <element name="LibraryAnnotation" positionX="0" positionY="0" width="128" height="210"/>
+        <element name="Mark" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="Submission" positionX="0" positionY="0" width="128" height="195"/>
+    </elements>
+</model>

@@ -1,0 +1,31 @@
+//
+// Prefix header for all source files of the 'Markup2' target in the 'Markup2' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+
+    #define MR_SHORTHAND
+    #import "CoreData+MagicalRecord.h"
+    #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:0.5]
+
+    #import "UIColor-Expanded.h"
+
+    #define _AFNETWORKING_ALLOW_INVALID_SSL_CERTIFICATES_
+
+#ifdef DEBUG
+#    define DLog(...) NSLog(__VA_ARGS__)
+#else
+#    define DLog(...) do {} while (0)
+#endif
+#define ALog(...) NSLog(__VA_ARGS__)
+
+#endif
+

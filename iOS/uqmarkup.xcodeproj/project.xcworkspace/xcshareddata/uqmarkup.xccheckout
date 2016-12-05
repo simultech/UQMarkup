@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>99FEFBD2-4C87-4C31-92A7-ADA9D39BBF58</string>
+	<key>IDESourceControlProjectName</key>
+	<string>uqmarkup</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5D4B3E32-9A0B-4913-9133-EC7DBADE20BB</key>
+		<string>https://github.com/simultech/Markup_2.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>uqmarkup.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5D4B3E32-9A0B-4913-9133-EC7DBADE20BB</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/simultech/Markup_2.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5D4B3E32-9A0B-4913-9133-EC7DBADE20BB</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5D4B3E32-9A0B-4913-9133-EC7DBADE20BB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Markup_2</string>
+		</dict>
+	</array>
+</dict>
+</plist>
