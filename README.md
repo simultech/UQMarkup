@@ -21,8 +21,9 @@ UQMarkup wouldn't be possible without the time, work and skill of a many number 
 For more information, please check out http://espace.library.uq.edu.au/view/UQ:321954 .
 
 ## Code Authors:
-- Andrew Dekker
-- Justin Marrington
+- Andrew Dekker (@simultech)
+- Justin Marrington (@howlingeverett)
+- Nurka (@nurmerey)
 
 ## License:
 Attribution required
