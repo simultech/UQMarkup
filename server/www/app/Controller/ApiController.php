@@ -57,14 +57,6 @@ class ApiController extends AppController {
 		parent::beforeFilter();
 	}
 	
-	function jojoIt($data) {
-		$myFile = "/var/www/html/_dev/app/tmp/jojo.txt";
-		$fh = fopen($myFile, 'a') or die("can't open file");
-		$stringData = print_r($data,true);
-		fwrite($fh, $stringData);
-		fclose($fh);
-	}
-	
 	function checkingCLI() {
 		echo 'perfect';
 		die();
