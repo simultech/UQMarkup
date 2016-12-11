@@ -56,7 +56,7 @@ class AppController extends Controller {
 	var $debug = false; //this will auto-get set to true if debugmode is true and its a developer
 	
 	function beforeFilter() {
-		if($_SERVER['SERVER_PORT'] != '443' && Configure::read('debug') == 0) {
+		if($_SERVER['SERVER_PORT'] != '443' && !Configure::read('local_server')) {
 			$this->forceSSL();
 		}
 		parent::beforeFilter();
