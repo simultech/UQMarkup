@@ -42,7 +42,7 @@ class ProjectsController extends AppController {
 			//check if they are a course coordinator
 			if($this->Ldap->isCourseCoordinator($courseuid)) {
 				$numberofprojectsadded = $this->loadProjectSubmissions($project);
-				$this->flash($numberofprojectsadded.' submissions added','/projects/submissionmanager/'.$project_id,true);
+				$this->flashMessage($numberofprojectsadded.' submissions added','/projects/submissionmanager/'.$project_id,true);
 			}
 		}
 	}
@@ -122,18 +122,18 @@ class ProjectsController extends AppController {
 				    }
 				    $filewrite = json_encode($fileobj);
 				    file_put_contents($file, $filewrite);
-				    $this->flash('Marks updated',$this->referer(),true);
+				    $this->flashMessage('Marks updated',$this->referer(),true);
 			    }
 			    $this->set('file',$file);
 			    $this->set('rubrics',$this->Rubric->find('all',array('order'=>array('Rubric.section'),'conditions'=>array('Rubric.project_id'=>$submission['Project']['id']))));
 			    $this->set('marks',json_decode(file_get_contents($file)));
 			    $this->set('submission',$submission);
 		    } else {
-			    $this->flash('Bad marks',$this->referer(),true);
+			    $this->flashMessage('Bad marks',$this->referer(),true);
 			    die();
 		    }
 		} else {
-			$this->flash('Bad marks',$this->referer(),true);
+			$this->flashMessage('Bad marks',$this->referer(),true);
 			die();
 		}
 	}
@@ -242,9 +242,9 @@ class ProjectsController extends AppController {
 					$this->Project->set($this->data);
 					if($this->Project->validates()) {
 						if($this->Project->save($this->data)) {
-							$this->flash('Assessment updated',$this->referer(),true);
+							$this->flashMessage('Assessment updated',$this->referer(),true);
 						} else {
-							$this->flash('Could not updated assessment','false');
+							$this->flashMessage('Could not updated assessment','false');
 						}
 					} else {
 						$formerrors = $this->Project->invalidFields();
@@ -639,9 +639,9 @@ class ProjectsController extends AppController {
 						}
 					}
 					if(sizeOf($errors) == 0) {
-						$this->flash('Submissions updated','false',true);
+						$this->flashMessage('Submissions updated','false',true);
 					} else {
-						$this->flash(implode(',',$errors),'false');
+						$this->flashMessage(implode(',',$errors),'false');
 					}
 				}
 				$this->Submission->unBindModel(array('hasMany' => array('Log')));
@@ -675,9 +675,9 @@ class ProjectsController extends AppController {
 			$this->Log->deleteAll(array('submission_id'=>$submission_id));
 			$this->Attachment->deleteAll(array('submission_id'=>$submission_id));
 			$this->Version->deleteAll(array('submission_id'=>$submission_id));
-			$this->flash('Submission Deleted',$this->referer(),true);
+			$this->flashMessage('Submission Deleted',$this->referer(),true);
 		} else {
-			$this->flash('Could not delete submission',$this->referer());
+			$this->flashMessage('Could not delete submission',$this->referer());
 		}
 		die();
 	}
@@ -750,7 +750,7 @@ class ProjectsController extends AppController {
 					$this->Rubric->create();
 					$this->Rubric->save($newrubric);
 				}
-				$this->flash('rubrics duplicated','/projects/rubrics/'.$project_id,true);
+				$this->flashMessage('rubrics duplicated','/projects/rubrics/'.$project_id,true);
 			}
 		}
 		die();
@@ -837,12 +837,12 @@ class ProjectsController extends AppController {
 								$line++;
 							}
 							if(!empty($errors)) {
-								$this->flash('Could not import rubric file at line '.($line+1).' - '.$errors[0],'false');
+								$this->flashMessage('Could not import rubric file at line '.($line+1).' - '.$errors[0],'false');
 							} else {
-								$this->flash('Imported rubrics',$this->referer(),true);
+								$this->flashMessage('Imported rubrics',$this->referer(),true);
 							}
 						} else {
-							$this->flash('Could not upload rubric file','false');
+							$this->flashMessage('Could not upload rubric file','false');
 						}
 						die();	
 					} else {
@@ -851,9 +851,9 @@ class ProjectsController extends AppController {
 						$this->Rubric->set($rubricdata);
 						if($this->Rubric->validates()) {
 						    if($this->Rubric->save($rubricdata)) {
-						    	$this->flash('Rubric added',$this->referer(),true);
+						    	$this->flashMessage('Rubric added',$this->referer(),true);
 						    } else {
-						    	$this->flash('Could not add rubric','false');
+						    	$this->flashMessage('Could not add rubric','false');
 						    }
 						} else {
 						    $formerrors = $this->Rubric->invalidFields();
@@ -897,7 +897,7 @@ class ProjectsController extends AppController {
 			//check if they are a course coordinator
 			if($this->Ldap->isCourseCoordinator($courseuid)) {
 				$this->Rubric->delete($rubric_id);
-				$this->flash('Rubric removed',$this->referer(),true);
+				$this->flashMessage('Rubric removed',$this->referer(),true);
 			}  else {
 				$this->permissionDenied('You are not a coordinator for this course');
 			}
@@ -928,9 +928,9 @@ class ProjectsController extends AppController {
 					$this->Rubric->set($rubricdata);
 					if($this->Rubric->validates()) {
 						if($this->Rubric->save($rubricdata)) {
-							$this->flash('Rubric updated','/projects/rubrics/'.$project['Project']['id'],true);
+							$this->flashMessage('Rubric updated','/projects/rubrics/'.$project['Project']['id'],true);
 						} else {
-							$this->flash('Could not update rubric','false');
+							$this->flashMessage('Could not update rubric','false');
 						}
 					} else {
 						$formerrors = $this->Rubric->invalidFields();
@@ -958,7 +958,7 @@ class ProjectsController extends AppController {
 			//check if they are a course coordinator
 			if($this->Ldap->isCourseCoordinator($courseuid)) {
 				$this->Tag->delete($tag_id);
-				$this->flash('Colour tag removed',$this->referer(),true);
+				$this->flashMessage('Colour tag removed',$this->referer(),true);
 			}  else {
 				$this->permissionDenied('You are not a coordinator for this course');
 			}
@@ -985,9 +985,9 @@ class ProjectsController extends AppController {
 					$this->Tag->set($this->data);
 					if($this->Tag->validates()) {
 						if($this->Tag->save($this->data)) {
-							$this->flash('Colour tag added',$this->referer(),true);
+							$this->flashMessage('Colour tag added',$this->referer(),true);
 						} else {
-							$this->flash('Could not add colour tag','false');
+							$this->flashMessage('Could not add colour tag','false');
 						}
 					} else {
 						$formerrors = $this->Tag->invalidFields();
@@ -1018,7 +1018,7 @@ class ProjectsController extends AppController {
 				if(isset($_FILES['csv']) && $_FILES['csv']['error'] == 0) {
 					$ext = pathinfo($_FILES['csv']['name'], PATHINFO_EXTENSION);
 					if($ext != 'csv') {
-						$this->flash('Please provide a CSV file','/projects/submissionmanager/'.$project_id);
+						$this->flashMessage('Please provide a CSV file','/projects/submissionmanager/'.$project_id);
 						die();
 					}
 					//file should be all good
@@ -1069,9 +1069,9 @@ class ProjectsController extends AppController {
 							foreach($invalidtutors as $invalidtutor) {
 								$invalidtutorstring .= $invalidtutor.', ';
 							}
-							$this->flash($identified.' Tutors assigned, could not assign tutors '.$invalidtutorstring,'/projects/submissionmanager/'.$project_id,true);
+							$this->flashMessage($identified.' Tutors assigned, could not assign tutors '.$invalidtutorstring,'/projects/submissionmanager/'.$project_id,true);
 						} else {
-							$this->flash($identified.' Tutors assigned','/projects/submissionmanager/'.$project_id,true);
+							$this->flashMessage($identified.' Tutors assigned','/projects/submissionmanager/'.$project_id,true);
 						}
 						fclose($handle);
 					}
@@ -1178,7 +1178,7 @@ class ProjectsController extends AppController {
 						}
 					}
 				}
-				$this->flash($identified.' students identified','/projects/submissionmanager/'.$project_id,true);
+				$this->flashMessage($identified.' students identified','/projects/submissionmanager/'.$project_id,true);
 				die();
 			} else {
 				$this->permissionDenied('You are not a coordinator for this course');
@@ -1283,7 +1283,7 @@ class ProjectsController extends AppController {
 						}
 					}
 				}
-				$this->flash($identified.' students identified','/projects/submissionmanager/'.$project_id,true);
+				$this->flashMessage($identified.' students identified','/projects/submissionmanager/'.$project_id,true);
 				die();
 			}
 		}
@@ -1335,7 +1335,7 @@ class ProjectsController extends AppController {
 						}
 					}
 				}
-				$this->flash($identified.' students identified','/projects/submissionmanager/'.$project_id,true);
+				$this->flashMessage($identified.' students identified','/projects/submissionmanager/'.$project_id,true);
 				die();
 			}
 		}
@@ -1446,7 +1446,7 @@ class ProjectsController extends AppController {
 				} else {
 					$publishedsubmissions = $publishedsubmissions.' submissions';
 				}
-				$this->flash('Published '.$publishedsubmissions.'','/projects/submissionmanager/'.$project_id,true);
+				$this->flashMessage('Published '.$publishedsubmissions.'','/projects/submissionmanager/'.$project_id,true);
 				die();
 			} else {
 				$this->permissionDenied('You are not a coordinator for this course');
@@ -1472,7 +1472,7 @@ class ProjectsController extends AppController {
 			//check if they are a course coordinator
 			if($this->Ldap->isCourseCoordinator($courseuid)) {
 				$this->Activity->delete($activity_id);
-				$this->flash('Process deleted','/projects/submissionhistory/'.$activity['Submission']['id'],true);
+				$this->flashMessage('Process deleted','/projects/submissionhistory/'.$activity['Submission']['id'],true);
 			}  else {
 				$this->permissionDenied('You are not a coordinator for this course');
 			}
@@ -1534,9 +1534,9 @@ class ProjectsController extends AppController {
 				$count++;
 			}
 			if($good) {
-				$this->flash('Students reassigned','/projects/submissionhistory/'.$submission_id,true);
+				$this->flashMessage('Students reassigned','/projects/submissionhistory/'.$submission_id,true);
 			} else {
-				$this->flash('Students could not all be assigned','/projects/submissionhistory/'.$submission_id,true);
+				$this->flashMessage('Students could not all be assigned','/projects/submissionhistory/'.$submission_id,true);
 			}
 		} else {
 			$this->permissionDenied('Not an authorised administrator');
@@ -1563,9 +1563,9 @@ class ProjectsController extends AppController {
 				
 				$filename = $filename.'.pdf';
 				if($this->Attachment->saveField('title',$filename)) {
-					$this->flash('Renamed submission file','/projects/submissionmanager/'.$project_id,true);
+					$this->flashMessage('Renamed submission file','/projects/submissionmanager/'.$project_id,true);
 				} else {
-					$this->flash('Could not rename submission file','/projects/submissionmanager/'.$project_id);					
+					$this->flashMessage('Could not rename submission file','/projects/submissionmanager/'.$project_id);					
 				}
 			}
 		}
@@ -1585,12 +1585,12 @@ class ProjectsController extends AppController {
 			//check if they are a course coordinator
 			if($this->Ldap->isCourseCoordinator($courseuid)) {
 				if(!isset($this->data['prepend']) || $this->data['prepend'] == '') {
-					$this->flash('Please add a prepend','/projects/submissionmanager/'.$project_id);
+					$this->flashMessage('Please add a prepend','/projects/submissionmanager/'.$project_id);
 				}
 				if(isset($_FILES['csv']) && $_FILES['csv']['error'] == 0) {
 					$ext = pathinfo($_FILES['csv']['name'], PATHINFO_EXTENSION);
 					if($ext != 'csv') {
-						$this->flash('Please provide a CSV file (Turnitin save as CSV from Excel)','/projects/submissionmanager/'.$project_id);
+						$this->flashMessage('Please provide a CSV file (Turnitin save as CSV from Excel)','/projects/submissionmanager/'.$project_id);
 					}
 					//file should be all good
 					if (($handle = fopen($_FILES['csv']['tmp_name'], "r")) !== FALSE) {
@@ -1664,13 +1664,13 @@ class ProjectsController extends AppController {
 									//die();
 								}
 							}
-							$this->flash($identified.' students identified','/projects/submissionmanager/'.$project_id,true);
+							$this->flashMessage($identified.' students identified','/projects/submissionmanager/'.$project_id,true);
 						}
 						fclose($handle);
 					}
 					
 				} else {
-					$this->flash('Please provide a CSV file (Turnitin save as CSV from Excel)','/projects/submissionmanager/'.$project_id);
+					$this->flashMessage('Please provide a CSV file (Turnitin save as CSV from Excel)','/projects/submissionmanager/'.$project_id);
 				}
 			}  else {
 				$this->permissionDenied('You are not a coordinator for this course');
@@ -1697,7 +1697,7 @@ class ProjectsController extends AppController {
 				if(isset($_FILES['csv']) && $_FILES['csv']['error'] == 0) {
 					$ext = pathinfo($_FILES['csv']['name'], PATHINFO_EXTENSION);
 					if($ext != 'csv') {
-						$this->flash('Please provide a CSV file (Turnitin save as CSV from Excel)','/projects/submissionmanager/'.$project_id);
+						$this->flashMessage('Please provide a CSV file (Turnitin save as CSV from Excel)','/projects/submissionmanager/'.$project_id);
 						die();
 					}
 					//file should be all good
@@ -1756,7 +1756,7 @@ class ProjectsController extends AppController {
 								}
 						    }
 						}
-						$this->flash($identified.' submissions assigned','/projects/submissionmanager/'.$project_id,true);
+						$this->flashMessage($identified.' submissions assigned','/projects/submissionmanager/'.$project_id,true);
 						fclose($handle);
 					}
 					
@@ -1786,7 +1786,7 @@ class ProjectsController extends AppController {
 				if(isset($_FILES['csv']) && $_FILES['csv']['error'] == 0) {
 					$ext = pathinfo($_FILES['csv']['name'], PATHINFO_EXTENSION);
 					if($ext != 'csv') {
-						$this->flash('Please provide a CSV file (Turnitin save as CSV from Excel)','/projects/submissionmanager/'.$project_id);
+						$this->flashMessage('Please provide a CSV file (Turnitin save as CSV from Excel)','/projects/submissionmanager/'.$project_id);
 						die();
 					}
 					//file should be all good
@@ -1832,7 +1832,7 @@ class ProjectsController extends AppController {
 								$identified++;
 						    }
 						}
-						$this->flash($identified.' submissions renamed','/projects/submissionmanager/'.$project_id,true);
+						$this->flashMessage($identified.' submissions renamed','/projects/submissionmanager/'.$project_id,true);
 						fclose($handle);
 					}
 					
@@ -1862,9 +1862,9 @@ class ProjectsController extends AppController {
 					if($this->Project->validates()) {
 						if($this->Project->save($this->data)) {
 							$this->refreshWebdavPermissions($course['Course']['id']);
-							$this->flash('Assessment created','/course/admin/'.$courseuid,true);
+							$this->flashMessage('Assessment created','/course/admin/'.$courseuid,true);
 						} else {
-							$this->flash('Could not create assessment','false');
+							$this->flashMessage('Could not create assessment','false');
 						}
 					} else {
 						$formerrors = $this->Project->invalidFields();

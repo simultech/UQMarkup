@@ -71,7 +71,7 @@ class AssessmentController extends AppController {
 				$logactions = true;
 			}
 			if(!$valid) {
-				$this->flash('Permission denied','/');
+				$this->flashMessage('Permission denied','/');
 			}
 			$this->set('logactions',$logactions);
 			$this->set('annots',$this->annotations($submission_id));

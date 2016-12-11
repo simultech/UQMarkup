@@ -104,9 +104,9 @@ class PagesController extends AppController {
 			$emaildata['replyto'] = $this->data['email'];
 			$emaildata['content'] = $emailcontent;
 			if($this->email($emaildata)) {
-				$this->flash('Thank you for your feedback.','/',true);
+				$this->flashMessage('Thank you for your feedback.','/',true);
 			} else {
-				$this->flash('Could not send email',false);
+				$this->flashMessage('Could not send email',false);
 			}
 		}
 		$this->set('userdetails',$this->Ldap->userdetails);

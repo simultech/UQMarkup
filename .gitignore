@@ -1,2 +1,14 @@
 
 iOS/uqmarkup.xcodeproj/project.xcworkspace/xcuserdata/simultech.xcuserdatad/UserInterfaceState.xcuserstate
+
+server/www/app/Config/database.php
+
+server/www/app/tmp/logs/error.log
+
+server/www/app/tmp/cache/persistent/myapp_cake_core_file_map
+
+server/www/app/tmp/cache/persistent/myapp_cake_core_cake_dev_en-us
+
+server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup_list
+
+server/www/app/tmp/cache/persistent/myapp_cake_core_method_cache

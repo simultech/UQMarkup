@@ -56,7 +56,7 @@ class AppController extends Controller {
 	var $debug = false; //this will auto-get set to true if debugmode is true and its a developer
 	
 	function beforeFilter() {
-		if($_SERVER['SERVER_PORT'] != '443') {
+		if($_SERVER['SERVER_PORT'] != '443' && Configure::read('debug') == 0) {
 			$this->forceSSL();
 		}
 		parent::beforeFilter();
@@ -85,7 +85,7 @@ class AppController extends Controller {
 		die();
 	}
 	
-	function flash($message,$redirect,$goodmessage=false) {
+	function flashMessage($message,$redirect,$goodmessage=false) {
 		if($goodmessage) {
 			$this->Session->setFlash($message,'flash_success');
 		} else {

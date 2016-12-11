@@ -72,7 +72,7 @@ class TutorController extends AppController {
 			if(!empty($_FILES) && isset($_FILES['uq_id_list']) && $_FILES['uq_id_list']['error'] == 0) {
 				$ext = pathinfo($_FILES['uq_id_list']['name'], PATHINFO_EXTENSION);
 				if($ext != 'csv') {
-					$this->flash('Please provide a CSV file',$this->referer());
+					$this->flashMessage('Please provide a CSV file',$this->referer());
 					die();
 				}
 				//file should be all good
@@ -101,16 +101,16 @@ class TutorController extends AppController {
 						//get cru 
 						$assignedusers += $this->assignStudent(trim($studentid),$this->Ldap->getUQID(),$course['Course']['id']);
 					}
-					$this->flash('Assigned '.$assignedusers.' students',$this->referer(),true);
+					$this->flashMessage('Assigned '.$assignedusers.' students',$this->referer(),true);
 				} else {
-					$this->flash('Could not open file',$this->referer());
+					$this->flashMessage('Could not open file',$this->referer());
 				}
 			} else {
 				//should be re-assigning of some kind
 				if(isset($this->data['course_id'])) {
 					$assignedusers = 0;
 					$assignedusers += $this->assignStudent($this->data['uq_id'],$this->Ldap->getUQID(),$this->data['course_id']);
-					$this->flash('Assigned '.$assignedusers.' students',$this->referer(),true);
+					$this->flashMessage('Assigned '.$assignedusers.' students',$this->referer(),true);
 				} else {
 					$submissions = $this->Submission->find('list',array('conditions'=>array('project_id'=>$this->data['project_id'])));
 					$identifyactivites = $this->Activity->find('all',array('conditions'=>array('submission_id'=>$submissions,'state_id'=>'1','meta'=>$this->data['uq_id']),'recursive'=>-1));
@@ -145,9 +145,9 @@ class TutorController extends AppController {
 								$output .= 'Submission '.$identifyactivity['Activity']['submission_id'].' reassigned.  ';
 							}
 						}
-						$this->flash($output,$this->referer(),true);
+						$this->flashMessage($output,$this->referer(),true);
 					} else {
-						$this->flash('Could not find a submission for '.$this->data['uq_id'],$this->referer());
+						$this->flashMessage('Could not find a submission for '.$this->data['uq_id'],$this->referer());
 					}
 				}
 			}
@@ -241,15 +241,15 @@ class TutorController extends AppController {
 			$existingassigned = $this->Assignedstudent->find('first',array('conditions'=>array('courseroleuser_id'=>$studentcourseroleuser['CourseRoleUser']['id'],'marker_id'=>$this->Ldap->getUserID()),'recursive'=>-1));
 			if($existingassigned) {
 				if($this->Assignedstudent->delete($existingassigned['Assignedstudent']['id'])) {
-					$this->flash('Unassigned student',$this->referer(),true);
+					$this->flashMessage('Unassigned student',$this->referer(),true);
 				} else {
-					$this->flash('Could not unassign student',$this->referer());
+					$this->flashMessage('Could not unassign student',$this->referer());
 				}
 			} else {
-				$this->flash('Invalid student',$this->referer());
+				$this->flashMessage('Invalid student',$this->referer());
 			}
 		} else {
-			$this->flash('Invalid student',$this->referer());
+			$this->flashMessage('Invalid student',$this->referer());
 		}
 	}
 }

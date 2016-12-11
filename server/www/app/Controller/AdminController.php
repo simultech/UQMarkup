@@ -95,7 +95,7 @@ class AdminController extends AppController {
 					//echo '<pre>';
 					//print_r($this->data);
 					//die();
-					$this->flash('Marks updated',$this->referer(),true);
+					$this->flashMessage('Marks updated',$this->referer(),true);
 				}
 			} else {
 				$this->permissionDenied('You are not a coordinator for this course');

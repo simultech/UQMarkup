@@ -43,12 +43,12 @@ class CourseController extends AppController {
 							$this->refreshClassList($course);
 						}
 						$this->refreshWebdavPermissions($association['course_id']);
-						$this->flash('Course created','/',true);
+						$this->flashMessage('Course created','/',true);
 					} else {
-						$this->flash('Could not create course','/');
+						$this->flashMessage('Could not create course','/');
 					}
 				} else {
-					$this->flash('Could not create course, course already exists','/');
+					$this->flashMessage('Could not create course, course already exists','/');
 					$formerrors = $this->Course->invalidFields();
 					$this->set('formerrors',$formerrors);
 					print_r($formerrors);
@@ -92,12 +92,12 @@ class CourseController extends AppController {
 						//save the relationship
 						if($this->CourseRoleUser->save(array('course_id'=>$this->data['course_id'],'role_id'=>$this->data['role_id'],'user_id'=>$user_id))) {
 							$this->refreshWebdavPermissions($this->data['course_id']);	
-							$this->flash('Staff member added',$this->referer(),true);
+							$this->flashMessage('Staff member added',$this->referer(),true);
 						} else {
-							$this->flash('Could not add staff member','false');
+							$this->flashMessage('Could not add staff member','false');
 						}
 					} else {
-						$this->flash('Not a valid UQ ID','false');
+						$this->flashMessage('Not a valid UQ ID','false');
 					}
 				}
 			}  else {
@@ -128,12 +128,12 @@ class CourseController extends AppController {
 					}
 					if($candelete) {
 						$this->CourseRoleUser->delete($association['CourseRoleUser']['id']);
-						$this->flash('Staff member removed',$this->referer(),true);
+						$this->flashMessage('Staff member removed',$this->referer(),true);
 					} else {
-						$this->flash('Could not remove staff member',$this->referer());
+						$this->flashMessage('Could not remove staff member',$this->referer());
 					}
 				} else {
-					$this->flash('Not a valid association',$this->referer());
+					$this->flashMessage('Not a valid association',$this->referer());
 				}
 			}  else {
 				$this->permissionDenied('You are not a coordinator for this course');
@@ -153,7 +153,7 @@ class CourseController extends AppController {
 			    if(!empty($_FILES) && isset($_FILES['uq_id_list']) && $_FILES['uq_id_list']['error'] == 0) {
 			    	$ext = pathinfo($_FILES['uq_id_list']['name'], PATHINFO_EXTENSION);
 			    	if($ext != 'csv') {
-			    		$this->flash('Please provide a CSV file',$this->referer());
+			    		$this->flashMessage('Please provide a CSV file',$this->referer());
 			    		die();
 			    	}
 			    	//file should be all good
@@ -184,9 +184,9 @@ class CourseController extends AppController {
 			    				$assignedusers += $this->assignStudent(trim($student),trim($tutorassign),$course['Course']['id']);
 			    			}
 			    		}
-			    		$this->flash('Assigned '.$assignedusers.' students',$this->referer(),true);
+			    		$this->flashMessage('Assigned '.$assignedusers.' students',$this->referer(),true);
 			    	} else {
-			    		$this->flash('Could not open file',$this->referer());
+			    		$this->flashMessage('Could not open file',$this->referer());
 			    	}
 			    }
 			}
@@ -207,7 +207,7 @@ class CourseController extends AppController {
 				$this->compareClassLists($course);
 			}
 		}
-		$this->flash('Course list refreshed','/course/admin/'.$courseuid,true);
+		$this->flashMessage('Course list refreshed','/course/admin/'.$courseuid,true);
 	}
 	
 	public function refreshlist($courseuid) {
@@ -224,7 +224,7 @@ class CourseController extends AppController {
 				$this->refreshClassList($course);
 			}
 		}
-		$this->flash('Course list refreshed','/course/admin/'.$courseuid,true);
+		$this->flashMessage('Course list refreshed','/course/admin/'.$courseuid,true);
 	}
 	
 	public function admin($courseuid,$showclasslist='') {
@@ -298,9 +298,9 @@ class CourseController extends AppController {
 							if(!empty($course)) {
 								$this->refreshClassList($course);
 							}
-							$this->flash('Course updated','/course/admin/'.$data['uid'],true);
+							$this->flashMessage('Course updated','/course/admin/'.$data['uid'],true);
 						} else {
-							$this->flash('Could not update course','false');
+							$this->flashMessage('Could not update course','false');
 						}
 					} else {
 						$formerrors = $this->Course->invalidFields();
@@ -337,7 +337,7 @@ class CourseController extends AppController {
 				if(isset($_FILES['csv']) && $_FILES['csv']['error'] == 0) {
 					$ext = pathinfo($_FILES['csv']['name'], PATHINFO_EXTENSION);
 					if($ext != 'csv') {
-						$this->flash('Please provide a CSV file','/course/managestaff/'.$course['Course']['uid']);
+						$this->flashMessage('Please provide a CSV file','/course/managestaff/'.$course['Course']['uid']);
 						die();
 					}
 					//file should be all good
@@ -391,7 +391,7 @@ class CourseController extends AppController {
 							}
 						}
 						$this->refreshWebdavPermissions($course_id);
-						$this->flash($staffadded.' staff members added.'.$badstaffstring,'/course/managestaff/'.$course['Course']['uid'],true);
+						$this->flashMessage($staffadded.' staff members added.'.$badstaffstring,'/course/managestaff/'.$course['Course']['uid'],true);
 					}
 				}
 			}  else {

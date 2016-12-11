@@ -82,13 +82,15 @@
 					<ul class="breadcrumb">
 						<?php
 							$bci=1;
-							foreach($breadcrumbs as $bcurl=>$bcname) {
-								if($bci == sizeOf($breadcrumbs)) {
-									echo '<li class="active">'.$bcname.'</li>';
-								} else {
-									echo '<li><a href="'.$baseURL.$bcurl.'">'.$bcname.'</a><span class="divider">/</span></li>';	
+							if(isset($breadcrumbs)) {
+								foreach($breadcrumbs as $bcurl=>$bcname) {
+									if($bci == sizeOf($breadcrumbs)) {
+										echo '<li class="active">'.$bcname.'</li>';
+									} else {
+										echo '<li><a href="'.$baseURL.$bcurl.'">'.$bcname.'</a><span class="divider">/</span></li>';	
+									}
+									$bci++;
 								}
-								$bci++;
 							}
 						?>
 					</ul>
