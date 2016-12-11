@@ -256,7 +256,6 @@ class SurveysController extends AppController {
 		}
 	}
 	
-	//https://uqmarkup.ceit.uq.edu.au/_dev/surveys/survey/student/16
 	public function survey($survey_name=false,$project_id=false,$alwaysshow=false) {
 		if(!$project_id || !$survey_name) {
 			$this->permissionDenied('Invalid survey');

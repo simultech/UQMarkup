@@ -2078,7 +2078,7 @@ Initial release for 2013
 		$emailcontent .= "Please note that this feedback is only available to you, and will not be sent through to the student.\n";
 		$emailcontent .= "Any changes that result from this feedback should be performed on your own device with your existing markup.\n";
 		$emailcontent .= "To view the feedback, please click on this link:\n";
-		$emailcontent .= "https://uqmarkup.ceit.uq.edu.au/_dev/assessment/view_moderation/".$this->encodeSubmissionID($submission_id)."\n\n";
+		$emailcontent .= Configure::read('url_base')."/_dev/assessment/view_moderation/".$this->encodeSubmissionID($submission_id)."\n\n";
 		$emailcontent .= "(best viewed on either Google Chrome or Firefox)";
 		
 		$markeractivities = $this->Activity->find('all',array('conditions'=>array('state_id'=>'4','submission_id'=>$submission_id),'recursive'=>-1));
