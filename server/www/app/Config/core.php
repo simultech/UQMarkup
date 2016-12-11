@@ -1,4 +1,6 @@
 <?php
+
+  require_once('private.php');
 /**
  * This is core configuration file.
  *
