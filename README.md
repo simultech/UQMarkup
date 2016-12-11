@@ -23,7 +23,7 @@ For more information, please check out http://espace.library.uq.edu.au/view/UQ:3
 ## Code Authors:
 - Andrew Dekker (@simultech)
 - Justin Marrington (@howlingeverett)
-- Nurka (@nurmerey)
+- Nurmerey (@nurmerey)
 
 ## License:
 Attribution required
