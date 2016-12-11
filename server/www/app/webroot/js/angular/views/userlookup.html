@@ -1,0 +1,16 @@
+<div>
+	<form class="search-field" ng-submit="doSearch()">
+		<div class="input-append">
+			<input type="submit" value="User Lookup Helper" class="btn btn-primary">
+	    	<input type="text" ng-model="searchKeyword" ng-change="doSearch()">
+	    	<button class="btn" ng-disabled="searchFilter == 'students'" ng-click="setSearchFilter('students')">Students</button>
+	    	<button class="btn" ng-disabled="searchFilter == 'markers'" ng-click="setSearchFilter('markers')">Markers</button>
+		</div>
+    </form>
+	<ul class="userlist">
+    	<li ng-repeat="user in users" jq:animate="dropdown;250">
+        	<p class="title" ng-click="doCopyUser();">{{user.username}}: {{user.name}}</p>
+        </li>
+	</ul>
+</div>
+

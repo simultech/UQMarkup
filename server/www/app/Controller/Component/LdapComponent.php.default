@@ -1,0 +1,214 @@
+<?php
+
+class LdapComponent extends Component {
+	
+	var $controller;
+	var $userdetails = array();
+	var $loggedin = false;
+	var $loginroute = '/users/login';
+	var $referer = '/';
+	var $admins = array('uqadekke');
+	var $adminemails = array('uqadekke@uq.edu.au');
+	var $basedn = "";
+	var $ldapurl = "ldap.uq.edu.au";
+	var $ldapmin = array(
+		'dn'=>'',
+		'pw'=>''
+	);
+	var $semester = 2;
+	var $sessionhash = '';
+	
+	function initialize(&$controller) {
+		$this->controller = $controller;
+		if($this->controller->Session->check('Auth.userdetails')) {
+			$this->loggedin = true;
+			$this->userdetails = $this->controller->Session->read('Auth.userdetails');
+			$this->sessionhash = $this->controller->Session->read('Auth.sessionhash');
+		}
+	}
+	
+	public function isCourseCoordinator($courseuid) {
+		$user_id = $this->getUserIDForUQLogin($this->getUQID());
+		$role_id = $this->controller->getRoleID('Course Coordinator');
+		$course = $this->controller->Course->find('first',array('conditions'=>array('uid'=>$courseuid),'recursive'=>-1));
+		$course_id = $course['Course']['id'];
+		
+		$count = $this->controller->CourseRoleUser->find('count',array('conditions'=>array('role_id'=>$role_id,'course_id'=>$course_id,'user_id'=>$user_id)));
+		if($count > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public function getUserIDForUQLogin($uqid) {
+		$existinguser = $this->controller->User->find('first',array('conditions'=>array('uqid'=>$uqid)));
+		//If a user exists
+		if(!empty($existinguser)) {
+			return $existinguser['User']['id'];
+		} else {
+			//Create the user
+			$details = $this->lookupuser($uqid);
+			if($details['count'] > 0) {
+				$userdata = array();
+				$userdata['uqid'] = $uqid;	
+				$userdata['name'] = $details[0]['cn'][0];
+				$userdata['email'] = $details[0]['mail'][0];
+				$this->controller->User->create();
+				if($this->controller->User->save($userdata)) {
+					return $this->controller->User->id;
+				}
+			}
+			return -1;
+		}
+		return -1;
+	}
+	
+	public function isAdmin() {
+		if(in_array($this->getUQID(), $this->admins)) {
+			if($this->getUQID() == 'uqadekke' && $this->controller->debugmode) {
+				$this->controller->debug = true;
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public function getUQID() {
+		if(isset($this->userdetails[0])) {
+			return $this->userdetails[0]['uid'][0];
+		} else {
+			return '';
+		}
+	}
+	
+	public function getUserID() {
+		return $this->getUserIDForUQLogin($this->getUQID());
+	}
+	
+	public function referer() {
+		if($this->controller->Session->check('Auth.referer')) {
+			return $this->controller->Session->read('Auth.referer');
+		} else {
+			return $this->referer;
+		}
+	}
+	
+	public function auth() {
+		if(!$this->loggedin()) {
+			$this->setReferrer();
+			$this->controller->redirect($this->loginroute);
+		}
+	}
+	
+	public function setReferrer() {
+		if(strpos($this->controller->request->here, "/users/login") === false && strpos($this->controller->request->here, "/pages/ethicalclearance") === false) {
+			$this->controller->Session->write('Auth.referer',str_replace($this->controller->request->base,"",$this->controller->request->here));
+		}
+	}
+	
+	public function loggedin() {
+		if(!$this->loggedin) {
+			$this->setReferrer();
+		}
+		$this->controller->set('loggedIn',true);
+		$this->controller->set('userid',$this->getUQID());
+		return $this->loggedin;
+	}
+	
+	public function getClassList($coursecode,$year,$semester) {
+		$connection = ldap_connect($this->ldapurl);
+		$ldapusers = array();
+	 	if(ldap_bind($connection,$this->ldapmin['dn'],$this->ldapmin['pw'])) {
+	 		$result = ldap_search($connection,$this->basedn,"(classes=$coursecode/$year/$semester)");
+	 		$ldapusers = ldap_get_entries($connection,$result);
+	 		ldap_unbind($connection);
+	 	}
+	 	unset($ldapusers['count']);
+	 	$users = array();
+	 	foreach($ldapusers as $ldapuser) {
+	 		$user = array();
+	 		$user['uqid'] = $ldapuser['uid'][0];
+	 		$user['email'] = $ldapuser['mail'][0];
+	 		$user['name'] = $ldapuser['cn'][0];
+	 		$users[] = $user;
+	 	}
+	 	return $users;
+	}
+	
+	function lookupuser($uqid) {
+		$connection = ldap_connect($this->ldapurl);
+		$userdetails = array();
+	 	if(ldap_bind($connection,$this->ldapmin['dn'],$this->ldapmin['pw'])) {
+	 		$result = ldap_search($connection,$this->basedn,"(uid=$uqid)");
+		 	$userdetails = ldap_get_entries($connection,$result);
+	 		ldap_unbind($connection);
+	 	}
+	 	return $userdetails;
+	}
+	
+	public function login($username,$password,$rememberme=false) {
+	 	$connection = ldap_connect($this->ldapurl);
+	 	if(ldap_bind($connection)) {
+		 	$result = ldap_search($connection,$this->basedn,"(uid=$username)");
+		 	$info = ldap_get_entries($connection,$result);
+		 	ldap_unbind($connection);
+		 	if($info['count'] > 0) {
+			 	$userdn = $info[0]['dn'];
+			 	$connection = ldap_connect($this->ldapurl);
+			 	if(@ldap_bind($connection,$userdn,$password)) {
+			 		if($rememberme) {
+				 		Configure::write('Session.timeout',43200);
+			 		}
+			 		$result = ldap_search($connection,$this->basedn,"(uid=$username)");
+			 		$info = ldap_get_entries($connection,$result);
+			 		$this->loggedin = true;
+			 		$this->userdetails = $info;
+			 		//print_r(json_encode($info));
+			 		//die();
+			 		$this->sessionhash = substr(hash("sha512",rand()),0,44);
+			 		$this->controller->Session->write('Auth.userdetails', $this->userdetails);
+			 		$this->controller->Session->write('Auth.loggedin', $this->loggedin);
+			 		$this->controller->Session->write('Auth.sessionhash', $this->sessionhash);
+			 		return array($this->userdetails);
+			 	} else {
+			 		$this->destroysession();
+				 	return array('error'=>'Invalid password');
+			 	}
+			 	//$result = ldap_search($connection,$this->basedn,"(prism=89133)");
+			 	//$info = ldap_get_entries($connection,$result);
+		 	} else {
+		 		$this->destroysession();
+			 	return array('error'=>'Invalid user');
+		 	}
+	 	} else {
+	 		$this->destroysession();
+	 		return array('error'=>'Could not connect');
+	 	}
+ 	}
+ 	
+ 	function logout() {
+	 	$this->destroysession();
+ 	}
+ 	
+ 	function destroysession() {
+ 		$this->loggedin = false;
+ 		$this->userdetails = array();
+	 	$this->controller->Session->delete('Auth');
+ 	}
+	
+	function startup() {
+		
+	}
+	
+	function beforeRender() {
+		
+	}
+	
+	function shutdown() {
+		
+	}
+	
+}
+
+?>

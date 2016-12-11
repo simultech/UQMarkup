@@ -1,0 +1,17 @@
+{"locations":[
+	{
+		"id":"UQ",
+		"name":"University of Queensland",
+		"url":"https://uqmarkup.ceit.uq.edu.au/_dev/"
+	},
+        {
+                "id":"Auckland",
+                "name":"University of Auckland",
+                "url":"https://facs.fmhs.auckland.ac.nz/_dev/"
+        },
+        {
+                "id":"USYD_Test",
+                "name":"University of Sydney Test",
+                "url":"https://uat-scilearn.sydney.edu.au/markup2/www/html/_dev/"
+        },
+]}
