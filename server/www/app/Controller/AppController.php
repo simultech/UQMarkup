@@ -31,6 +31,9 @@ App::uses('Controller', 'Controller');
  * @package       app.Controller
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
+
+define('__BASE_URL__', Configure::read('url_base_relative'));
+
 class AppController extends Controller {
 
 	var $breadcrumbs = array();
@@ -42,7 +45,7 @@ class AppController extends Controller {
 	var $states = array();
 	var $logtypes = array();
 	
-	var $baseURL = '/_dev';
+	var $baseURL = __BASE_URL__;
 	
 	var $webdavdir = '/var/www/webdav/uploads/';
 	var $binarydir = '/var/www/webdav/binary/';
@@ -370,21 +373,7 @@ function getAudioDuration($audiopath) {
 		    						echo "Not overwriting files";
 		    						die();
 		    					}
-		    				}/* else if($extn == 'ppt') {
-		    					$test = array();
-		    					putenv('URE_BOOTSTRAP=vnd.sun.star.pathname:/usr/lib64/libreoffice/program/fundamentalrc');
-		    					putenv('UNO_PATH=/usr/lib64/libreoffice/program');
-		    					putenv('LD_LIBRARY_PATH=/usr/lib64/libreoffice/program:/usr/lib64/libreoffice/basis-link/ure-link/lib');
-		    					$conversion = '/var/www/webdav/to_pdf.sh /var/www/jojo/a.ppt';//'.$folder.'/'.$file;
-		    					//$conversion = 'unoconv -vvv --listener &';
-		    					//$conversion = '/usr/lib64/openoffice/program/soffice.bin -headless -nofirststartwizard -accept="socket,host=localhost,port=8100;urp;StarOffice.Service';
-		    					//$conversion = 'which python';
-		    					//$conversion = '/usr/bin/unoconv --listener -vvv';
-		    					echo $conversion;
-		    					$response = exec($conversion);
-		    					print_r($jojo);
-		    					echo 'done';
-		    				}*/
+		    				}
 		    			}
 		    		}
    		    	}
