@@ -1,13 +1,14 @@
 <?php
 
 require_once("XML/Serializer.php");
+
 App::uses('AppController', 'Controller');
 
 class AdminController extends AppController {
 
 	public $name = 'Admin';
 
-	public $uses = array('Course','CourseRoleUser','Project','Tag','Rubric','Submission','Version','Surveyresult','Attachment','Activity','Log','Aggregatedmark');
+	public $uses = array('Course','CourseRoleUser','Project','Tag','Rubric','Submission','Version','Surveyresult','Attachment','Activity','Log','Aggregatedmark','Adminuser');
 	
 	public $components = array('Ldap');
 	
@@ -1477,7 +1478,13 @@ class AdminController extends AppController {
 	}
 	
 	public function index() {
-		
+		$this->breadcrumbs = array('/admin/'=>'Manage Administrators');
+		if($this->Ldap->isAdmin()) {
+			$admins = $this->Adminuser->find('all');
+			$this->set('admins', $admins);
+		} else {
+			$this->permissionDenied('You are not an administrator');
+		}
 	}
 	
 	function sortentries($a,$b) {

@@ -32,3 +32,13 @@ server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__logs
 server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__courses
 
 server/www/app/Config/private.php
+
+server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__adminusers
+
+server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__assignedstudents
+
+server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__attachments
+
+server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__roles
+
+server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup_adminusers

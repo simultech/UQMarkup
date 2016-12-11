@@ -3,6 +3,10 @@ UQMarkup research project.
 
 UQMarkup is an open source assessment tool, allowing users to quickly and effectively mark student assignments including in-situ audio annotations.  UQMarkup also provides a many learning analytics features.
 
+## Requirements:
+PHP 5.4
+pear install XML_Serializer-0.21.0
+
 ## Creators:
 UQMarkup wouldn't be possible without the time, work and skill of a many number of people:
 
