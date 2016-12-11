@@ -12,3 +12,23 @@ server/www/app/tmp/cache/persistent/myapp_cake_core_cake_dev_en-us
 server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup_list
 
 server/www/app/tmp/cache/persistent/myapp_cake_core_method_cache
+
+server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__activities
+
+server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__course__role__users
+
+server/www/app/tmp/cache/persistent/myapp_cake_core_cake_en-us
+
+server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__users
+
+server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__submissions
+
+server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__states
+
+server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__projects
+
+server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__marks
+
+server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__logs
+
+server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__courses

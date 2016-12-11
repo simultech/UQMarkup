@@ -115,7 +115,7 @@ class Project extends AppModel {
 		)
 	);
 	
-	public function beforeSave() {
+	public function beforeSave($options = array()) {
 		if (!empty($this->data['Project']['start_date'])) {
 	    	$this->data['Project']['start_date'] = $this->dateFormatBeforeSave($this->data['Project']['start_date']);
     	}
