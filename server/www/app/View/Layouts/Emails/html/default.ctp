@@ -352,7 +352,7 @@
                                             <!-- *|IFNOT:ARCHIVE_PAGE|* -->
 											<td valign="top" width="190">
                                             	<div mc:edit="std_preheader_links">
-                                                	Is this email not displaying correctly?<br /><a href="https://uqmarkup.ceit.uq.edu.au<?php echo $baseURL; ?>/pages/contactus" target="_blank">Let us know</a>.
+                                                	Is this email not displaying correctly?<br /><a href="<?php echo Configure::read('url_base'); ?><?php echo $baseURL; ?>/pages/contactus" target="_blank">Let us know</a>.
                                                 </div>
                                             </td>
 											<!-- *|END:IF|* -->
@@ -373,7 +373,7 @@
                                             <td class="headerContent">
                                             
                                             	<!-- // Begin Module: Standard Header Image \\ -->
-                                            	<img src="https://uqmarkup.ceit.uq.edu.au<?php echo $baseURL; ?>/img/email_background.gif" style="max-width:600px;" id="headerImage campaign-icon" mc:label="header_image" mc:edit="header_image" mc:allowdesigner mc:allowtext />
+                                            	<img src="<?php echo Configure::read('url_base'); ?><?php echo $baseURL; ?>/img/email_background.gif" style="max-width:600px;" id="headerImage campaign-icon" mc:label="header_image" mc:edit="header_image" mc:allowdesigner mc:allowtext />
                                             	<!-- // End Module: Standard Header Image \\ -->
                                             
                                             </td>
@@ -418,7 +418,7 @@
                                                 <!-- // Begin Module: Standard Footer \\ -->
                                                 <table border="0" cellpadding="10" cellspacing="0" width="100%">
                                                     <tr>
-                                                        <td><p>This email was sent by <a href="https://uqmarkup.ceit.uq.edu.au<?php echo $baseURL; ?>">UQMarkup</a></p></td>
+                                                        <td><p>This email was sent by <a href="<?php echo Configure::read('url_base'); ?><?php echo $baseURL; ?>">UQMarkup</a></p></td>
                                                     </tr>
                                                 </table>
                                                 <!-- // End Module: Standard Footer \\ -->

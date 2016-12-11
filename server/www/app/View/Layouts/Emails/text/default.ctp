@@ -18,4 +18,4 @@
 ?>
 <?php echo $content_for_layout;?>
 
-This email was sent by UQMarkup - https://uqmarkup.ceit.uq.edu.au
+This email was sent by UQMarkup - <?php echo Configure::read('url_base'); ?>

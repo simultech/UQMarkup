@@ -22,7 +22,7 @@
 	
 </style>
 <div>
-<p><a href="http://uqmarkup.ceit.uq.edu.au/studenttermsofuse.html" target="_blank">Open in a new page</a></p>
+<p><a href="<?php echo Configure::read('url_base'); ?>/studenttermsofuse.html" target="_blank">Open in a new page</a></p>
 <label>What sorts of feedback have you received in the past:</label><textarea name='pastfeedback' class='form-control'></textarea>
 </div>
 <div>

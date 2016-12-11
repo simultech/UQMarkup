@@ -6,7 +6,7 @@
 <script type='text/javascript' src="https://raw.github.com/DmitryBaranovskiy/raphael/master/raphael-min.js"></script>
 <h2>Statistics for Submission <?php echo $submission['Submission']['id']; ?></h2>
 <dl>
-	<dt>Link: </dt><dd><a target="_blank" href="<?php echo $submission['data']['uri']; ?>">https://uqmarkup.ceit.uq.edu.au<?php echo $submission['data']['uri']; ?></a></dd>
+	<dt>Link: </dt><dd><a target="_blank" href="<?php echo $submission['data']['uri']; ?>"><?php echo Configure::read('url_base'); ?><?php echo $submission['data']['uri']; ?></a></dd>
 	<dt>Submitted by: </dt><dd><?php echo $submission['data']['submittedby']['name']; ?> (<?php echo $submission['data']['submittedby']['uqid']; ?>)</dd>
 	<dt>Marked by: </dt><dd><?php echo $submission['data']['markedby']['name']; ?> (<?php echo $submission['data']['markedby']['uqid']; ?>)</dd>
 	<dt>Moderated: </dt>

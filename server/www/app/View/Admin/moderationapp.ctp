@@ -7,6 +7,6 @@
     This step should be completed using the Safari browser on the iPhone or iTouch or iPad!<br>
     <br><br>
     Click on this link when the first step has finished<br>
-    <a href="https://uqmarkup.ceit.uq.edu.au/_dev/MarkupMod.plist"> Click here to install the App</a>
+    <a href="<?php echo Configure::read('url_base'); ?>/_dev/MarkupMod.plist"> Click here to install the App</a>
 </body>
 </html>
