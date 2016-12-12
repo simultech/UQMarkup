@@ -38,7 +38,7 @@ class AppController extends Controller {
 
 	var $breadcrumbs = array();
 	
-	var $uses = array('Role','State','Logtype','User','Project','Course');
+	var $uses = array('Role','State','Logtype','User','Project','Course','Adminuser');
 	//var $components = array('Security');
 	
 	var $roles = array();

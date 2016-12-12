@@ -1,3 +1,10 @@
+<?php
+if(isset($superadmin)) {
+?>
+<a class="btn btn-warning" style="float:right;" href="/admin">Super Administration</a>
+<?php
+}
+?>
 <h2>Welcome to UQMarkup</h2>
 <div class="alert alert-info">
 	UQMarkup is a research project which allows students to receive various forms of in-situ feedback for their assignments.<br /><br />

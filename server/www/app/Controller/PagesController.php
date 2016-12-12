@@ -45,6 +45,9 @@ class PagesController extends AppController {
 	public function home() {
 		$debugshowall = false;
 		$userid = $this->Ldap->getUserID();
+		if($this->Ldap->isSuperAdmin()) {
+			$this->set('superadmin', true);
+		}
 		if($this->courseadmin) {
 			//find existing courses
 			$ccrole = $this->getRoleID('Course Coordinator');

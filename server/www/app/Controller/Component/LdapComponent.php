@@ -25,8 +25,8 @@ class LdapComponent extends Component {
 
 		// If faking LDAP then add fake user
 		if(Configure::read('ldap_fake')) {
-			$admins[] = 'uqsngo1';
-			$superadmins[] = 'uqsngo1';
+			$this->admins[] = 'uqsngo1';
+			$this->superadmins[] = 'uqsngo1';
 		}
 
 		// Setup the admin accounts
