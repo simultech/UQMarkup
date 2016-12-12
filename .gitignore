@@ -48,3 +48,5 @@ server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__rubrics
 server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__tags
 
 server/www/app/tmp/cache/persistent/myapp_cake_core_default_en-us
+
+iOS/Markup2/SecretKey.plist
