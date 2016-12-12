@@ -28,6 +28,7 @@
 
 static NSString *baseURL;
 static BOOL loaded = NO;
+static NSString *kApiSharedSecret = @"";
 
 static MarkupAPIController *instance;
 
@@ -53,6 +54,13 @@ static MarkupAPIController *instance;
         instance.uploadQueue = [[NSOperationQueue alloc] init];
         [instance.uploadQueue setMaxConcurrentOperationCount:1];
     }
+
+
+    //get secret key from plist
+    NSString *secretKeyPath = [[NSBundle mainBundle] pathForResource:@"SecretKey" ofType:@"plist"];
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: secretKeyPath];
+    NSString *secretKey = [dict objectForKey: @"SecretKey"];
+    kApiSharedSecret = secretKey;
 
     return instance;
 }

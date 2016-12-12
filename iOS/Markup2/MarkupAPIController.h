@@ -6,7 +6,7 @@
 #import <Foundation/Foundation.h>
 
 #define kApiBase @"https://uqmarkup.ceit.uq.edu.au/_dev/"
-#define kApiSharedSecret @""
+
 
 @interface MarkupAPIController : NSObject
 
