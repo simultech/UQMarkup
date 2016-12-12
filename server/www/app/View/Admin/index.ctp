@@ -30,7 +30,7 @@
 <form class="well" method="POST" action="/admin/index_add">
 	<?php
 		echo $this->element('formfield',array('label'=>'UQ Username','placeholder'=>'UQ Username','id'=>'uqid', 'value'=>''));
-		echo $this->element('checkboxfield',array('label'=>'Super User','placeholder'=>'','id'=>'super', 'value'=>'0'));
+		echo $this->element('checkboxfield',array('label'=>'Super User (Warning: Superusers have full control of the system)','placeholder'=>'','id'=>'super', 'value'=>'0'));
 		echo $this->element('checkboxfield',array('label'=>'Receives System Email','placeholder'=>'','id'=>'email', 'value'=>'0'));
 	?>
   <br />

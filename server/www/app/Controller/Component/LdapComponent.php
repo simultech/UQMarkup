@@ -7,7 +7,8 @@ class LdapComponent extends Component {
 	var $loggedin = false;
 	var $loginroute = '/users/login';
 	var $referer = '/';
-	var $admins = array('uqsngo1');
+	var $admins = array('uqadekke');
+	var $superadmins = array('uqadekke');
 	var $adminemails = array();
 	var $basedn = '';
 	var $ldapmin = array();
@@ -17,10 +18,28 @@ class LdapComponent extends Component {
 	
 	function initialize(Controller $controller) {
 
-		$this->adminemails = Configure::read('ldap_adminemails');
+		$this->adminemails = array();
 		$this->basedn = Configure::read('base_dn');
 		$this->ldapmin = Configure::read('ldap_ldapmin');
 		$this->ldapserver = Configure::read('ldap_server');
+
+		// If faking LDAP then add fake user
+		if(Configure::read('ldap_fake')) {
+			$admins[] = 'uqsngo1';
+			$superadmins[] = 'uqsngo1';
+		}
+
+		// Setup the admin accounts
+		$adminusers = $controller->Adminuser->find('all');
+		foreach($adminusers as $adminuser) {
+			$this->admins[] = $adminuser['User']['uqid'];
+			if($adminuser['Adminuser']['email']) {
+				$this->adminemails[] = $adminuser['User']['email'];
+			}
+			if($adminuser['Adminuser']['super']) {
+				$this->superadmins[] = $adminuser['User']['uqid'];
+			}
+		}
 		
 		$this->controller = $controller;
 		if($this->controller->Session->check('Auth.userdetails')) {
@@ -79,6 +98,14 @@ class LdapComponent extends Component {
 			if($this->getUQID() == 'uqadekke' && $this->controller->debugmode) {
 				$this->controller->debug = true;
 			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function isSuperAdmin() {
+		if(in_array($this->getUQID(), $this->superadmins)) {
 			return true;
 		} else {
 			return false;

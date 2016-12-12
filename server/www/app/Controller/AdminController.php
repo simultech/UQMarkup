@@ -1479,7 +1479,7 @@ class AdminController extends AppController {
 
 	public function index() {
 		$this->breadcrumbs = array('/admin/'=>'Manage Administrators');
-		if($this->Ldap->isAdmin()) {
+		if($this->Ldap->isSuperAdmin()) {
 			$admins = $this->Adminuser->find('all');
 			$this->set('admins', $admins);
 		} else {
@@ -1488,7 +1488,7 @@ class AdminController extends AppController {
 	}
 
 	public function index_add() {
-		if($this->Ldap->isAdmin()) {
+		if($this->Ldap->isSuperAdmin()) {
 			if(!empty($this->data)) {
 				$user_id = $this->Ldap->getUserIDForUQLogin($this->data['uqid']);
 				if($user_id > 0) {
@@ -1509,7 +1509,7 @@ class AdminController extends AppController {
 	}
 
 	public function index_remove($user_id) {
-		if($this->Ldap->isAdmin()) {
+		if($this->Ldap->isSuperAdmin()) {
 			$this->Adminuser->delete($user_id);
 			$this->flashMessage('Administrator removed',$this->referer(),true);
 		} else {
