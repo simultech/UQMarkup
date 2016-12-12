@@ -37,4 +37,4 @@ For more information, please check out http://espace.library.uq.edu.au/view/UQ:3
 - Nurmerey (@nurmerey)
 
 ## License:
-Attribution required
+Attribution required.  The software is offered free and as-is, with no support.
