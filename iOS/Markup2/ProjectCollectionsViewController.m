@@ -88,13 +88,43 @@
 - (void)tryDeleteLocalSubmission:(UILongPressGestureRecognizer *)gr {
     if(!self.showingDeleteConfirm) {
         self.showingDeleteConfirm = YES;
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Delete Local Changes?"
-                                                      message:@"Do you want to delete ALL LOCAL CHANGES for this submission?"
-                                                     delegate:self
-                                            cancelButtonTitle:@"Cancel"
-                                            otherButtonTitles:nil];
-        [message addButtonWithTitle:@"Delete"];
-        [message show];
+
+        UIAlertController *message = [UIAlertController alertControllerWithTitle:@"Delete Local Changes?"
+                                                                         message:@"Do you want to delete ALL LOCAL CHANGES for this submission?"
+                                                                  preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction* cancelButton = [UIAlertAction
+                                    actionWithTitle:@"Cancel"
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                        self.showingDeleteConfirm = NO;
+                                    }];
+
+        UIAlertAction* deleteButton = [UIAlertAction
+                                   actionWithTitle:@"Delete"
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {
+                                       self.showingDeleteConfirm = NO;
+                                       SubmissionCell *cell = (SubmissionCell *)[self.collectionView cellForItemAtIndexPath:self.toDeleteIndexPath];
+                                       Submission *sub = cell.download.submission;
+                                       for(Annotation *ann in sub.annotations) {
+                                           [ann deleteLocalFile];
+                                           [ann deleteEntity];
+                                       }
+                                       for(Log *log in sub.logs) {
+                                           [log deleteEntity];
+                                       }
+                                       for(Mark *mark in sub.marks) {
+                                           [mark deleteEntity];
+                                       }
+                                       [sub deleteEntity];
+                                       cell.download.submission = nil;
+                                       [self.collectionView reloadData];
+                                   }];
+        [message addAction:cancelButton];
+        [message addAction:deleteButton];
+        [self presentViewController:message animated:YES completion:nil];
+
     }
 }
 
@@ -108,31 +138,6 @@
         return YES;
     }
     return NO;
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    self.showingDeleteConfirm = NO;
-    if([title isEqualToString:@"Delete"])
-    {
-        SubmissionCell *cell = (SubmissionCell *)[self.collectionView cellForItemAtIndexPath:self.toDeleteIndexPath];
-        Submission *sub = cell.download.submission;
-        for(Annotation *ann in sub.annotations) {
-            [ann deleteLocalFile];
-            [ann deleteEntity];
-        }
-        for(Log *log in sub.logs) {
-            [log deleteEntity];
-        }
-        for(Mark *mark in sub.marks) {
-            [mark deleteEntity];
-        }
-        [sub deleteEntity];
-        cell.download.submission = nil;
-        [self.collectionView reloadData];
-        NSLog(@"Oh My God");
-    }
 }
 
 - (void)configureTitleViews
