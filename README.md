@@ -22,6 +22,13 @@ UQMarkup wouldn't be possible without the time, work and skill of a many number 
 - Worthy, P.
 - Marrington, J.
 
+And a number of departments:
+
+- SBMS (http://sbms.uq.edu.au/)
+- HMS (http://www.hms.uq.edu.au/)
+- CEIT (http://ceit.uq.edu.au/)
+- UQx (http://uqx.uq.edu.au/)
+
 For more information, please check out http://espace.library.uq.edu.au/view/UQ:321954 .
 
 ## Code Authors:
