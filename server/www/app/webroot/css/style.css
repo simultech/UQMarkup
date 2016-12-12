@@ -565,6 +565,9 @@ div.courselist div.actions {
 table tr.even td {
 	background:#e9e9e9;
 }
+table tr td.center {
+	text-align:center;
+}
 table tr td input {
 	margin:0;
 }

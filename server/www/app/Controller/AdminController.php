@@ -1476,12 +1476,42 @@ class AdminController extends AppController {
 		//print_r($projectmarkcounts);
 		die();
 	}
-	
+
 	public function index() {
 		$this->breadcrumbs = array('/admin/'=>'Manage Administrators');
 		if($this->Ldap->isAdmin()) {
 			$admins = $this->Adminuser->find('all');
 			$this->set('admins', $admins);
+		} else {
+			$this->permissionDenied('You are not an administrator');
+		}
+	}
+
+	public function index_add() {
+		if($this->Ldap->isAdmin()) {
+			if(!empty($this->data)) {
+				$user_id = $this->Ldap->getUserIDForUQLogin($this->data['uqid']);
+				if($user_id > 0) {
+					$data = $this->data;
+					$data['user_id'] = $user_id;
+					if($this->Adminuser->save($data)) {
+						$this->flashMessage('Administrator added',$this->referer(),true);
+					} else {
+						$this->flashMessage('Could not add administrator','false');
+					}
+				} else {
+					$this->flashMessage('Could not add administrator, could not find user','false');
+				}
+			}
+		} else {
+			$this->permissionDenied('You are not an administrator');
+		}
+	}
+
+	public function index_remove($user_id) {
+		if($this->Ldap->isAdmin()) {
+			$this->Adminuser->delete($user_id);
+			$this->flashMessage('Administrator removed',$this->referer(),true);
 		} else {
 			$this->permissionDenied('You are not an administrator');
 		}

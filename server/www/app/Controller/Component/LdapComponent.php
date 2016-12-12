@@ -50,7 +50,15 @@ class LdapComponent extends Component {
 			return $existinguser['User']['id'];
 		} else {
 			//Create the user
-			$details = $this->lookupuser($uqid);
+			if (Configure::read('ldap_fake')) {
+				$details = array(array(
+					'cn'=>array('Fake User'),
+					'mail'=>array('fake@fake.com')
+				));
+				$details['count'] = 1;
+			} else {
+				$details = $this->lookupuser($uqid);
+			}
 			if($details['count'] > 0) {
 				$userdata = array();
 				$userdata['uqid'] = $uqid;	
