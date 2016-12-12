@@ -35,6 +35,12 @@ static MarkupAPIController *instance;
 + (MarkupAPIController *)sharedApi
 {
     if (!loaded) {
+        //get secret key from plist
+        NSString *secretKeyPath = [[NSBundle mainBundle] pathForResource:@"SecretKey" ofType:@"plist"];
+        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: secretKeyPath];
+        NSString *secretKey = [dict objectForKey: @"SecretKey"];
+        kApiSharedSecret = secretKey;
+        
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         if([defaults objectForKey:@"basepath"]) {
             baseURL = [defaults objectForKey:@"basepath"];
@@ -54,13 +60,6 @@ static MarkupAPIController *instance;
         instance.uploadQueue = [[NSOperationQueue alloc] init];
         [instance.uploadQueue setMaxConcurrentOperationCount:1];
     }
-
-
-    //get secret key from plist
-    NSString *secretKeyPath = [[NSBundle mainBundle] pathForResource:@"SecretKey" ofType:@"plist"];
-    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: secretKeyPath];
-    NSString *secretKey = [dict objectForKey: @"SecretKey"];
-    kApiSharedSecret = secretKey;
 
     return instance;
 }
