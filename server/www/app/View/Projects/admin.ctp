@@ -32,6 +32,7 @@
 		echo $this->element('checkboxfield',array('label'=>'Collaborative Marking','placeholder'=>'','id'=>'option_multiple_markers','value'=>$project['Project']['option_multiple_markers']));
 		echo $this->element('checkboxfield',array('label'=>'Students can download their feedback','placeholder'=>'','id'=>'option_downloadable','value'=>$project['Project']['option_downloadable']));
 		echo $this->element('checkboxfield',array('label'=>'Automatically publish feedback','placeholder'=>'','id'=>'option_autopublish','value'=>$project['Project']['option_autopublish']));
+		echo $this->element('checkboxfield',array('label'=>'Do not automatically assign submissions to tutors','placeholder'=>'','id'=>'option_disable_autoassign','value'=>$project['Project']['option_disable_autoassign']));
 		
 	?>
   <br />
