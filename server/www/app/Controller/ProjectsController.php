@@ -591,7 +591,9 @@ class ProjectsController extends AppController {
 													$this->Activity->create();
 													$this->Activity->save($activitydata);
 												}
-												$this->autoassign($submission_id);
+												if($project['Project']['option_disable_autoassign'] == 0) {
+                                                    $this->autoassign($submission_id);
+                                                }
 											} else {
 												$errors[] = 'User is not in class list '.$uqid;
 											}
@@ -1170,7 +1172,9 @@ class ProjectsController extends AppController {
 										);
 										$this->Activity->create();
 										$this->Activity->save($activitydata);
-										$this->autoassign($submission['Submission']['id']);
+										if($project['Project']['option_disable_autoassign'] == 0) {
+                                            $this->autoassign($submission['Submission']['id']);
+                                        }
 										$identified++;
 									}
 								}
@@ -1276,7 +1280,9 @@ class ProjectsController extends AppController {
 									);
 									$this->Activity->create();
 									$this->Activity->save($activitydata);
-									$this->autoassign($submission['Submission']['id']);
+									if($project['Project']['option_disable_autoassign'] == 0) {
+                                        $this->autoassign($submission['Submission']['id']);
+                                    }
 									$identified++;
 								}
 							}
@@ -1326,7 +1332,9 @@ class ProjectsController extends AppController {
 									    	);
 									    	$this->Activity->create();
 									    	$this->Activity->save($activitydata);
-									    	$this->autoassign($submission['Submission']['id']);
+									    	if($project['Project']['option_disable_autoassign'] == 0) {
+                                                $this->autoassign($submission['Submission']['id']);
+                                            }
 									    	$identified++;
 									    }
 									}
@@ -1654,8 +1662,8 @@ class ProjectsController extends AppController {
 												$activitydata['meta'] = $student_id;
 												$this->Activity->create();
 												$this->Activity->save($activitydata);
-												if($project_id != '62' && $project_id != '73' && $project_id != '90' && $project_id != '122' && $project_id != '127') {
-													$this->autoassign($submission['Submission']['id']);
+												if($project['Project']['option_disable_autoassign'] == 0) {
+												    $this->autoassign($submission['Submission']['id']);
 												}
 												$identified++;
 											}
