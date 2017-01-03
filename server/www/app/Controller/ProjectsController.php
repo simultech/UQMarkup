@@ -1866,9 +1866,19 @@ class ProjectsController extends AppController {
 			if($this->Ldap->isCourseCoordinator($courseuid)) {
 				$this->set('course',$course);
 				if(!empty($this->data)) {
-					$this->Project->set($this->data);
+				    $data = $this->data;
+				    if ($data['start_date'] == '') {
+                        $data['start_date'] = date('d-m-Y');
+                    }
+                    if ($data['submission_date'] == '') {
+                        $data['submission_date'] = date('d-m-Y');
+                    }
+                    if ($data['end_date'] == '') {
+                        $data['end_date'] = date('d-m-Y');
+                    }
+					$this->Project->set($data);
 					if($this->Project->validates()) {
-						if($this->Project->save($this->data)) {
+						if($this->Project->save($data)) {
 							$this->refreshWebdavPermissions($course['Course']['id']);
 							$this->flashMessage('Assessment created','/course/admin/'.$courseuid,true);
 						} else {

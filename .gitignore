@@ -1,53 +1,9 @@
 
 iOS/uqmarkup.xcodeproj/project.xcworkspace/xcuserdata/simultech.xcuserdatad/UserInterfaceState.xcuserstate
 
-server/www/app/tmp/logs/error.log
-
-server/www/app/tmp/cache/persistent/myapp_cake_core_file_map
-
-server/www/app/tmp/cache/persistent/myapp_cake_core_cake_dev_en-us
-
-server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup_list
-
-server/www/app/tmp/cache/persistent/myapp_cake_core_method_cache
-
-server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__activities
-
-server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__course__role__users
-
-server/www/app/tmp/cache/persistent/myapp_cake_core_cake_en-us
-
-server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__users
-
-server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__submissions
-
-server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__states
-
-server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__projects
-
-server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__marks
-
-server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__logs
-
-server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__courses
-
 server/www/app/Config/private.php
 
-server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__adminusers
-
-server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__assignedstudents
-
-server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__attachments
-
-server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__roles
-
-server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup_adminusers
-
-server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__rubrics
-
-server/www/app/tmp/cache/models/myapp_cake_model_default_uqmarkup__tags
-
-server/www/app/tmp/cache/persistent/myapp_cake_core_default_en-us
+server/www/app/tmp/*
 
 iOS/Markup2/SecretKey.plist
 
@@ -66,3 +22,5 @@ server/www/.idea/www.iml
 .idea/vcs.xml
 
 .idea/workspace.xml
+
+.idea/cake_config_setting_v0_6.xml
