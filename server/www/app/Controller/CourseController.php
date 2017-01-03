@@ -165,7 +165,7 @@ class CourseController extends AppController {
 						$this->CourseRoleUser->delete($association['CourseRoleUser']['id']);
 						$this->flashMessage('Staff member removed',$this->referer(),true);
 					} else {
-						$this->flashMessage('Could not remove staff member',$this->referer());
+						$this->flashMessage('Could not remove staff member, please ask a super user to remove course coordinators',$this->referer());
 					}
 				} else {
 					$this->flashMessage('Not a valid association',$this->referer());
