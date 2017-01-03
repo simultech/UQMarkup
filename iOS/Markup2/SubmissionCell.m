@@ -16,6 +16,7 @@
 
 - (void)awakeFromNib
 {
+
     [self.documentThumb setImage:[UIImage imageNamed:@"defaultsubmission.png"]];
     [self.documentThumb.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
     [self.documentThumb.layer setShadowColor:[UIColor blackColor].CGColor];
@@ -41,6 +42,9 @@
     self.highlightView.layer.cornerRadius = 14.0;
     [self.highlightView setBackgroundColor:[UIColor colorWithRGBHex:0xBBBDC0]];
     [self.highlightView setAlpha:0.8];
+
+    //adding for warning
+    [super awakeFromNib];
 }
 
 - (void)setTitlePage:(CGPDFPageRef)page {

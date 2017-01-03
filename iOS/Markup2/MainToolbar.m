@@ -17,6 +17,9 @@
 {
     [self setupButtons];
     [self setupPalmPopup];
+
+    //adding for warning
+    [super awakeFromNib];
 }
 
 -(void)setTitle:(NSString *)newTitle {
