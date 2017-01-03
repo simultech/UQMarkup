@@ -41,6 +41,7 @@ define('__WEBDAV_VERSIONS__', __WEBDAV_PATH__.'/versions/');
 define('__WEBDAV_MODERATION__', __WEBDAV_PATH__.'/moderation/');
 define('__WEBDAV_TMP__', __WEBDAV_PATH__.'/tmp/');
 define('__WEBDAV_SURVEYS__', __WEBDAV_PATH__.'/surveys/');
+define('__WEBDAV_URL__', Configure::read('url_base').'/uploads/');
 
 
 class AppController extends Controller {
@@ -48,7 +49,6 @@ class AppController extends Controller {
 	var $breadcrumbs = array();
 	
 	var $uses = array('Role','State','Logtype','User','Project','Course','Adminuser');
-	//var $components = array('Security');
 	
 	var $roles = array();
 	var $states = array();
@@ -62,7 +62,7 @@ class AppController extends Controller {
 	var $moderationdir = __WEBDAV_MODERATION__;
 	var $tmpdir = __WEBDAV_TMP__;
 	var $surveydir = __WEBDAV_SURVEYS__;
-	var $webdavsuburl = 'https://uqmarkup.ceit.uq.edu.au/uploads/';
+	var $webdavsuburl = __WEBDAV_URL__;
 	
 	var $debugmode = true;
 	var $debug = false; //this will auto-get set to true if debugmode is true and its a developer
