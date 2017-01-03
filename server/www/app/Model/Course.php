@@ -29,8 +29,8 @@ class Course extends AppModel {
                 'rule' => 'alphaNumeric',
                 'message' => 'Invalid course ID'
             ),
-            'notEmpty' => array(
-                'rule' => 'notEmpty',
+            'notBlank' => array(
+                'rule' => 'notBlank',
                 'message' => 'Required'
             )
 		),
@@ -51,13 +51,13 @@ class Course extends AppModel {
                 'rule' => 'isUnique',
                 'message' => 'This course already exists'
             ),
-            'notEmpty' => array(
-                'rule' => 'notEmpty',
+            'notBlank' => array(
+                'rule' => 'notBlank',
                 'message' => 'Required'
             )
         ),
         'name' => array(
-            'rule'    => 'notEmpty',
+            'rule'    => 'notBlank',
             'message' => 'Required'
         ),
     );

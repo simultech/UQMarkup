@@ -52,3 +52,17 @@ server/www/app/tmp/cache/persistent/myapp_cake_core_default_en-us
 iOS/Markup2/SecretKey.plist
 
 *.xcuserstate
+
+server/www/.idea/modules.xml
+
+server/www/.idea/workspace.xml
+
+server/www/.idea/www.iml
+
+.idea/modules.xml
+
+.idea/UQMarkup.iml
+
+.idea/vcs.xml
+
+.idea/workspace.xml

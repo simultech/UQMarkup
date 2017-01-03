@@ -24,16 +24,16 @@ class Tag extends AppModel {
 	
 	var $validate = array(
         'name' => array(
-            'rule'    => 'notEmpty',
+            'rule'    => 'notBlank',
             'message' => 'Must have a tag name'
         ),
         'color' => array(
-        	'notEmpty' => array(
-	            'rule'    => 'notEmpty',
+        	'notBlank' => array(
+	            'rule'    => 'notBlank',
 	            'message' => 'Must have a tag colour'
 	        ),
-	        'between' => array(
-	        	'rule'    => array('between', 6, 6),
+	        'lengthBetween' => array(
+	        	'rule'    => array('lengthBetween', 6, 6),
 	        	'message' => 'Must be 6 numbers in length'
 	        )
         )

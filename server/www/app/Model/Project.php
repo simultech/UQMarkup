@@ -26,11 +26,11 @@ class Project extends AppModel {
 	
 	var $validate = array(
         'name' => array(
-            'rule'    => 'notEmpty',
+            'rule'    => 'notBlank',
             'message' => 'Must have a project name'
         ),
         'description' => array(
-            'rule'    => 'notEmpty',
+            'rule'    => 'notBlank',
             'message' => 'Must have a project description'
         ),
         'start_date' => array(

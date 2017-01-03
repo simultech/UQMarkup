@@ -54,7 +54,7 @@ class AssessmentController extends AppController {
 				foreach($markerlist as $markeremail=>$markername) {
 					$this->moderationEmail($markername,$course,$this->data['feedback'],$submission,$markeremail);
 				}
-				$this->Session->setFlash('Feedback sent to tutor email','flash_success');
+				$this->Flash->flashSuccess('Feedback sent to tutor email');
 			}
 		}
 	}

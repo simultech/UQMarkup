@@ -566,7 +566,7 @@ class ProjectsController extends AppController {
 						if(isset($this->data['identify'])) {
 							foreach($this->data['identify'] as $submission_id=>$uqidlist) {
 								if(trim($uqidlist) != '') {
-									$uqids = split(',', $uqidlist);
+									$uqids = explode(',', $uqidlist);
 									foreach($uqids as $uqid) {
 										$uqid = trim($uqid);
 										$student = $this->User->find('first',array('conditions'=>array('uqid'=>$uqid),'recursive'=>-1));
@@ -609,7 +609,7 @@ class ProjectsController extends AppController {
 						if(isset($this->data['assign'])) {
 							foreach($this->data['assign'] as $submission_id=>$uqid) {
 								if($uqid != '') {
-									$uqids = split(',', $uqid);
+									$uqids = explode(',', $uqid);
 									foreach($uqids as $uqid) {
 										$tutor = $this->User->find('first',array('conditions'=>array('uqid'=>$uqid),'recursive'=>-1));
 										if(!empty($tutor)) {
@@ -1153,7 +1153,7 @@ class ProjectsController extends AppController {
 							$student_id = $submission['Attachment'][0]['title'];
 							$student_id = str_replace(".pdf", "", $student_id);
 							if($project['Project']['option_group_project'] == 1) {
-								$student_ids = split('_', $student_id);
+								$student_ids = explode('_', $student_id);
 							} else {
 								$student_ids[] = $student_id;
 							}
@@ -1214,7 +1214,7 @@ class ProjectsController extends AppController {
 							$student_ids = array();
 							$student_id = $submission['Attachment'][0]['title'];
 							$student_id = str_replace(".pdf", "", $student_id);
-							$filename = split("_", $student_id);
+							$filename = explode("_", $student_id);
 							$date = strtotime($filename[3]);//date('YYYY-mm-dd HH_ii_ss',strtotime($filename[3]));
 							$date = DateTime::createFromFormat('j-m-Y g-i-s A', $filename[3]);
 							if($date) {
@@ -1262,7 +1262,7 @@ class ProjectsController extends AppController {
 							$student_ids = array();
 							$student_id = $submission['Attachment'][0]['title'];
 							$student_id = str_replace(".pdf", "", $student_id);
-							$filename = split("_", $student_id);
+							$filename = explode("_", $student_id);
 							$creationdate = $filename[3];
 							$student_id = $filename[2];
 							$user = $this->User->find('first',array('conditions'=>array('uqid'=>$student_id)));
@@ -1362,7 +1362,7 @@ class ProjectsController extends AppController {
 			$submissionlist = array_values($this->Submission->find('list',array('fields'=>array('id'),'conditions'=>array('project_id'=>$project_id),'recursive'=>-1)));
 			$assigns = array_unique(array_values($this->Activity->find('list',array('fields'=>array('meta'),'conditions'=>array('submission_id'=>$submissionlist,'state_id'=>'1'),'recursive'=>-1))));
 			if($this->Ldap->isCourseCoordinator($courseuid)) {
-				$files = split("\n",$this->data['text']);
+				$files = explode("\n",$this->data['text']);
 				//print_r($files);
 				echo '<table><tr><th>File</th><th>Student ID</th><th>Status</th></tr>';
 				foreach($files as $file) {

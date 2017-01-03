@@ -1513,7 +1513,7 @@ Initial release for 2013
 					$theuser = $this->User->find('first',array('conditions'=>array('uqid'=>$identified['Activity']['meta']),'recursive'=>-1));
 					$usernameformatted = $identified['Activity']['meta'];
 					if(!empty($theuser)) {
-						$theusernames = split(" ", $theuser['User']['name']);
+						$theusernames = explode(" ", $theuser['User']['name']);
 						if(sizeOf($theusernames) > 1) {
 							$usernameformatted = $usernameformatted.' ('.$theusernames[sizeOf($theusernames)-1].')';
 						}
@@ -1587,7 +1587,7 @@ Initial release for 2013
 					$theuser = $this->User->find('first',array('conditions'=>array('uqid'=>$identified['Activity']['meta']),'recursive'=>-1));
 					$usernameformatted = $identified['Activity']['meta'];
 					if(!empty($theuser)) {
-						$theusernames = split(" ", $theuser['User']['name']);
+						$theusernames = explode(" ", $theuser['User']['name']);
 						if(sizeOf($theusernames) > 1) {
 							$usernameformatted = $usernameformatted.' ('.$theusernames[sizeOf($theusernames)-1].')';
 						}
@@ -1648,7 +1648,7 @@ Initial release for 2013
 					$theuser = $this->User->find('first',array('conditions'=>array('uqid'=>$identified['Activity']['meta']),'recursive'=>-1));
 					$usernameformatted = $identified['Activity']['meta'];
 					if(!empty($theuser)) {
-						$theusernames = split(" ", $theuser['User']['name']);
+						$theusernames = explode(" ", $theuser['User']['name']);
 						if(sizeOf($theusernames) > 1) {
 							$usernameformatted = $usernameformatted.' -> ';
 						}
@@ -1772,7 +1772,7 @@ Initial release for 2013
 					$theuser = $this->User->find('first',array('conditions'=>array('uqid'=>$identified['Activity']['meta']),'recursive'=>-1));
 					$usernameformatted = $identified['Activity']['meta'];
 					if(!empty($theuser)) {
-						$theusernames = split(" ", $theuser['User']['name']);
+						$theusernames = explode(" ", $theuser['User']['name']);
 						if(sizeOf($theusernames) > 1) {
 							$usernameformatted = $usernameformatted.' ('.$theusernames[sizeOf($theusernames)-1].')';
 						}

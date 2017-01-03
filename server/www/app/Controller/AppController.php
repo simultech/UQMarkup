@@ -83,16 +83,16 @@ class AppController extends Controller {
 	}
 	
 	function permissionDenied($message) {
-		$this->Session->setFlash('Permission Denied - '.$message);
+		$this->Flash->setFlash('Permission Denied - '.$message);
 		$this->redirect($this->referer());
 		die();
 	}
 	
 	function flashMessage($message,$redirect,$goodmessage=false) {
 		if($goodmessage) {
-			$this->Session->setFlash($message,'flash_success');
+			$this->Flash->flashSuccess($message);
 		} else {
-			$this->Session->setFlash($message);
+			$this->Flash->setFlash($message);
 		}
 		if($redirect != 'false') {
 			$this->redirect($redirect);
