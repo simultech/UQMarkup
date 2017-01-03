@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		6EB334E51E1BC21600C42432 /* SecretKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EB334E41E1BC21600C42432 /* SecretKey.plist */; };
 		A922E44115F1E72300E84B8F /* AudioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A922E44015F1E72300E84B8F /* AudioCell.m */; };
 		A922E45115F258D100E84B8F /* PageNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = A922E45015F258D100E84B8F /* PageNumberView.m */; };
 		A922E45315F259C500E84B8F /* PageNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = A922E45015F258D100E84B8F /* PageNumberView.m */; };
@@ -196,6 +197,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6EB334E41E1BC21600C42432 /* SecretKey.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SecretKey.plist; sourceTree = "<group>"; };
 		A922E43F15F1E72300E84B8F /* AudioCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioCell.h; sourceTree = "<group>"; };
 		A922E44015F1E72300E84B8F /* AudioCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioCell.m; sourceTree = "<group>"; };
 		A922E44F15F258D100E84B8F /* PageNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageNumberView.h; sourceTree = "<group>"; };
@@ -755,6 +757,7 @@
 		D0938E4915D259C4001980B4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6EB334E41E1BC21600C42432 /* SecretKey.plist */,
 				D0938F1515D285EB001980B4 /* Images */,
 				D0938E4A15D259C4001980B4 /* uqmarkup-Info.plist */,
 				D0938E4B15D259C4001980B4 /* InfoPlist.strings */,
@@ -1134,6 +1137,7 @@
 				D0938EFC15D25AEA001980B4 /* Markup2.storyboard in Resources */,
 				A9C4451018B0849E007CD93F /* Media.xcassets in Resources */,
 				A96FC47315E9C828001BAEE9 /* rubriccheckbox.png in Resources */,
+				6EB334E51E1BC21600C42432 /* SecretKey.plist in Resources */,
 				A96FC47515E9C828001BAEE9 /* rubriccheckbox@2x.png in Resources */,
 				A96FC47815E9CACA001BAEE9 /* tab_rubric.png in Resources */,
 				A9D8B9BA15EB4860002660BE /* binder.png in Resources */,
