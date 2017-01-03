@@ -302,8 +302,6 @@ class ApiController extends AppController {
 		$this->requireAuth();
 		$user_id = $this->Ldap->getUserID();
 		
-		$starttime = $this->getcurrenttime(); 
-		
 		$semester = '1';
 		if(intval(date('m')) > 7) {
 			$semester = '2';
@@ -317,64 +315,37 @@ class ApiController extends AppController {
 		} else {
 			$projectsdata = array_merge($projectsdata,$this->filteredFakeProjects($courseids));
 		}
-		//echo 'FINISHED: '.($this->getcurrenttime()-$starttime.' seconds'."\n");
-		//die();
 		$this->response = $projectsdata;
 	}
 	
 	public function projectlist2() {
-		/*
-$mtime = microtime(); 
-		$mtime = explode(" ",$mtime); 
-		$mtime = $mtime[1] + $mtime[0]; 
-		$starttime = $mtime;
-*/ 
-		
 		
 		$this->requireAuth();
 		$user_id = $this->Ldap->getUserID();
-		
-		
-		$starttime = $this->getcurrenttime(); 
+
 		$courseids = $this->CourseRoleUser->find('list',array('fields'=>array('course_id'),'conditions'=>array('role_id > 1','user_id'=>$user_id)));
 		
 		$projects = $this->Project->find('all',array('conditions'=>array('course_id'=>$courseids,'Course.year'=>date('Y')),'order'=>array('Course.year'=>'desc','Course.uid'=>'asc','Project.name'=>'asc')));
 
 		$projectsdata = $this->detailProjects2($projects);
 		
-		/*
-$mtime = microtime(); 
-		$mtime = explode(" ",$mtime); 
-		$mtime = $mtime[1] + $mtime[0]; 
-		$endtime = $mtime; 
-		$totaltime = ($endtime - $starttime); 
-		echo "This page was created in ".$totaltime." seconds"; 
-		die();
-*/
-		
 		if(sizeOf($projectsdata) == 0) {
 			$projectsdata = $this->filteredFakeProjects($courseids);
 		} else {
 			$projectsdata = array_merge($projectsdata,$this->filteredFakeProjects($courseids));
 		}
-		//echo 'FINISHED: '.($this->getcurrenttime()-$starttime.' seconds'."\n");
-		//die();
 		$this->response = $projectsdata;
 	}
 	
 	public function moderationlist() {
 		$this->requireAuth();
 		
-			$user_id = $this->Ldap->getUserID();
-			
-			
-			$starttime = $this->getcurrenttime(); 
-			$courseids = $this->CourseRoleUser->find('list',array('fields'=>array('course_id'),'conditions'=>array('role_id > 2','user_id'=>$user_id)));
-			$projects = $this->Project->find('all',array('conditions'=>array('course_id'=>$courseids,'Course.year'=>date('Y')),'order'=>array('Course.year'=>'desc','Course.uid'=>'asc','Project.name'=>'asc')));
-			
-			$projectsdata = $this->detailModerationProjects($projects);
-			//echo 'FINISHED: '.($this->getcurrenttime()-$starttime.' seconds'."\n");
-			//die();
+        $user_id = $this->Ldap->getUserID();
+
+        $courseids = $this->CourseRoleUser->find('list',array('fields'=>array('course_id'),'conditions'=>array('role_id > 2','user_id'=>$user_id)));
+        $projects = $this->Project->find('all',array('conditions'=>array('course_id'=>$courseids,'Course.year'=>date('Y')),'order'=>array('Course.year'=>'desc','Course.uid'=>'asc','Project.name'=>'asc')));
+
+        $projectsdata = $this->detailModerationProjects($projects);
 		$this->response = $projectsdata;
 	}
 	
@@ -421,7 +392,6 @@ $mtime = microtime();
 			if(!in_array($fakeprojects[0]['Submission'][$i]['req'], $courseids) && $fakeprojects[0]['Submission'][$i]['req'] != '*') {
 				unset($fakeprojects[0]['Submission'][$i]);
 			}
-			//unset($fakeproject['req']);
 		}
 		foreach($fakeprojects as &$fakeproject) {
 			$fakeproject['Submission'] = array_values($fakeproject['Submission']);

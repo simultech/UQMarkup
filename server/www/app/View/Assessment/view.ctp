@@ -547,9 +547,6 @@ Zoom:
     $(document).ready(function(){
 	    $("#jquery_jplayer_1").jPlayer({
 		    ready: function () {
-			    /*$(this).jPlayer("setMedia", {
-	                mp3: "/_dev/files/audio/1.mp3"
-	            });*/
 		    },
 		    swfPath: "/_dev/js/jplayer",
 		    supplied: "mp3",
