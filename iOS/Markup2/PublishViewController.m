@@ -64,7 +64,7 @@
 
 - (void)uploadEditedSubmissions
 {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     if (!appDelegate.reach.isReachable) {
         [self.delegate publishViewFailedToPublish];
         return;

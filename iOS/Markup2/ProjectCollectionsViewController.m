@@ -256,7 +256,7 @@
 }
 
 - (void)checkForUpdate {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     if (appDelegate.reach.isReachable) {
         [[MarkupAPIController sharedApi] isLatestVersionWithSuccess:^(NSDictionary *latestInfo) {
@@ -272,7 +272,7 @@
 
 - (IBAction)refreshProjects:(id)sender
 {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     if (appDelegate.reach.isReachable) {
         if(self.isRefreshing) {
@@ -928,7 +928,7 @@
 }
 
 - (IBAction)downloadAll:(id)sender {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     if (appDelegate.reach.isReachable) {
         NSLog(@"DOWNLOADING EVERYTHING");
         for(Project *section in self.projects) {
