@@ -1,5 +1,5 @@
 <?php
-	$DISABLE_AUTO_ASSIGN = true;	
+	$DISABLE_AUTO_ASSIGN = false;
 ?>
 
 <h2>Marking tools for <?php echo $course['Course']['coursecode']; ?> (Semester <?php echo $course['Course']['semester'].', 
