@@ -89,7 +89,7 @@ class ProjectsController extends AppController {
 				foreach($submissions as $submission) {
 					if(isset($submission['marked']) && $submission['marked']) {
 						$version = $this->Version->find('first',array('conditions'=>array('submission_id'=>$submission['Submission']['id']),'recursive'=>-1,'order'=>array('Version.updated'=>'desc')));
-						$subhash = '<br />sudo vim /var/www/webdav/versions/'.$submission['Submission']['id'].'/'.$version['Version']['path'].'/marks.json';
+						$subhash = '<br />sudo vim '.Configure::read('path_webdav').'/versions/'.$submission['Submission']['id'].'/'.$version['Version']['path'].'/marks.json';
 						echo '<p>'.$submission['Student']['uqid'].' - '.$subhash.'</p>';
 					}
 				}

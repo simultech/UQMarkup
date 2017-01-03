@@ -415,10 +415,10 @@ class AssessmentController extends AppController {
 					$file = $path.'/'.$pdffile;
 					
 					if($submission_id == 502) {
-						$file = '/var/www/webdav/versions/502/2035b5963688f0924f3e118317e30b1deb24b4d4/jojo.pdf';
+						$file = Configure::read('path_webdav').'/versions/502/2035b5963688f0924f3e118317e30b1deb24b4d4/jojo.pdf';
 					}
 					if($submission_id == 1049) {
-						$file = '/var/www/webdav/versions/1049/2ad4348ba02a6606d5a49f4990ccdc153167d7c5/s4264737_new.pdf';
+						$file = Configure::read('path_webdav').'/versions/1049/2ad4348ba02a6606d5a49f4990ccdc153167d7c5/s4264737_new.pdf';
 					}
 					if($file) {
 					    if (file_exists($file) && is_readable ($file)) {
@@ -502,10 +502,10 @@ class AssessmentController extends AppController {
 					$file = $path.'/'.$pdffile;
 					
 					if($submission_id == 502) {
-						$file = '/var/www/webdav/versions/502/2035b5963688f0924f3e118317e30b1deb24b4d4/jojo.pdf';
+						$file = Configure::read('path_webdav').'/versions/502/2035b5963688f0924f3e118317e30b1deb24b4d4/jojo.pdf';
 					}
 					if($submission_id == 1049) {
-						$file = '/var/www/webdav/versions/1049/2ad4348ba02a6606d5a49f4990ccdc153167d7c5/s4264737_new.pdf';
+						$file = Configure::read('path_webdav').'/versions/1049/2ad4348ba02a6606d5a49f4990ccdc153167d7c5/s4264737_new.pdf';
 					}
 					if($file) {
 					    if (file_exists($file) && is_readable ($file)) {

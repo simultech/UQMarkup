@@ -131,7 +131,7 @@ foreach($submission['sessions'] as $sessionid=>$session) {
 			echo '</div>';
 		?>
 		</dd>
-		<dt>Audio annotations listening</td>
+		<dt>Audio annotations listening</dt>
 			<dd>
 			<?php
 			$audioannotationcount = 0;

@@ -153,7 +153,7 @@ class ApiController extends AppController {
 		
 		if(in_array($submission_id, $this->fakeSubmissionIDs())) {
 		//if($submission_id == "999999" || $submission_id == "999998" || $submission_id == "999997") {
-			$path = '/var/www/webdav/fake/'.$submission_id.'.pdf';
+			$path = Configure::read('path_webdav').'/fake/'.$submission_id.'.pdf';
 			if (file_exists($path) && is_readable ($path)) {
 				ini_set('memory_limit','256M');				
 				header("Content-length: ".filesize($path));
@@ -1830,7 +1830,7 @@ Initial release for 2013
 			$output = array();
 			$unzippeddir = $this->tmpdir.'/'.$submission_id;
 			$unzipcmd = "unzip ".$zipfile." -d ".$unzippeddir;
-			$audiocmd = "/var/www/webdav/convert.sh ".$unzippeddir."/annots";
+			$audiocmd = Configure::read('path_webdav')."/convert.sh ".$unzippeddir."/annots";
 			shell_exec($unzipcmd);
 			if(file_exists($this->tmpdir.'/'.$submission_id)) {
 				shell_exec($audiocmd);
@@ -1933,7 +1933,7 @@ Initial release for 2013
 			$output = array();
 			$unzippeddir = $this->tmpdir.'/'.'moderation_'.$submission_id;
 			$unzipcmd = "unzip ".$zipfile." -d ".$unzippeddir;
-			$audiocmd = "/var/www/webdav/convert.sh ".$unzippeddir."/annots";
+			$audiocmd = Configure::read('path_webdav')."/convert.sh ".$unzippeddir."/annots";
 			shell_exec($unzipcmd);
 			if(file_exists($this->tmpdir.'/'.'moderation_'.$submission_id)) {
 				shell_exec($audiocmd);

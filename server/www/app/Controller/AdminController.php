@@ -146,7 +146,7 @@ class AdminController extends AppController {
 	}
 	
 	public function replacefiles() {
-		$replacedir = '/var/www/webdav/replace';
+		$replacedir = Configure::read('path_webdav').'/replace';
 		if ($handle = opendir($replacedir)) {
 			while (false !== ($entry = readdir($handle))) {
 				if (substr($entry, strrpos($entry, '.')) == '.pdf') { 
@@ -971,7 +971,7 @@ class AdminController extends AppController {
 		$version = $this->Version->find('first',array('conditions'=>array('submission_id'=>$attachment[0]['Attachment']['submission_id']),'order'=>array('Version.created'=>'desc')));
 		print_r($version);
 		if(!empty($version)) {
-			$fullpath = '/var/www/webdav/versions/'.$attachment[0]['Attachment']['submission_id'].'/'.$version['Version']['path'].'/'.$attachment[0]['Attachment']['title'];
+			$fullpath = Configure::read('path_webdav').'/versions/'.$attachment[0]['Attachment']['submission_id'].'/'.$version['Version']['path'].'/'.$attachment[0]['Attachment']['title'];
 			return $fullpath;
 		}
 		return null;
