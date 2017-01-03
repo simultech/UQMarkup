@@ -448,7 +448,7 @@ div#workflow div.arrow {
     height:48px;
     float:left;
     margin-top:50px;
-    background:url('/_dev/img/arrow.gif');
+    background:url('../img/arrow.gif');
 }
 div#workflow div.step em.workflow_status {
     position:absolute;
@@ -466,68 +466,68 @@ div#workflow a:hover div.step {
 }
 
 div#workflow div.step em.workflow_complete {
-    background:url('/_dev/img/workflow/workflow_complete.png');
+    background:url('../img/workflow/workflow_complete.png');
 }
 div#workflow div.step em.workflow_incomplete {
-    background:url('/_dev/img/workflow/workflow_incomplete.png');
+    background:url('../img/workflow/workflow_incomplete.png');
 }
 div#workflow div.step em.workflow_recursive {
-    background:url('/_dev/img/workflow/workflow_recursive.png');
+    background:url('../img/workflow/workflow_recursive.png');
 }
 
 
 div#workflow div.icon_addcourse {
-    background-image:url('/_dev/img/workflow/workflow_addcourse.png');
+    background-image:url('../img/workflow/workflow_addcourse.png');
     background-position:40px 15px;
 }
 div#workflow div.icon_addcourse em.workflow_status { left:80px; }
 div#workflow div.icon_addstaff {
-    background-image:url('/_dev/img/workflow/workflow_teachingstaff.png');
+    background-image:url('../img/workflow/workflow_teachingstaff.png');
     background-position:29px 15px;
 }
 div#workflow div.icon_addstaff em.workflow_status { left:95px; }
 div#workflow div.icon_projects {
-    background-image:url('/_dev/img/workflow/workflow_projects.png');
+    background-image:url('../img/workflow/workflow_projects.png');
     background-position:40px 15px;
 }
 div#workflow div.icon_projects em.workflow_status { left:85px; }
 
 div#workflow div.icon_rubrics {
-    background-image:url('/_dev/img/workflow/workflow_rubrics.png');
+    background-image:url('../img/workflow/workflow_rubrics.png');
     background-position:20px 15px;
 }
 div#workflow div.icon_rubrics em.workflow_status { left:100px; }
 div#workflow div.icon_colourtags {
-    background-image:url('/_dev/img/workflow/workflow_colourtags.png');
+    background-image:url('../img/workflow/workflow_colourtags.png');
     background-position:40px 15px;
 }
 div#workflow div.icon_colourtags em.workflow_status { left:85px; }
 div#workflow div.icon_uploadsubmissions {
-    background-image:url('/_dev/img/workflow/workflow_uploadsubmissions.png');
+    background-image:url('../img/workflow/workflow_uploadsubmissions.png');
     background-position:28px 15px;
 }
 div#workflow div.icon_uploadsubmissions em.workflow_status { left:102px; }
 
 div#workflow div.icon_identifysubmissions {
-    background-image:url('/_dev/img/workflow/workflow_identifysubmissions.png');
+    background-image:url('../img/workflow/workflow_identifysubmissions.png');
     background-position:24px 15px;
 }
 div#workflow div.icon_identifysubmissions em.workflow_status { left:94px; }
 
 div#workflow div.icon_reviewsubmissions {
-    background-image:url('/_dev/img/workflow/workflow_reviewsubmissions.png');
+    background-image:url('../img/workflow/workflow_reviewsubmissions.png');
     background-position:36px 15px;
 }
 div#workflow div.icon_reviewsubmissions em.workflow_status { left:88px; }
 
 div#workflow div.icon_moderatesubmissions {
-    background-image:url('/_dev/img/workflow/workflow_moderatesubmissions.png');
+    background-image:url('../img/workflow/workflow_moderatesubmissions.png');
     background-position:24px 15px;
 }
 div#workflow div.icon_moderatesubmissions em.workflow_status { left:98px; }
 
 div#workflow div.icon_publishfeedback {
-    background-image:url('/_dev/img/workflow/workflow_publishfeedback.png');
+    background-image:url('../img/workflow/workflow_publishfeedback.png');
     background-position:34px 15px;
 }
 div#workflow div.icon_publishfeedback em.workflow_status { left:98px; }
@@ -612,7 +612,7 @@ div#states {
 		height:40px;
 		margin-top:18px;
 		float:left;
-		background:url('/_dev/img/arrow.gif') no-repeat center right;
+		background:url('../img/arrow.gif') no-repeat center right;
 	}
 	div#workflowstates div.state div.progress {
 		margin:5px;

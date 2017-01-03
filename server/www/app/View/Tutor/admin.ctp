@@ -73,7 +73,6 @@ foreach($projects as $project) {
 ?>
 	<h3>My Marking: <?php echo $project['Project']['name']; ?></h3>
 	<div class='tutor_section'>
-	<!--<p><a href='/_dev/tutor/tutorsubmissionlist/<?php echo $project['Project']['id']; ?>' class='btn'>My marking statistics</a></p>-->
 	<?php echo $this->element('listsubmissions',array('submissions'=>$project['Submission'])); ?>
 	<div class='bottomwrap'>
 		<form method='POST'>
