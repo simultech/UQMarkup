@@ -12,6 +12,8 @@ class CourseController extends AppController {
 	
 	public $courseadmin = false;
 
+	public $superadmin = false;
+
 	public function beforeFilter() {
 		parent::beforeFilter();
 		if(!$this->Ldap->loggedin()) {
@@ -20,6 +22,9 @@ class CourseController extends AppController {
 		if($this->Ldap->isAdmin()) {
 			$this->courseadmin = true;
 		}
+        if($this->Ldap->isSuperAdmin()) {
+            $this->superadmin = true;
+        }
 	}
 	
 	public function create() {
@@ -107,6 +112,36 @@ class CourseController extends AppController {
 			$this->permissionDenied('Not an authorised administrator');
 		}
 	}
+
+    public function changestaff($courseuid,$user_id) {
+        if($this->courseadmin) {
+            $course = $this->Course->findByUid($courseuid);
+            if(empty($course)) {
+                $this->permissionDenied('Not a valid course');
+            }
+            $coursecode = $course['Course']['coursecode'];
+            //check if they are a course coordinator
+            if($this->Ldap->isCourseCoordinator($courseuid)) {
+                $association = $this->CourseRoleUser->find('first',array('conditions'=>array('CourseRoleUser.user_id'=>$user_id,'course_id'=>$course['Course']['id'],),'recursive'=>-1));
+                if(!empty($association)) {
+                    $role = $this->roles[$association['CourseRoleUser']['role_id']];
+                    if ($association['CourseRoleUser']['role_id'] == 3) {
+                        $association['CourseRoleUser']['role_id'] = 2;
+                    } else if ($association['CourseRoleUser']['role_id'] == 2) {
+                        $association['CourseRoleUser']['role_id'] = 3;
+                    }
+                    $this->CourseRoleUser->save($association);
+                    $this->flashMessage('Staff member status changed',$this->referer(),true);
+                } else {
+                    $this->flashMessage('Not a valid association',$this->referer());
+                }
+            }  else {
+                $this->permissionDenied('You are not a coordinator for this course');
+            }
+        } else {
+            $this->permissionDenied('Not an authorised administrator');
+        }
+    }
 	
 	public function removestaff($courseuid,$user_id) {
 		if($this->courseadmin) {
@@ -123,7 +158,7 @@ class CourseController extends AppController {
 				if(!empty($association)) {
 					$role = $this->roles[$association['CourseRoleUser']['role_id']];
 					$candelete = false;
-					if($role != "Course Coordinator") {
+					if($role != "Course Coordinator" || $this->superadmin) {
 						$candelete = true;
 					}
 					if($candelete) {

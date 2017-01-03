@@ -42,6 +42,7 @@
 	Router::connect('/course/admin/*', array('controller' => 'course', 'action' => 'admin'));
 	Router::connect('/course/managestaff/*', array('controller' => 'course', 'action' => 'managestaff'));
 	Router::connect('/course/removestaff/*', array('controller' => 'course', 'action' => 'removestaff'));
+    Router::connect('/course/changestaff/*', array('controller' => 'course', 'action' => 'changestaff'));
 	Router::connect('/course/updateassign/*', array('controller' => 'course', 'action' => 'updateassign'));
 	Router::connect('/submission/*', array('controller' => 'submission', 'action' => 'display'));
 	Router::connect('/course/*', array('controller' => 'course', 'action' => 'display'));
