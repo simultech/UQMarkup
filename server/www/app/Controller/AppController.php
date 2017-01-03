@@ -33,6 +33,15 @@ App::uses('Controller', 'Controller');
  */
 
 define('__BASE_URL__', Configure::read('url_base_relative'));
+define('__WEBDAV_PATH__', Configure::read('path_webdav'));
+
+define('__WEBDAV_DIR__', __WEBDAV_PATH__.'/uploads/');
+define('__WEBDAV_BINARY__', __WEBDAV_PATH__.'/binary/');
+define('__WEBDAV_VERSIONS__', __WEBDAV_PATH__.'/versions/');
+define('__WEBDAV_MODERATION__', __WEBDAV_PATH__.'/moderation/');
+define('__WEBDAV_TMP__', __WEBDAV_PATH__.'/tmp/');
+define('__WEBDAV_SURVEYS__', __WEBDAV_PATH__.'/surveys/');
+
 
 class AppController extends Controller {
 
@@ -47,12 +56,12 @@ class AppController extends Controller {
 	
 	var $baseURL = __BASE_URL__;
 	
-	var $webdavdir = '/var/www/webdav/uploads/';
-	var $binarydir = '/var/www/webdav/binary/';
-	var $versionsdir = '/var/www/webdav/versions/';
-	var $moderationdir = '/var/www/webdav/moderation/';
-	var $tmpdir = '/var/www/webdav/tmp/';
-	var $surveydir = '/var/www/webdav/surveys/';
+	var $webdavdir = __WEBDAV_DIR__;
+	var $binarydir = __WEBDAV_BINARY__;
+	var $versionsdir = __WEBDAV_VERSIONS__;
+	var $moderationdir = __WEBDAV_MODERATION__;
+	var $tmpdir = __WEBDAV_TMP__;
+	var $surveydir = __WEBDAV_SURVEYS__;
 	var $webdavsuburl = 'https://uqmarkup.ceit.uq.edu.au/uploads/';
 	
 	var $debugmode = true;
