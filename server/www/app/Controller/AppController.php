@@ -109,7 +109,7 @@ class AppController extends Controller {
     function emailToStudent($studentname,$course,$project,$submission,$studentemail) {
 		$emailcontent = 'Dear '.$studentname.",\n\n";
 		$emailcontent .= 'You now have assessment feedback available for '.$course['Course']['coursecode'].".\n";
-		$emailcontent .= 'To view this feedback, please visit: '.Configure::read('url_base').'/_dev/assessment/view/'.$this->encodeSubmissionID($submission['Submission']['id'])."\n";
+		$emailcontent .= 'To view this feedback, please visit: '.Configure::read('url_base').Configure::read('url_base_relative').'/assessment/view/'.$this->encodeSubmissionID($submission['Submission']['id'])."\n";
 		$emailcontent .= "Please use the 'contact us' form at the bottom of the page to let us know if you experience any issues.\n\nRegards,\nUQMarkup.";  
 		$emaildata = array();
 		$emaildata['subject'] = 'UQMarkup Feedback ready for '.$course['Course']['coursecode'].' '.$project['Project']['name'];
@@ -126,7 +126,7 @@ class AppController extends Controller {
 		$emailcontent .= 'You now have moderation feedback available for '.$course['Course']['coursecode'].".\n";
 		$emailcontent .= "\nFeedback:\n======\n";
 		$emailcontent .= $feedback."\n======\n\n";
-		$emailcontent .= 'To view the submission that this feedback is related to, please visit: '.Configure::read('url_base').'/_dev/assessment/view/'.$this->encodeSubmissionID($submission['Submission']['id'])."\n";
+		$emailcontent .= 'To view the submission that this feedback is related to, please visit: '.Configure::read('url_base').Configure::read('url_base_relative').'/assessment/view/'.$this->encodeSubmissionID($submission['Submission']['id'])."\n";
 		$emailcontent .= "Please use the 'contact us' form at the bottom of the page to let us know if you experience any issues.\n\nRegards,\nUQMarkup.";  
 		$emaildata = array();
 		$emaildata['subject'] = 'UQMarkup moderation feedback for '.$course['Course']['coursecode'].' '.$submission['Project']['name'];

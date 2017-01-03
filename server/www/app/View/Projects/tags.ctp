@@ -1,6 +1,6 @@
 <h2>Manage Colour Tags</h2>
-<link rel='stylesheet' type='text/css' href='/_dev/css//jquery/jquery.colorpicker.css' />
-<script type='text/javascript' src='/_dev/js/jquery.colorpicker.js'></script>
+<link rel='stylesheet' type='text/css' href='<?php echo $baseURL; ?>/css//jquery/jquery.colorpicker.css' />
+<script type='text/javascript' src='<?php echo $baseURL; ?>/js/jquery.colorpicker.js'></script>
 <h3>Colour Tags for '<?php echo $project['Project']['name']; ?>'</h3>
 <table>
 	<th>Colour</th><th>Tag Name</th><th>Actions</th>

@@ -1,15 +1,15 @@
 <h2>Manage Rubrics</h2>
-<link rel='stylesheet' type='text/css' href='/_dev/css//jquery/jquery.colorpicker.css' />
-<script type='text/javascript' src='/_dev/js/jquery.colorpicker.js'></script>
+<link rel='stylesheet' type='text/css' href='<?php echo $baseURL; ?>/css/jquery/jquery.colorpicker.css' />
+<script type='text/javascript' src='<?php echo $baseURL; ?>/js/jquery.colorpicker.js'></script>
 <h3>Rubrics for '<?php echo $project['Project']['name']; ?>'</h3>
 <?php echo $this->element('rubriclayout',array('editrubrics'=>true)); ?>
 <h3>Import Rubrics '<?php echo $project['Project']['name']; ?>'</h3>
-<p><a href='/_dev/files/rubrics_template.csv'>Download this template</a>, edit and upload here:</p>
+<p><a href='<?php echo $baseURL; ?>/files/rubrics_template.csv'>Download this template</a>, edit and upload here:</p>
 <form class="well" method="POST" enctype="multipart/form-data">
 	<input name='rubric' type='file' />
 	<button name='importrubric' class="btn btn-primary"><i class="icon-plus icon-white"></i> Import Rubrics</button>
 </form>
-<form class="well" method="POST" action="/_dev/projects/duplicaterubrics/<?php echo $project['Project']['id']; ?>">
+<form class="well" method="POST" action="<?php echo $baseURL; ?>/projects/duplicaterubrics/<?php echo $project['Project']['id']; ?>">
 <p>Duplicate from other projects: </p>
 	<select name="othercourse">
 	<?php

@@ -95,7 +95,7 @@ if($project['Project']['option_multiple_markers'] == 1) {
 ?>
 <h3>Manage Submissions</h3>
 <a class='btn btn-default' style='float:right' id='selectall' onclick="selectallsubmissions();">Select All Submissions</a>
-<script src="/_dev/js/angular/controllers/userlookupController.js"></script>
+<script src="<?php echo $baseURL; ?>/js/angular/controllers/userlookupController.js"></script>
 <div ng-app="uqmarkupApp">
 	<userlookup course="<?php echo $project['Project']['course_id']; ?>"></userlookup>
 </div>

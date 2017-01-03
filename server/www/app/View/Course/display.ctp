@@ -1,10 +1,10 @@
 jojojo
-<script src="/_dev/js/charts/raphael.js"></script>
-<script src="/_dev/js/charts/g.raphael-min.js"></script>
-<script src="/_dev/js/charts/g.bar-min.js"></script>
-<script src="/_dev/js/charts/g.dot-min.js"></script>
-<script src="/_dev/js/charts/g.line-min.js"></script>
-<script src="/_dev/js/charts/g.pie-min.js"></script>
+<script src="<?php echo $baseURL; ?>/js/charts/raphael.js"></script>
+<script src="<?php echo $baseURL; ?>/js/charts/g.raphael-min.js"></script>
+<script src="<?php echo $baseURL; ?>/js/charts/g.bar-min.js"></script>
+<script src="<?php echo $baseURL; ?>/js/charts/g.dot-min.js"></script>
+<script src="<?php echo $baseURL; ?>/js/charts/g.line-min.js"></script>
+<script src="<?php echo $baseURL; ?>/js/charts/g.pie-min.js"></script>
 
 <div id="holder"></div>
 

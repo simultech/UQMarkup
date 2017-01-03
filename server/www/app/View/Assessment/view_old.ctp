@@ -77,7 +77,7 @@ td.rubric_option_body {
 }
 
 .marked {
-    background: #dfd url('/_dev/img/rubriccheckbox.png') no-repeat center center;
+    background: #dfd url('<?php echo $baseURL; ?>/img/rubriccheckbox.png') no-repeat center center;
 }
 
 #zoomhintwrapper {
@@ -139,12 +139,12 @@ a.jp-play,a.jp-pause {
 	top:0;
 	left:0;
 	text-indent:-10000px;
-	background:#444 url('/_dev/js/jplayer/player-graphics.gif') 3px 3px;
+	background:#444 url('<?php echo $baseURL; ?>/js/jplayer/player-graphics.gif') 3px 3px;
 	border-right:1px solid #222;
 }
 a.jp-pause {
 	background:green;
-	background:#333 url('/_dev/js/jplayer/player-graphics.gif') 3px 33px;
+	background:#333 url('<?php echo $baseURL; ?>/js/jplayer/player-graphics.gif') 3px 33px;
 }
 div#jp_container_1 {
 	position:relative;
@@ -520,7 +520,7 @@ Zoom:
 	    $("#jquery_jplayer_1").jPlayer({
 		    ready: function () {
 		    },
-		    swfPath: "/_dev/js/jplayer",
+		    swfPath: "<?php echo $baseURL; ?>/js/jplayer",
 		    supplied: "mp3",
 		    wmode: "window"
 		});

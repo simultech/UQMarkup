@@ -4,7 +4,7 @@ Each call needs either a GET or POST param called secret, with the value: <br />
 shared=<?php echo $secret; ?>
 </p>
 <?php
-	$path = '/_dev/api/';
+	$path = $baseURL.'/api/';
 	ksort($endpoints);
 	foreach($endpoints as $name=>$endpoint) {
 		echo '<h3>/'.$name.'</h3>';

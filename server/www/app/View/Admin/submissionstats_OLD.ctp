@@ -3,7 +3,7 @@
 	$graphheight = 400;
 	$audiocount = 0;
 ?>
-<audio controls="controls" id="audioplayer_106" src="/_dev/assessment/audio/229/annot__2012_09_16_09_28_14.m4a"></audio>
+<audio controls="controls" id="audioplayer_106" src="<?php echo $baseURL; ?>/assessment/audio/229/annot__2012_09_16_09_28_14.m4a"></audio>
 <h2>Statistics for Submission <?php echo $submission['Submission']['id']; ?></h2>
 <dl>
 	<dt>Link: </dt><dd><a target="_blank" href="<?php echo $submission['data']['uri']; ?>"><?php echo Configure::read('url_base'); ?><?php echo $submission['data']['uri']; ?></a></dd>

@@ -69,7 +69,7 @@ td.rubric_option_body {
 }
 
 .marked {
-    background: #dfd url('/_dev/img/rubriccheckbox.png') no-repeat center center;
+    background: #dfd url('<?php echo $baseURL; ?>/img/rubriccheckbox.png') no-repeat center center;
 }
 
 #zoomhintwrapper {

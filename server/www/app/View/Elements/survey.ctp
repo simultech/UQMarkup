@@ -293,7 +293,7 @@ $('form#surveyform input').click(function() {
 	var survey_id = "1";
 	var question_id = $(this).attr('name');
 	var answer = $(this).val();
-	var theURL = '/_dev/assessment/savesurveyanswer/<?php echo $project_id; ?>/'+survey_id;
+	var theURL = '<?php echo $baseURL; ?>/assessment/savesurveyanswer/<?php echo $project_id; ?>/'+survey_id;
 	$.ajax({
 		type: "POST",
 		url: theURL,
