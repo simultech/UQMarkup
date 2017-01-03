@@ -61,8 +61,6 @@
     self.showFilter = YES;
     self.searchText = @"";
     [self.collectionView setAllowsMultipleSelection:YES];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     self.tapToRemoveKeyboardGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doTapToRemoveKeyboardClick:)];
     
     [self.editButtonItem setTitle:@"Publish"];
@@ -890,6 +888,9 @@
 #pragma mark Login Delegate methods
 - (void)didLogin
 {
+    NSLog(@"did login -- added keyboard observer");
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     self.logoutButton.enabled = YES;
     [self refreshProjects:self];
 }
@@ -920,6 +921,10 @@
 
 - (IBAction)logout:(id)sender {
     [[MarkupAPIController sharedApi] logoutWithSucess:^{
+        NSLog(@"did logout -- removed keyboard observer");
+        [[NSNotificationCenter defaultCenter]  removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter]  removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+
         [self performSegueWithIdentifier:@"Show Login" sender:self];
         self.logoutButton.enabled = NO;
     } andFailure:^(NSError *error) {
