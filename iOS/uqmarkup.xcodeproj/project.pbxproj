@@ -1105,7 +1105,7 @@
 				ORGANIZATIONNAME = "Ably Design";
 				TargetAttributes = {
 					D0938E3D15D259C4001980B4 = {
-						DevelopmentTeam = X4J3AMW696;
+						DevelopmentTeam = F642PJVK8J;
 					};
 				};
 			};
@@ -1428,14 +1428,16 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = F642PJVK8J;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Markup2/uqmarkup-Prefix.pch";
 				INFOPLIST_FILE = "Markup2/uqmarkup-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Markup2\"",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.ablydesign.uqmarkup1;
 				PRODUCT_NAME = uqmarkup;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -1451,14 +1453,16 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = F642PJVK8J;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Markup2/uqmarkup-Prefix.pch";
 				INFOPLIST_FILE = "Markup2/uqmarkup-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Markup2\"",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.ablydesign.uqmarkup1;
 				PRODUCT_NAME = uqmarkup;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
