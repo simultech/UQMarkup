@@ -194,10 +194,7 @@ class CourseController extends AppController {
 			    	//file should be all good
 			    	if (($handle = fopen($_FILES['uq_id_list']['tmp_name'], "r")) !== FALSE) {
 			    		$csvdata = file_get_contents($_FILES['uq_id_list']['tmp_name']);
-			    		$csvdata = explode("\r",$csvdata);
-			    		if(!is_array($csvdata)) {
-			    			$csvdata = explode("\n",$csvdata);
-			    		}
+                        $csvdata = preg_split("/\\r\\n|\\r|\\n/", $csvdata);
 			    		$i = 0;
 			    		$tutorassigns = array();
 			    		foreach($csvdata as $csvline) {
@@ -355,7 +352,7 @@ class CourseController extends AppController {
 		header("Content-Disposition: attachment; filename=stafflist.csv");
 		header("Pragma: no-cache");
 		header("Expires: 0");
-		echo "UQ ID,Tutor or Course Coordinator\n";
+		echo "UQ ID,'Tutor' or 'Course Coordinator'\n";
 		die();
 	}
 	
@@ -378,7 +375,7 @@ class CourseController extends AppController {
 					//file should be all good
 					if (($handle = fopen($_FILES['csv']['tmp_name'], "r")) !== FALSE) {
 						$csvdata = file_get_contents($_FILES['csv']['tmp_name']);
-						$csvdata = explode("\r",$csvdata);
+						$csvdata = preg_split("/\\r\\n|\\r|\\n/", $csvdata);
 						if(sizeOf($csvdata) < 2) {
 							$csvdata = explode("\n",$csvdata);
 						}
