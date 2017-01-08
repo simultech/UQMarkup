@@ -6,7 +6,7 @@ angular.module('uqmarkupApp').factory('userLookupService', function($http) {
 
     service.findUsers = function(keyword, type, course, callback) {
     	var matches = [];
-    	$http({method: 'GET', url: '/_dev/jsonapi/userlookup/'+course+'/'+type+'/'+keyword}).success(function(data, status, headers, config) {
+    	$http({method: 'GET', url: uqmarkupBase+'/jsonapi/userlookup/'+course+'/'+type+'/'+keyword}).success(function(data, status, headers, config) {
     		for(var username in data) {
     			var newObj = {
 	    			username: username,

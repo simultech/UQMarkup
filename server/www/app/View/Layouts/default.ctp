@@ -6,6 +6,9 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     	<meta name="description" content="">
     	<meta name="author" content="">
+        <script>
+            var uqmarkupBase = "a<?php echo $baseURL; ?>";
+        </script>
     	<?php
 		echo $this->Html->meta('icon');
 		echo $this->Html->css('bootstrap.min');
@@ -67,7 +70,6 @@
 		<div id="container">
 			<div id="header">
 				<h1>
-					<a class='ceit' href='http://ceit.uq.edu.au' target='_blank'><?php echo $this->Html->image("ceit.png"); ?></a>
 					<?php
 						if(isset($loggedIn) && $loggedIn) {
 							echo '<p id="logindetails">Logged in as '.$userid.'</p>';
@@ -99,7 +101,7 @@
 				</div>
 			</div>
 			<div id="footer">
-				&copy; 2012 CEIT, UQ, Ably, Lovely Head
+				&copy; 2016 UQ (CEIT, Ably, Lovely Head)
 				<?php if(isset($loggedIn) && $loggedIn) { ?>
 					<em><a href='<?php echo $baseURL; ?>/pages/contactus'>Got an issue? Let us know.</a></em>
 					<em><a href='<?php echo $baseURL; ?>/pages/ethicalclearance'>Ethical clearance status.</a></em>

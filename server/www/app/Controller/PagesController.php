@@ -139,9 +139,9 @@ class PagesController extends AppController {
 			$this->redirect($this->Ldap->referer());
 		} else {
 			if($student) {
-				$content = file_get_contents("/var/www/html/studenttermsofuse.html");
+				$content = file_get_contents(WWW_ROOT."studenttermsofuse.html");
 			} else {
-				$content = file_get_contents("/var/www/html/ipadtermsofuse.html");
+				$content = file_get_contents(WWW_ROOT."ipadtermsofuse.html");
 			}
 			$this->set('content',$content);
 		}

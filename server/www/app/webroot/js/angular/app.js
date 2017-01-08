@@ -1,5 +1,5 @@
 var uqmarkupApp = angular.module("uqmarkupApp", []);
-var baseURL = '/_dev';
+var baseURL = uqmarkupBase;
 
 var elements = {'userlookup':{}};
 

@@ -271,7 +271,7 @@ if($project['Project']['option_multiple_markers'] == 1) {
 	$(document).ready(function() {
 		$.tablesorter.defaults.widgets = ['zebra'];
 		$.tablesorter.defaults.sortList = [[1,0]];
-		$("table").tablesorter({debug: true});
+		$("table").tablesorter();
 	});
 	function toggleautomatedtasks() {
 		if($("#automated").css("display") == 'block') {

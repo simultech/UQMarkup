@@ -15,7 +15,7 @@ of sections in a survey.
   $ = jQuery;
 
   settings = {
-    postbackUrl: '/_dev/surveys/savesurvey',
+    postbackUrl: uqmarkupBase+'/surveys/savesurvey',
     yesSubquestionClass: 'yes',
     noSubquestionClass: 'no',
     questionClass: 'surveyquestion',
