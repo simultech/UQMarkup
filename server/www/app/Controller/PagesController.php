@@ -47,20 +47,14 @@ class PagesController extends AppController {
 		$userid = $this->Ldap->getUserID();
 		if($this->Ldap->isSuperAdmin()) {
 			$this->set('superadmin', true);
-		} else {
-            $this->set('superadmin', false);
-        }
-        if($this->Ldap->isAdmin()) {
-            $this->set('admin', true);
-        } else {
-            $this->set('admin', false);
-        }
-        $ccrole = $this->getRoleID('Course Coordinator');
-        $course_teaching_ids = $this->CourseRoleUser->find('list',array('fields'=>array('course_id','course_id'),'conditions'=>array('user_id'=>$userid,'role_id'=>$ccrole)));
-        if(sizeOf($course_teaching_ids) > 0) {
-            $courses_teaching = $this->Course->find('all',array('conditions'=>array('id'=>$course_teaching_ids),'order'=>array(array('year'=>'desc'),array('semester'=>'desc'))));
-            $this->set('courses_teaching',$courses_teaching);
-        }
+		}
+		if($this->courseadmin) {
+			//find existing courses
+			$ccrole = $this->getRoleID('Course Coordinator');
+			$course_teaching_ids = $this->CourseRoleUser->find('list',array('fields'=>array('course_id','course_id'),'conditions'=>array('user_id'=>$userid,'role_id'=>$ccrole)));
+			$courses_teaching = $this->Course->find('all',array('conditions'=>array('id'=>$course_teaching_ids),'order'=>array(array('year'=>'desc'),array('semester'=>'desc'))));
+			$this->set('courses_teaching',$courses_teaching);
+		}
 		$tutorrole = $this->getRoleID('Tutor');
 		$course_tutoring_ids = $this->CourseRoleUser->find('list',array('fields'=>array('course_id','course_id'),'conditions'=>array('user_id'=>$userid,'role_id >='=>$tutorrole)));
 		$courses_tutoring = $this->Course->find('all',array('conditions'=>array('id'=>$course_tutoring_ids),'order'=>array(array('year'=>'desc'),array('semester'=>'desc'))));

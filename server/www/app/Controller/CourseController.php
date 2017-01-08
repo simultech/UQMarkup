@@ -152,8 +152,6 @@ class CourseController extends AppController {
 			$coursecode = $course['Course']['coursecode'];
 			//check if they are a course coordinator
 			if($this->Ldap->isCourseCoordinator($courseuid)) {
-				//print_r($course['Course']['id']);
-				//die();
 				$association = $this->CourseRoleUser->find('first',array('conditions'=>array('CourseRoleUser.user_id'=>$user_id,'course_id'=>$course['Course']['id'],),'recursive'=>-1));
 				if(!empty($association)) {
 					$role = $this->roles[$association['CourseRoleUser']['role_id']];
