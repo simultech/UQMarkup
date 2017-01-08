@@ -1,6 +1,6 @@
 <h2>Manage Administrators</h2>
-<h3>Administrators</h3>
-	<p>Admins can create and manage courses.  Super Admins have full access across the system, and can perform additional functions.</p>
+<h3>Course Administrators</h3>
+	<p>Course administrators can create and manage courses.  Super Admins have full access across the system, and can perform additional functions.</p>
 	<table>
 		<thead>
 			<tr>
@@ -17,9 +17,19 @@
 			<tr>
 				<td><?php echo $admin['User']['uqid']; ?></td>
 				<td><?php echo $admin['User']['name']; ?></td>
-				<td class='center'><input disabled type="checkbox" <?php if($admin['Adminuser']['super'] == 1) { echo 'checked'; } ?> /></td>
-				<td class='center'><input disabled type="checkbox" <?php if($admin['Adminuser']['email'] == 1) { echo 'checked'; } ?> /></td>
-				<?php echo '<td class="center">'.$this->Html->link('Remove',array('action'=>'index_remove',$admin['Adminuser']['id']),array(),'Are you sure you wish to remove this administrator?').'</td>'; ?>
+				<td class='center'><input disabled type="checkbox" <?php if($admin['Adminuser']['super'] == 1) { echo 'checked'; } ?> />
+                    <?php
+                    if ($admin['User']['uqid'] != $userid) {
+                        echo ' ('.$this->Html->link('toggle',array('action'=>'index_togglesuper',$admin['Adminuser']['id']),array(),'Are you sure you want to change this users permission?').')';
+                    }
+                    ?>
+                </td>
+				<td class='center'><input disabled type="checkbox" <?php if($admin['Adminuser']['email'] == 1) { echo 'checked'; } ?> />
+                    <?php
+                        echo ' ('.$this->Html->link('toggle',array('action'=>'index_toggleemail',$admin['Adminuser']['id']),array(),'Are you sure you want to change this users permission?').')';
+                    ?>
+                </td>
+				<?php echo '<td class="center">'.$this->Html->link('Remove',array('action'=>'index_remove',$admin['Adminuser']['id']),array(),'Are you sure you wish to remove this administrator?  The user will no longer have the ability to manage courses.').'</td>'; ?>
 			</tr>
 <?php
 	}
@@ -34,7 +44,7 @@
 		echo $this->element('checkboxfield',array('label'=>'Receives System Email','placeholder'=>'','id'=>'email', 'value'=>'0'));
 	?>
   <br />
-  <button type="submit" class="btn btn-primary"><i class="icon-user icon-white"></i> Add Administrator</button>
+  <button type="submit" class="btn btn-primary"><i class="icon-user icon-white"></i> Add Course Administrator</button>
 </form>
 <script type='text/javascript'>
 function checkboxchanged(checkbox,field) {

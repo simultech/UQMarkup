@@ -1508,14 +1508,44 @@ class AdminController extends AppController {
 		}
 	}
 
-	public function index_remove($user_id) {
+	public function index_remove($adminuser_id) {
 		if($this->Ldap->isSuperAdmin()) {
-			$this->Adminuser->delete($user_id);
+			$this->Adminuser->delete($adminuser_id);
 			$this->flashMessage('Administrator removed',$this->referer(),true);
 		} else {
 			$this->permissionDenied('You are not an administrator');
 		}
 	}
+
+    public function index_togglesuper($adminuser_id) {
+        if($this->Ldap->isSuperAdmin()) {
+            $adminuser = $this->Adminuser->findById($adminuser_id);
+            if ($adminuser['Adminuser']['super'] == 1) {
+                $adminuser['Adminuser']['super'] = 0;
+            } else {
+                $adminuser['Adminuser']['super'] = 1;
+            }
+            $this->Adminuser->save($adminuser);
+            $this->flashMessage('Super status updated',$this->referer(),true);
+        } else {
+            $this->permissionDenied('You are not an administrator');
+        }
+    }
+
+    public function index_toggleemail($adminuser_id) {
+        if($this->Ldap->isSuperAdmin()) {
+            $adminuser = $this->Adminuser->findById($adminuser_id);
+            if ($adminuser['Adminuser']['email'] == 1) {
+                $adminuser['Adminuser']['email'] = 0;
+            } else {
+                $adminuser['Adminuser']['email'] = 1;
+            }
+            $this->Adminuser->save($adminuser);
+            $this->flashMessage('Email updated',$this->referer(),true);
+        } else {
+            $this->permissionDenied('You are not an administrator');
+        }
+    }
 	
 	function sortentries($a,$b) {
 		$al = $a['created'];
