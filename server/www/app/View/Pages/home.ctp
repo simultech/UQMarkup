@@ -6,9 +6,11 @@ if(isset($superadmin)) {
 }
 ?>
 <h2>Welcome to UQMarkup</h2>
-<div class="alert alert-info">
-	UQMarkup is a research project which allows students to receive various forms of in-situ feedback for their assignments.<br /><br />
-	If you run into any issues please <a href='<?php echo $baseURL; ?>/pages/contactus'><strong>contact us here</strong></a>.</div>
+<div class="alert alert-danger">
+    <strong style='text-align:center'>
+        <h1>WARNING</h1>
+        UQMarkup is currently undergoing a major upgrade.  During this period, please avoid conducting new marking with in the system</strong>
+</div>
 <?php
 if(isset($courses_teaching)) {
 ?>
