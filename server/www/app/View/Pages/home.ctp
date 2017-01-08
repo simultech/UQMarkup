@@ -50,10 +50,15 @@ if(isset($courses_teaching)) {
 	}
 ?>
 </div>
-<div class='actions'>
-	<a href='<?php echo $baseURL; ?>/course/create' class='btn'><i class="icon-plus-sign icon"></i> Create a new course</a>
-</div>
-<?php
+    <?php
+    if ($admin) {
+        ?>
+        <div class='actions'>
+            <a href='<?php echo $baseURL; ?>/course/create' class='btn'><i class="icon-plus-sign icon"></i> Create a new
+                course</a>
+        </div>
+        <?php
+    }
 }
 ?>
 
