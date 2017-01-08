@@ -80,13 +80,11 @@
         }
     }
     [self updateMarks];
-    //[self.view setToolbarTitle:@"Rubrics" withLeftButton:nil andRightButton:nil];
 }
 
 - (void)updateMarks {
     float marks = 0;
     if(self.toolbarRef && self.totalMarks > 0) {
-        NSLog(@"AAA %@",self.data);
         NSMutableDictionary *oldDict = [self.data mutableCopy];
         for(id sectionKey in oldDict) {
             NSMutableArray *oldArray = [[oldDict objectForKey:sectionKey] mutableCopy];
@@ -94,15 +92,7 @@
                 if([[rubric objectForKey:@"type"] isEqualToString:@"table"] && [rubric objectForKey:@"value"] != nil) {
                     int columnnumber = [[rubric objectForKey:@"value"] intValue];
                     marks += [[[[rubric objectForKey:@"meta"] objectAtIndex:columnnumber] objectForKey:@"grade"] floatValue];
-                    NSLog(@"ZING ZING %@",rubric);
                 }
-                /*NSMutableDictionary *newRubric = [[NSMutableDictionary alloc] initWithDictionary:rubric];
-                [newRubric setObject:value forKey:@"value"];
-                    NSMutableArray *sectionArray = [self.data objectForKey:sectionKey];
-                    int theIndex = [[self.data objectForKey:sectionKey] indexOfObject:rubric];
-                    [sectionArray replaceObjectAtIndex:theIndex withObject:newRubric];
-                    [self.data setObject:sectionArray forKey:sectionKey];
-                }*/
             }
         }
         marks = roundf(marks);
@@ -192,19 +182,6 @@
     } else if([type isEqualToString:@"table"]) {
         NSArray *meta = [[[self.data objectForKey:aKey] objectAtIndex:[indexPath row]] objectForKey:@"meta"];
         height = 40;
-        /*int deviceWidth = 768;
-        switch ([[UIApplication sharedApplication] statusBarOrientation]) {
-            case UIInterfaceOrientationPortrait:
-            case UIInterfaceOrientationPortraitUpsideDown:
-                deviceWidth = 768;
-                break;
-            case UIInterfaceOrientationLandscapeLeft:
-            case UIInterfaceOrientationLandscapeRight:
-                deviceWidth = 1024;
-                break;
-            default:
-                break;
-        }*/
         int deviceWidth = self.view.bounds.size.width;
         int columnWidth = deviceWidth/[meta count];
         for(NSDictionary *columnData in meta) {
@@ -263,28 +240,15 @@
     
     NSString *cellType = [data objectForKey:@"type"];
     if([cellType isEqualToString:@"boolean"]) {
-//        cell = [tableView dequeueReusableCellWithIdentifier:BooleanIdentifier];
-//        if (!cell) {
-            cell = [[BooleanRubricCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BooleanIdentifier];
-//        }
+        cell = [[BooleanRubricCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BooleanIdentifier];
     } else if([cellType isEqualToString:@"number"]) {
-//        cell = [tableView dequeueReusableCellWithIdentifier:NumberIdentifier];
-//        if (!cell) {
-            cell = [[NumberRubricCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NumberIdentifier];
-//        }
+        cell = [[NumberRubricCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NumberIdentifier];
     } else if([cellType isEqualToString:@"text"]) {
-//        cell = [tableView dequeueReusableCellWithIdentifier:TextIdentifier];
-//        if (!cell) {
-            cell = [[TextRubricCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TextIdentifier];
-//        }
+        cell = [[TextRubricCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TextIdentifier];
     } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:TableIdentifier];
-//        if (!cell) {
-            cell = [[TableRubricCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TableIdentifier];
-//        }
+        cell = [[TableRubricCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TableIdentifier];
     }
     
-//    [cell prepareForReuse];
     [cell loadData:data];
     
     if([data objectForKey:@"value"] != nil) {
