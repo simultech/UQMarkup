@@ -6,16 +6,16 @@
 	</ul></div>
 <h3>Teaching Staff</h3>
 <table>
-	<th>Role</th><th>UQ ID</th><th>Name</th><th>Email</th><th>Change Role</th><th>Remove</th>
+	<th>Role</th><th>UQ ID</th><th>Name</th><th>Email</th><th>Remove</th>
 	<?php
 	foreach($staff as $stafftype=>$stafflist) {
 		foreach($stafflist as $staffmember) {
-			echo '<tr><td>'.$stafftype.'</td><td>'.$staffmember['User']['uqid'].'</td><td>'.$staffmember['User']['name'].'</td><td>'.$staffmember['User']['email'].'</td>';
-			if ($stafftype == 'Course Coordinator') {
-                echo '<td>'.$this->Html->link('Set to Tutor',array('action'=>'changestaff',$course['Course']['uid'],$staffmember['User']['id']),array(),'Are you sure you wish to set this staff member to a course coordinator?').'</td>';
-            } else {
-                echo '<td>'.$this->Html->link('Set to Coordinator',array('action'=>'changestaff',$course['Course']['uid'],$staffmember['User']['id']),array(),'Are you sure you wish to set this staff member to a tutor?').'</td>';
+			echo '<tr><td>'.$stafftype;
+			if ($staffmember['User']['uqid'] != $userid) {
+                echo ' ('.$this->Html->link('change',array('action'=>'changestaff',$course['Course']['uid'],$staffmember['User']['id']),array(),'Are you sure you wish to change this staff members access?').')';
             }
+			echo '</td>';
+			echo '<td>'.$staffmember['User']['uqid'].'</td><td>'.$staffmember['User']['name'].'</td><td>'.$staffmember['User']['email'].'</td>';
 			echo '<td>'.$this->Html->link('Remove',array('action'=>'removestaff',$course['Course']['uid'],$staffmember['User']['id']),array(),'Are you sure you wish to remove this staff member?').'</td></tr>';
 		}
 	}
