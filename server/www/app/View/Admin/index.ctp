@@ -1,6 +1,6 @@
 <h2>Manage Administrators</h2>
 <h3>Administrators</h3>
-	<p>Admins can create courses.  Super Admins have full access across the system.</p>
+	<p>Admins can create and manage courses.  Super Admins have full access across the system, and can perform additional functions.</p>
 	<table>
 		<thead>
 			<tr>
