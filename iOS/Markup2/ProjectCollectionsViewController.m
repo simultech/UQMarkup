@@ -189,7 +189,6 @@
 }
 
 - (void)backupCoreData {
-    NSLog(@"BACKING UP");
     NSString *supportPath;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
     if (paths.count > 0) {
@@ -229,13 +228,10 @@
         [[[segue.destinationViewController viewControllers] objectAtIndex:0] setSubmissionTitle:[[(SubmissionCell *)sender download] title]];
         [[[segue.destinationViewController viewControllers] objectAtIndex:0] setDelegate:self];
         
-        NSLog(@"Project Id: %@", [[[sender download] project] projectId]);
-        
         NSArray *rubrics = [[NSArray alloc] initWithArray:[[[(SubmissionCell *)sender download] project] rubrics] copyItems:YES];
         for (Rubric *rubric in rubrics) {
             Mark *mark = [Mark findFirstWithPredicate:[NSPredicate predicateWithFormat:@"rubricId == %d AND SELF IN %@", rubric.rubricId, sub.marks]];
             if (mark) {
-                DLog(@"MARK IS: ZZZZZZZZZ %@", mark);
                 rubric.rubricValue = mark.value;
             }
         }
@@ -749,7 +745,7 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
-    //[self.collectionView setContentInset:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
+
     [self.collectionView setFrame:CGRectMake(self.collectionView.frame.origin.x, self.collectionView.frame.origin.y, self.collectionView.frame.size.width, self.collectionView.frame.size.height+keyboardFrame.size.height)];
     UIToolbar *toolbar = self.navigationController.toolbar;
     [self.navigationController.toolbar setFrame:CGRectMake(toolbar.frame.origin.x, toolbar.frame.origin.y + keyboardFrame.size.height, toolbar.frame.size.width, toolbar.frame.size.height)];
@@ -810,94 +806,7 @@
     [self.collectionView reloadData];
 }
 
-//- (void) updateFilter {
-//    
-//    NSString *searchTerms = self.searchText;
-//    if([searchTerms isEqualToString:@""]) {
-//        searchTerms = @".";
-//    }
-//    
-//    NSMutableArray *previousFilteredProjects;
-//    if(self.filteredProjects) {
-//        previousFilteredProjects = [[NSMutableArray alloc] initWithArray:self.filteredProjects copyItems:YES];
-//    } else {
-//        self.filteredProjects = self.projects;
-//        [self.collectionView reloadData];
-//        [self updateFilter];
-//        return;
-//    }
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(uqId CONTAINS[cd] %@) OR (title CONTAINS[cd] %@)",searchTerms,searchTerms];
-//    NSPredicate *filteredPredicate = [NSPredicate predicateWithFormat:@"((uqId CONTAINS[cd] %@) OR (title CONTAINS[cd] %@)) AND (marked == NO)",@"BLBK",@"BLBK"];
-//    self.filteredProjects = [[NSMutableArray alloc] initWithArray:self.projects copyItems:YES];
-//    for(Project *filteredProject in self.filteredProjects) {
-//        NSArray *filteredSubmissions;
-//        if([[self mainFilter] selectedSegmentIndex] == 1 || filteredProject.isFiltered) {
-//            filteredSubmissions = [filteredProject.submissions filteredArrayUsingPredicate:filteredPredicate];
-//        } else {
-//            filteredSubmissions = [filteredProject.submissions filteredArrayUsingPredicate:predicate];
-//            DLog(@"JOJOJOJOJ");
-//        }
-//        filteredProject.submissions = filteredSubmissions;//[filteredSubmissions copy];
-//    }
-//    
-//    NSMutableArray *removedIndexpaths = [[NSMutableArray alloc] init];
-//    NSMutableArray *addedIndexpaths = [[NSMutableArray alloc] init];
-//    
-//    int sectionIndex = 0;
-//    for(Project *fullProject in self.projects) {
-//        //int itemIndex = 0;
-//        for(SubmissionDownload *fullSubmission in fullProject.submissions) {
-//            //was previously there, is no longer
-//            if([[[previousFilteredProjects objectAtIndex:sectionIndex] submissions] containsObject:fullSubmission] && ![[[self.filteredProjects objectAtIndex:sectionIndex] submissions] containsObject:fullSubmission]) {
-//                int newItemIndex = [[[previousFilteredProjects objectAtIndex:sectionIndex] submissions] indexOfObject:fullSubmission];
-//                [removedIndexpaths addObject:[NSIndexPath indexPathForItem:newItemIndex inSection:sectionIndex]];
-//                DLog(@"REMOVING SOMETHING");
-//            }
-//            //wasn't there, now is
-//            if(![[[previousFilteredProjects objectAtIndex:sectionIndex] submissions] containsObject:fullSubmission] && [[[self.filteredProjects objectAtIndex:sectionIndex] submissions] containsObject:fullSubmission]) {
-//                DLog(@"FOUND A NEW ONE YOU FUCKER");
-//                int newItemIndex = [[[self.filteredProjects objectAtIndex:sectionIndex] submissions] indexOfObject:fullSubmission];
-//                [addedIndexpaths addObject:[NSIndexPath indexPathForItem:newItemIndex inSection:sectionIndex]];
-//            }
-//            //if([[[previousFilteredProjects objectAtIndex:sectionIndex] submissions] containsObject:fullSubmission]) {
-//                //itemIndex++;
-//            //}
-//        }
-//        sectionIndex++;
-//    }
-//    DLog(@"REMOVING INDEX PATHS:");
-//    for(NSIndexPath *index in removedIndexpaths) {
-//        DLog(@"   INDEX PATH SECTION: %d ROW %d",index.section,index.item);
-//    }
-//    
-//    DLog(@"ADDING INDEX PATHS:");
-//    for(NSIndexPath *index in addedIndexpaths) {
-//        DLog(@"   INDEX PATH SECTION: %d ROW %d",index.section,index.item);
-//    }
-//    BOOL forceData = false;
-//    if(forceData) {
-//        [self.collectionView reloadData];
-//    } else {
-//        if([removedIndexpaths count] == 0 && [addedIndexpaths count] == 0) {
-//            return;
-//        }
-//        //@try {
-//            [self.collectionView performBatchUpdates:^{
-//                [self.collectionView deleteItemsAtIndexPaths:removedIndexpaths];
-//                [self.collectionView insertItemsAtIndexPaths:addedIndexpaths];
-//                //[self.collectionView deleteSections:removedProjects];
-//            } completion:^(BOOL finished) {
-//                DLog(@"DONE");
-//            }];
-//        //}
-//        //@catch (NSException *exception) {
-//            //DLog(@"found a bug %@",exception);
-//        //}
-//        //@finally {
-//            //do nothign
-//        //}
-//    }
-//}
+
 
 #pragma mark Login Delegate methods
 - (void)didLogin
