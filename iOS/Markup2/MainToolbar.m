@@ -100,7 +100,8 @@
 }
 
 -(void)createSaveButtons {
-    revertButton = [[UIBarButtonItem alloc] initWithTitle:@"Clear Annotations" style:UIBarButtonItemStyleBordered target:delegate action:@selector(revertChanges:)];
+    // TODO: test, make sure didnt break anything. Chanaged UIBarButtonItemStylePlain
+    revertButton = [[UIBarButtonItem alloc] initWithTitle:@"Clear Annotations" style:UIBarButtonItemStylePlain target:delegate action:@selector(revertChanges:)];
     revertButton.tintColor = [UIColor whiteColor];
     [itemOrder addObject:revertButton];
     [revertButton setEnabled:YES];

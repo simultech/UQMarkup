@@ -67,7 +67,10 @@
     [self.editButtonItem setAction:@selector(togglePublishMode:)];
     [self.editButtonItem setTintColor:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:self.editButtonItem];
-    self.cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(togglePublishMode:)];
+
+    // changed to UIBarButtonItemStylePlain
+    // TODO: test, make sure didn't break
+    self.cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(togglePublishMode:)];
     self.reloadButton = self.navigationItem.leftBarButtonItem;
     
     _inPublishMode = NO;
@@ -270,8 +273,9 @@
 
 - (IBAction)refreshProjects:(id)sender
 {
+
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    
+    DLog(@"refreshProjects %d", appDelegate.reach.isReachable);
     if (appDelegate.reach.isReachable) {
         if(self.isRefreshing) {
             return;
@@ -324,10 +328,19 @@
 
 - (void)displayLocalProjects
 {
+
     self.projects = [NSKeyedUnarchiver unarchiveObjectWithFile:[self localProjectsFile]];
     if (!self.projects) {
-        UIAlertView *noProjects = [[UIAlertView alloc] initWithTitle:@"No projects" message:@"You must be connected to the internet at least once to download projects. Try refreshing." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-        [noProjects show];
+        UIAlertController *noProjects = [UIAlertController alertControllerWithTitle:@"No projects"
+                                                                         message:@"You must be connected to the internet at least once to download projects. Try refreshing."
+                                                                  preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction* cancelButton = [UIAlertAction
+                                       actionWithTitle:@"Ok"
+                                       style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction * action) {}];
+        [noProjects addAction:cancelButton];
+        [self presentViewController:noProjects animated:YES completion:nil];
         return;
     }
     [self updateFilter];
@@ -581,6 +594,7 @@
             [cell.downloadProgress setHidden:YES];
         } failure:^(NSError *error) {
             [cell.downloadProgress setHidden:YES];
+            
             UIAlertView *downloadFailed = [[UIAlertView alloc] initWithTitle:@"Couldn't get submission" message:@"We couldn't download the submission document. Please try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [downloadFailed show];
             self.isTransitioning = NO;
