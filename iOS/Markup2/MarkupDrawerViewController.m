@@ -203,15 +203,6 @@
     _contentWidth = width;
 }
 
-//- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-//{
-//    if (UIDeviceOrientationIsLandscape(toInterfaceOrientation)) {
-//        _shadowFrame = CGRectMake(0.0, 0.0, _contentWidth, self.view.frame.size.width - 140.0);
-//    } else {
-//        _shadowFrame = CGRectMake(0.0, 0.0, _contentWidth, self.view.frame.size.height - 140.0);
-//    }
-//}
-
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     if (self.onLeft) {

@@ -611,7 +611,8 @@
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    [self.rubricDrawer setContentWidth:self.view.frame.size.width-100];
+    //Because this is will, send the opposite orientation, height instead of width
+    [self.rubricDrawer setContentWidth:self.view.frame.size.height-100];
     [self.scrollView resetZoomToFit];
 }
 
