@@ -72,10 +72,10 @@
 {
     CGFloat width;
     if (UIDeviceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-        self.contentFrame = CGRectMake(0.0, 0.0, _contentWidth, self.view.frame.size.width-180);
+        self.contentFrame = CGRectMake(0.0, 0.0, _contentWidth, self.view.frame.size.height-160);
         width = 1024.0;
     } else {
-        self.contentFrame = CGRectMake(0.0, 0.0, _contentWidth, self.view.frame.size.height-180);
+        self.contentFrame = CGRectMake(0.0, 0.0, _contentWidth, self.view.frame.size.height-160);
         width = 768.0;
     }
     
@@ -83,13 +83,11 @@
         self.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     }
 
-    NSLog(@"%g", width);
     if (self.onLeft) {
         self.openFrame = CGRectMake(-3.0, 88.0, self.contentFrame.size.width + 44.0, self.contentFrame.size.height);
         self.closedFrame = CGRectMake(-self.contentFrame.size.width-3, 88.0, self.contentFrame.size.width + 44.0, self.contentFrame.size.height);
     } else {
         self.openFrame = CGRectMake(width - self.contentFrame.size.width + 3.0 - self.tabView.frame.size.width, 88.0, self.contentFrame.size.width + 44.0, self.contentFrame.size.height);
-        NSLog(@"%@", NSStringFromCGRect(self.openFrame));
         self.closedFrame = CGRectMake(width - self.tabView.frame.size.width + 3.0, 88.0, self.contentFrame.size.width + 44.0, self.contentFrame.size.height);
     }
     self.view.frame = self.closedFrame;
@@ -205,14 +203,14 @@
     _contentWidth = width;
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    if (UIDeviceOrientationIsLandscape(toInterfaceOrientation)) {
-        _shadowFrame = CGRectMake(0.0, 0.0, _contentWidth, self.view.frame.size.width - 140.0);
-    } else {
-        _shadowFrame = CGRectMake(0.0, 0.0, _contentWidth, self.view.frame.size.height - 140.0);
-    }
-}
+//- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+//{
+//    if (UIDeviceOrientationIsLandscape(toInterfaceOrientation)) {
+//        _shadowFrame = CGRectMake(0.0, 0.0, _contentWidth, self.view.frame.size.width - 140.0);
+//    } else {
+//        _shadowFrame = CGRectMake(0.0, 0.0, _contentWidth, self.view.frame.size.height - 140.0);
+//    }
+//}
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {

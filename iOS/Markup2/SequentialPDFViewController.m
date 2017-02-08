@@ -253,7 +253,7 @@
     rubricContent.submission = self.submission;
     self.rubricDrawer.contentViewController = rubricContent;
     [rubricContent setToolbarRef:self.rubricDrawer];
-    [self.rubricDrawer setContentWidth:650.0];
+    [self.rubricDrawer setContentWidth:self.view.frame.size.width-100];
     [self.rubricDrawer setupTabImage:@"tab_rubrics.png" atVerticalPosition:0.1];
     //[self.rubricDrawer.view setAlpha:0.90];
     [self.view addSubview:self.rubricDrawer.view];
@@ -611,6 +611,7 @@
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+    [self.rubricDrawer setContentWidth:self.view.frame.size.width-100];
     [self.scrollView resetZoomToFit];
 }
 
