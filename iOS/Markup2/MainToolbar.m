@@ -7,7 +7,7 @@
 //
 
 #import "MainToolbar.h"
-
+#import <AVFoundation/AVFoundation.h>
 
 @implementation MainToolbar
 
@@ -212,12 +212,25 @@
 
 - (void)openAudio:(id)sender
 {
-    [self toggleButton:(UIButton *)sender];
-    if([(UIButton *)sender isSelected]) {
-        [self.delegate mainToolbar:self didSelectAnnotationType:AnnotationTypeRecording];
-        [self.delegate mainToolbar:self didSelectRecordToStartRecording:YES];
-        [self.annotationMenu setMenu:AnnotationTypeRecording];
-    }
+    [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+        if (granted) {
+            NSLog(@"granted");
+            [self toggleButton:(UIButton *)sender];
+            if([(UIButton *)sender isSelected]) {
+                [self.delegate mainToolbar:self didSelectAnnotationType:AnnotationTypeRecording];
+                [self.delegate mainToolbar:self didSelectRecordToStartRecording:YES];
+                [self.annotationMenu setMenu:AnnotationTypeRecording];
+            }
+        } else {
+            NSLog(@"denied");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Microphone Access Denied"
+                                                            message:@"You must allow microphone access in Settings > Privacy > Microphone"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
+    }];
 }
 
 - (void)done:(id)sender
