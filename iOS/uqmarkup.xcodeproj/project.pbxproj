@@ -1105,7 +1105,7 @@
 				ORGANIZATIONNAME = "Ably Design";
 				TargetAttributes = {
 					D0938E3D15D259C4001980B4 = {
-						DevelopmentTeam = F642PJVK8J;
+						DevelopmentTeam = X4J3AMW696;
 					};
 				};
 			};
@@ -1405,7 +1405,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = Markup;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -1440,6 +1440,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = Markup;
 				SDKROOT = iphoneos;
@@ -1455,7 +1456,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = F642PJVK8J;
+				DEVELOPMENT_TEAM = X4J3AMW696;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Markup2/uqmarkup-Prefix.pch";
 				INFOPLIST_FILE = "Markup2/uqmarkup-Info.plist";
@@ -1464,11 +1465,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Markup2\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = au.com.ablydesign.uqmarkup1;
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.ablydesign.uqmarkup;
 				PRODUCT_NAME = uqmarkup;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1480,7 +1481,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = F642PJVK8J;
+				DEVELOPMENT_TEAM = X4J3AMW696;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Markup2/uqmarkup-Prefix.pch";
 				INFOPLIST_FILE = "Markup2/uqmarkup-Info.plist";
@@ -1489,11 +1490,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Markup2\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = au.com.ablydesign.uqmarkup1;
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.ablydesign.uqmarkup;
 				PRODUCT_NAME = uqmarkup;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
