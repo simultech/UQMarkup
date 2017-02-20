@@ -8,20 +8,28 @@
 <?php
 	echo $this->element('submission_workflow');
 ?>
-<p><a href="<?php echo $baseURL; ?>/admin/projectstats/<?php echo $project['Project']['id']; ?>" target="_blank" class="btn">View Project Statistics</a> 
-<a href="<?php echo $baseURL; ?>/admin/visualisation/<?php echo $project['Project']['id']; ?>" target="_blank" class="btn">View Analytics</a> 
-<a href="<?php echo $baseURL; ?>/surveys/results/<?php echo $project['Project']['id']; ?>" target="_blank" class="btn">Survey Responses</a> 
-<a href="<?php echo $baseURL; ?>/projects/submissionlist/<?php echo $project['Project']['id']; ?>" target="_blank" class="btn">View Your Assigned Submissions</a> 
-<a href="<?php echo $baseURL; ?>/admin/getMarksCsv/<?php echo $project['Project']['id']; ?>" target="_blank" class="btn">View Rubric Marks (CSV)</a> 
-<a href="<?php echo $baseURL; ?>/projects/sbms_students/<?php echo $project['Project']['id']; ?>" target="_blank" class="btn">Submission List</a> 
+<h3>Upload Submissions</h3>
+<div class='well'>
+    <p>Webdav Upload URL <a href='<?php echo $baseURL; ?>/webdav.pdf' target='_blank'>(tutorial)</a>: <strong><a href='<?php echo $uploadfolder; ?>' target='_blank'><?php echo $uploadfolder; ?></a></strong></p>
+    <a href='<?php echo $baseURL; ?>/projects/loadSubmissions/<?php echo $project['Project']['id']; ?>' class='btn'><i class='icon-refresh icon'></i> Check for uploaded submissions</a>
+</div>
+<h3>Statistics &amp; Downloads</h3>
+<div style="font-size:60%;">
+<p><a href="<?php echo $baseURL; ?>/admin/projectstats/<?php echo $project['Project']['id']; ?>" target="_blank" class="btn btn-small">View Project Statistics</a>
+<a href="<?php echo $baseURL; ?>/admin/visualisation/<?php echo $project['Project']['id']; ?>" target="_blank" class="btn btn-small">View Analytics</a>
+<a href="<?php echo $baseURL; ?>/surveys/results/<?php echo $project['Project']['id']; ?>" target="_blank" class="btn btn-small">Survey Responses</a>
+<a href="<?php echo $baseURL; ?>/projects/submissionlist/<?php echo $project['Project']['id']; ?>" target="_blank" class="btn btn-small">View Your Assigned Submissions</a>
+<a href="<?php echo $baseURL; ?>/admin/getMarksCsv/<?php echo $project['Project']['id']; ?>" target="_blank" class="btn btn-small">View Rubric Marks (CSV)</a>
+<a href="<?php echo $baseURL; ?>/projects/sbms_students/<?php echo $project['Project']['id']; ?>" target="_blank" class="btn btn-small">Submission List (CSV)</a>
 <?php
 if($project['Project']['option_multiple_markers'] == 1) {
 ?>
- <a href="<?php echo $baseURL; ?>/admin/multigrade/<?php echo $project['Project']['id']; ?>" target="_blank" class="btn btn-warning">Perform Grade Aggregation</a>
+ <a href="<?php echo $baseURL; ?>/admin/multigrade/<?php echo $project['Project']['id']; ?>" target="_blank" class="btn btn-warning btn-small">Perform Grade Aggregation</a>
 <?php
 }
 ?>
 </p>
+</div>
 <h3>Automated Tasks</h3>
 <p><a id='automatedtoggle' href="javascript:toggleautomatedtasks();">Show automated tasks</a></p>
 <div id='automated' style='display:none'>
@@ -54,11 +62,6 @@ if($project['Project']['option_multiple_markers'] == 1) {
 	<p><a target='_blank' href='<?php echo $baseURL; ?>/projects/getassigntutorscsv/<?php echo $project['Project']['id']; ?>'>Get tutor assignment CSV file</a></p>
 	<input type='file' name='csv' /><input class='btn' type='submit' value='Assign tutors' />
 </form>
-</div>
-<h3>Upload Additional Submissions</h3>
-<div class='well'>
-<p>Webdav Upload URL <a href='<?php echo $baseURL; ?>/webdav.pdf' target='_blank'>(tutorial)</a>: <strong><a href='<?php echo $uploadfolder; ?>' target='_blank'><?php echo $uploadfolder; ?></a></strong></p>
-<a href='<?php echo $baseURL; ?>/projects/loadSubmissions/<?php echo $project['Project']['id']; ?>' class='btn'><i class='icon-refresh icon'></i> Check for uploaded submissions</a>
 </div>
 <h3>Publish Submissions</h3>
 <?php
