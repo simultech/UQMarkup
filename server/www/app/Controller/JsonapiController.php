@@ -29,6 +29,7 @@ class JsonapiController extends AppController {
 	);
 	
 	function beforeFilter() {
+        $this->secretkey = Configure::read('secret_key');
 		if($this->secretkey == '') {
 			echo 'SECRET KEY MISSING FROM JsonapiController.php';
 			die();

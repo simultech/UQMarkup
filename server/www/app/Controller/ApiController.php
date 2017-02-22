@@ -29,6 +29,7 @@ class ApiController extends AppController {
 	);
 	
 	function beforeFilter() {
+	    $this->secretkey = Configure::read('secret_key');
 		if($this->secretkey == '') {
 			echo 'SECRET KEY MISSING FROM ApiController.php';
 			die();
