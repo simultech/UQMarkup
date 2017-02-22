@@ -76,7 +76,7 @@ static MarkupAPIController *instance;
                andFailure:(void(^)(NSError *error))failure
 {
     
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://uqmarkup.ceit.uq.edu.au/locations.json"]];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://markup.sbms.uq.edu.au/locations.json"]];
     
     AFJSONRequestOperation *jsonOp = [[AFJSONRequestOperation alloc] initWithRequest:request];
     

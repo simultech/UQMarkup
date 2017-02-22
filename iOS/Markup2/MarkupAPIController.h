@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define kApiBase @"https://uqmarkup.ceit.uq.edu.au/_dev/"
+#define kApiBase @"https://markup.sbms.uq.edu.au/"
 
 
 @interface MarkupAPIController : NSObject

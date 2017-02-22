@@ -25,7 +25,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://uqmarkup.ceit.uq.edu.au/ipadtermsofuse.html"]]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://markup.sbms.uq.edu.au/ipadtermsofuse.html"]]];
 }
 
 - (IBAction)agree:(id)sender {

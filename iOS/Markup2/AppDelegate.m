@@ -15,7 +15,7 @@
     /*[TestFlight takeOff:@"dab5152ad87a8c270d388c754d92066c_MTI2ODUwMjAxMi0wOC0zMCAwOTo1OTo1My4zMjYzMjA"];
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];*/
     
-    self.reach = [Reachability reachabilityWithHostname:@"uqmarkup.ceit.uq.edu.au"];
+    self.reach = [Reachability reachabilityWithHostname:@"markup.sbms.uq.edu.au"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reachabilityChanged:)
