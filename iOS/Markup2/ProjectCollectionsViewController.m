@@ -53,6 +53,11 @@
     self.frontpageThumbs = [[NSMutableDictionary alloc] init];
     self.isRefreshing = NO;
     _getRequestsCount = 0;
+
+    [[NSNotificationCenter defaultCenter]  removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]  removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidLoad
@@ -704,6 +709,7 @@
 
 - (void)keyboardWillShow:(NSNotification *)not
 {
+    NSLog(@"KEYBOARD WILL SHOW");
     NSDictionary *userInfo = [not userInfo];
     NSTimeInterval animationDuration;
     UIViewAnimationCurve animationCurve;
@@ -732,6 +738,7 @@
 
 - (void)keyboardWillHide:(NSNotification *)not
 {
+    NSLog(@"KEYBOARD WILL HIDE");
     NSDictionary *userInfo = [not userInfo];
     NSTimeInterval animationDuration;
     UIViewAnimationCurve animationCurve;
