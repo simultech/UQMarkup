@@ -14,4 +14,9 @@
                 "name":"University of Sydney Test",
                 "url":"https://uat-scilearn.sydney.edu.au/markup2/www/html/_dev/"
         },
+  {
+    "id":"UQ_Legacy",
+    "name":"UQ CEIT (Legacy)",
+    "url":"https://uqmarkup.ceit.uq.edu.au/_dev/"
+  },
 ]}
