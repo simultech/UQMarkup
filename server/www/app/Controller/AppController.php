@@ -124,7 +124,7 @@ class AppController extends Controller {
 		$emaildata['subject'] = 'UQMarkup Feedback ready for '.$course['Course']['coursecode'].' '.$project['Project']['name'];
 		$emaildata['subject_short'] = 'UQMarkup Feedback for '.$course['Course']['coursecode'];
 		$emaildata['to'] = $studentemail;
-		$emaildata['replyto'] = 'noreply@uqmarkup.ceit.uq.edu.au';
+		$emaildata['replyto'] = 'noreply@markup.sbms.uq.edu.au';
 		$emaildata['returnPath'] = array('uqadekke@uq.edu.au');
 		$emaildata['content'] = $emailcontent;
 		$this->email($emaildata);
@@ -144,7 +144,7 @@ class AppController extends Controller {
 		$emaildata['cc'] = array('j.kibedi@uq.edu.au');
 		$emaildata['bcc'] = array('j.kibedi@uq.edu.au','uqadekke@uq.edu.au');
 		$emaildata['returnPath'] = array('uqadekke@uq.edu.au');
-		$emaildata['replyto'] = 'noreply@uqmarkup.ceit.uq.edu.au';
+		$emaildata['replyto'] = 'noreply@markup.sbms.uq.edu.au';
 		$emaildata['content'] = $emailcontent;
 		$this->email($emaildata);
 	}
@@ -160,7 +160,7 @@ class AppController extends Controller {
 		$emaildata['to'] = $tutoremail;
 		$emaildata['bcc'] = array('j.kibedi@uq.edu.au','uqadekke@uq.edu.au');
 		$emaildata['returnPath'] = array('uqadekke@uq.edu.au');
-		$emaildata['replyto'] = 'noreply@uqmarkup.ceit.uq.edu.au';
+		$emaildata['replyto'] = 'noreply@markup.sbms.uq.edu.au';
 		$emaildata['content'] = $emailcontent;
 		$this->email($emaildata);
 	}
@@ -329,7 +329,7 @@ function getAudioDuration($audiopath) {
 		}
 		$this->set('title_for_layout', $data['subject']);
 		$email = new CakeEmail();
-		$email->from(array('noreply@uqmarkup.ceit.uq.edu.au' => 'UQMarkup'));
+		$email->from(array('noreply@markup.sbms.uq.edu.au' => 'UQMarkup'));
 		$email->to($data['to']);
 		if(isset($data['cc'])) {
 			$email->cc($data['cc']);
