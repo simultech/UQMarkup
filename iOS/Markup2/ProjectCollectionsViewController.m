@@ -540,7 +540,7 @@
         [self.editButtonItem setTintColor:UIColorFromRGB(0x0000FF)];
         [self.editButtonItem setEnabled:YES];
     }
-    [self.editButtonItem setTitle:[NSString stringWithFormat:@"Upload (%d)",[[self.collectionView indexPathsForSelectedItems] count]]];
+    [self.editButtonItem setTitle:[NSString stringWithFormat:@"Upload (%lu)",[[self.collectionView indexPathsForSelectedItems] count]]];
 }
 
 #pragma mark UICollectionViewDelegate methods
