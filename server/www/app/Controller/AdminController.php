@@ -1,7 +1,5 @@
 <?php
 
-require_once("XML/Serializer.php");
-
 App::uses('AppController', 'Controller');
 
 class AdminController extends AppController {
@@ -1126,14 +1124,6 @@ class AdminController extends AppController {
 						}
 						echo $formatteddata;
 						break;
-					case 'xml':
-						header('Content-type: application/xml');
-						$formatteddata = $this->json_to_xml(json_encode($thedata));
-						if($pretty) {
-							$formatteddata = $this->xml_pretty($formatteddata);
-						}
-						echo $formatteddata;
-						break;
 				}
 				die();
 			} else {
@@ -1199,49 +1189,7 @@ class AdminController extends AppController {
 	        } 
 	    } 
 	    return $new_json; 
-	} 
-	
-	function xml_pretty($xml, $html_output=false) {
-	    $xml_obj = new SimpleXMLElement($xml);
-	    $level = 4;
-	    $indent = 0; // current indentation level
-	    $pretty = array();
-	    // get an array containing each XML element
-	    $xml = explode("\n", preg_replace('/>\s*</', ">\n<", $xml_obj->asXML()));
-
-	    // shift off opening XML tag if present
-	    if (count($xml) && preg_match('/^<\?\s*xml/', $xml[0])) {
-		    $pretty[] = array_shift($xml);
-		}
-		foreach ($xml as $el) {
-			if (preg_match('/^<([\w])+[^>\/]*>$/U', $el)) {
-				// opening tag, increase indent
-				$pretty[] = str_repeat(' ', $indent) . $el;
-				$indent += $level;
-			} else {
-				if (preg_match('/^<\/.+>$/', $el)) {            
-					$indent -= $level;  // closing tag, decrease indent
-				}
-				if ($indent < 0) {
-					$indent += $level;
-				}
-				$pretty[] = str_repeat(' ', $indent) . $el;
-			}
-		}   
-		$xml = implode("\n", $pretty);   
-		return ($html_output) ? htmlentities($xml) : $xml;
 	}
-	
-	function json_to_xml($json) {
-    	$serializer = new XML_Serializer();
-	    $obj = json_decode($json);
-	    if ($serializer->serialize($obj)) {
-        	return $serializer->getSerializedData();
-        }
-	    else {
-        	return null;
-        }
-    }
 	
 	function organiseProjectData($project_id) {
 		$submissions = $this->Submission->find('all',array('conditions'=>array('project_id'=>$project_id)));
