@@ -1,8 +1,26 @@
-<h2>Manage Teaching Staff</h2>
-<h3>Student List</h3>
+<h2>Manage Students For <?php echo $course['Course']['name']; ?></h2>
+<h3>Update Students From Sinet</h3>
 <?php
-    echo $this->element('classlist');
+    echo ' <a class="btn" href="'.$baseURL.'/course/refreshlist/'.$course['Course']['uid'].'">Refresh</a></p>';
 ?>
+<h3>Student List</h3>
+<table>
+    <thead>
+    <tr><th>UQ ID</th><th>Name</th><th>Email</th><th>Assigned To</th></tr>
+    </thead>
+    <?php
+    foreach($students as $student) {
+        echo '<tr><td>'.$student['User']['uqid'].'</td><td>'.$student['User']['name'].'</td><td>'.$student['User']['email'].'</td>';
+        if(isset($automarklist[$student['User']['id']])) {
+            echo '<td>'.$automarklist[$student['User']['id']].'</td>';
+        } else {
+            echo '<td>Unassigned</td>';
+        }
+        echo '</tr>';
+    }
+    ?>
+</table>
+<h3>Bulk Update Student Auto-assign</h3>
 <form method='POST' enctype="multipart/form-data" action="<?php echo $baseURL; ?>/course/updateassign/<?php echo $course['Course']['uid']; ?>">
     <div class="fileupload fileupload-new" data-provides="fileupload">
         <div class="input-append">
