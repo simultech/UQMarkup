@@ -19,11 +19,7 @@ class UsersController extends AppController {
 			$result = $this->Ldap->login($this->data['username'],$this->data['password'],$rememberme);
 			if($this->Ldap->loggedin()) {
 				$user = $this->User->find('first',array('conditions'=>array('User.id'=>$this->Ldap->getUserID())));
-				if($user['User']['termsagreed'] < 1) {
-					$this->redirect('/pages/ethicalclearance');
-				} else {
-					$this->redirect($this->Ldap->referer());
-				}
+                $this->redirect($this->Ldap->referer());
 			} else {
 				$this->set('error',$result['error']);
 			}

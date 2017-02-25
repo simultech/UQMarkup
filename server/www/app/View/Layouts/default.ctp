@@ -104,7 +104,6 @@
 				&copy; 2016 UQ (CEIT, Ably, Lovely Head)
 				<?php if(isset($loggedIn) && $loggedIn) { ?>
 					<em><a href='<?php echo $baseURL; ?>/pages/contactus'>Got an issue? Let us know.</a></em>
-					<em><a href='<?php echo $baseURL; ?>/pages/ethicalclearance'>Ethical clearance status.</a></em>
 				<?php } ?>
 			</div>
 		</div>
