@@ -280,15 +280,19 @@ class CourseController extends AppController {
                     $automarklist[$markerlistitem['Student']['user_id']] = $markerlistitem['Marker']['uqid'];
                 }
                 $this->set('students',$students);
+                $this->set('automarklist',$automarklist);
 
                 //if we are saving data
                 if(!empty($this->data)) {
+	                $assignedusers = 0;
                     foreach($this->data['studentassign'] as $studentid=>$tutorid) {
                         if($tutorid != '') {
                             print_r($studentid);
                             print_r($tutorid);
+                            $assignedusers += $this->assignStudent($studentid,$tutorid,$course['Course']['id']);
                         }
                     }
+                    $this->flashMessage('Assigned '.$assignedusers.' students',$this->referer(),true);
                     die();
 //                    $this->Course->set($this->data);
 //                    if($this->Course->validates()) {
@@ -505,7 +509,6 @@ class CourseController extends AppController {
 	        	if($existingassigned) {
 	        		$this->Assignedstudent->id = $existingassigned['Assignedstudent']['id'];
 	        		$this->Assignedstudent->saveField('marker_id',$thetutor['User']['id']);
-	        		$assignedusers++;
 	        	} else {
 	        		$assigned_data = array(
 	        			'courseroleuser_id'=>$courseroleuser['CourseRoleUser']['id'],
@@ -518,7 +521,7 @@ class CourseController extends AppController {
 	        		}
 	        	}
 	        	//find submissions that belong to the user for the course
-		        $projects = array_keys($this->Project->find('list',array('conditions'=>array('course_id'=>$course_id))));
+		        $projects = array_keys($this->Project->find('list',array('conditions'=>array('course_id'=>$course_id, 'not'=>array('option_disable_autoassign'=>'1')))));
 		        $potentialsubmissions = $this->Activity->find('all',array('conditions'=>array('meta'=>$studentid,'state_id'=>1,'Submission.project_id'=>$projects)));
 		        foreach($potentialsubmissions as $potentialsubmission) {
 		            $states = $this->Activity->find('all',array('conditions'=>array('submission_id'=>$potentialsubmission['Submission']['id'])));

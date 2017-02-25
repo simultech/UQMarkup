@@ -220,7 +220,6 @@ class TutorController extends AppController {
 		            	$this->Activity->save($newactivity);
 		            }
 		        }
-	        	//$assignedusers++;
 	        }
 	    }
 	    return $assignedusers;
