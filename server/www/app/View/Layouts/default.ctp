@@ -7,7 +7,7 @@
     	<meta name="description" content="">
     	<meta name="author" content="">
         <script>
-            var uqmarkupBase = "a<?php echo $baseURL; ?>";
+            var uqmarkupBase = "<?php echo $baseURL; ?>";
         </script>
     	<?php
 		echo $this->Html->meta('icon');
