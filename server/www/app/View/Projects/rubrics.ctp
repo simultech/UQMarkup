@@ -31,5 +31,5 @@
 		echo $this->element('rubrictypes');
 	?>
   <br />
-  <button type="submit" class="btn btn-primary"><i class="icon-circle-arrow-up icon-white"></i> Create Rubric</button>
+  <button disabled id='createrubric' type="submit" class="btn btn-primary"><i class="icon-circle-arrow-up icon-white"></i> Create Rubric</button>
 </form>
