@@ -1428,10 +1428,16 @@ class ApiController extends AppController {
 	public function isLatestVersion() {
 		$currentversion = '3.00';
 		$releasenotes = '
+
+IMPORTANT NOTE:
+PLEASE GO TO THE APPSTORE APPLICATION AND CLICK UPDATE ON UQMARKUP
+
+WARNING - PLEASE UPDATE IMMEDIATELY - THIS VERSION NO LONGER WILL SAVE DATA
+		
+
 RELEASE NOTES 
 ====
 3.00 - 25-02-2017
-WARNING - PLEASE UPDATE IMMEDIATELY - THIS VERSION NO LONGER WILL SAVE DATA
 - Moved from uqmarkup.ceit.uq.edu.au to markup.sbms.uq.edu.au
 - Significant core changes to UQMarkup
 ---
