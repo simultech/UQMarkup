@@ -22,7 +22,7 @@
     }
     ?>
 </table>
-    <p>
+    <p style="margin-top:20px;">
         <input type='submit' value='Update Tutor Assignments' class='btn btn-primary' />
     </p>
 </form>

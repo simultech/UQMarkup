@@ -283,7 +283,6 @@ class CourseController extends AppController {
 
                 //if we are saving data
                 if(!empty($this->data)) {
-                    print_r($this->data);
                     foreach($this->data['studentassign'] as $studentid=>$tutorid) {
                         if($tutorid != '') {
                             print_r($studentid);

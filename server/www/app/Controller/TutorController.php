@@ -156,7 +156,6 @@ class TutorController extends AppController {
 		$studentlist = $this->Assignedstudent->find('all',array('conditions'=>array('marker_id'=>$this->Ldap->getUserId(),'Assignedstudent.course_id'=>$course["Course"]['id'])));
 		$studentids = array();
 		foreach($studentlist as $studentlistitem) {
-			echo $studentlistitem['Assignedstudent']['id'].',';
 			$studentids[] = $studentlistitem['Student']['user_id'];
 		}
 		$students = $this->User->find('all',array('conditions'=>array('id'=>$studentids),'recursive'=>-1));
