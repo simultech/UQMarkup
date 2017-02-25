@@ -256,6 +256,59 @@ class CourseController extends AppController {
 		}
 		$this->flashMessage('Course list refreshed','/course/admin/'.$courseuid,true);
 	}
+
+	public function managestudents($courseuid) {
+        ini_set('memory_limit','1024M');
+        ini_set('max_execution_time','480');
+        if($this->courseadmin) {
+            $course = $this->Course->findByUid($courseuid);
+            if(empty($course)) {
+                $this->permissionDenied('Not a valid course');
+            }
+            $coursecode = $course['Course']['coursecode'];
+            $this->breadcrumbs = array('/course/admin/'.$courseuid=>'Manage '.$coursecode);
+            //check if they are a course coordinator
+            if($this->Ldap->isCourseCoordinator($courseuid)) {
+                $this->set('course',$course);
+                //get the student list
+                $role_id = $this->getRoleID('Student');
+                $studentids = $this->CourseRoleUser->find('list',array('fields'=>array('user_id'),'conditions'=>array('role_id'=>$role_id,'course_id'=>$course['Course']['id'])));
+                $students = $this->User->find('all',array('conditions'=>array('id'=>$studentids),'order'=>array('uqid')));
+                $markerlist = $this->Assignedstudent->find('all',array('conditions'=>array('courseroleuser_id'=>array_keys($studentids))));
+                $automarklist = array();
+                foreach($markerlist as $markerlistitem) {
+                    $automarklist[$markerlistitem['Student']['user_id']] = $markerlistitem['Marker']['uqid'];
+                }
+                $this->set('students',$students);
+
+                //if we are saving data
+                if(!empty($this->data)) {
+//                    $this->Course->set($this->data);
+//                    if($this->Course->validates()) {
+//                        $data = $this->data;
+//                        $data['coursecode'] = strtoupper($data['coursecode']);
+//                        $data['uid'] = $data['year'].'_'.$data['semester'].'_'.$data['coursecode'];
+//                        if($this->Course->save($data)) {
+//                            $course = $this->Course->find('first',array('conditions'=>array('Course.id'=>$this->data['id'])));
+//                            if(!empty($course)) {
+//                                $this->refreshClassList($course);
+//                            }
+//                            $this->flashMessage('Course updated','/course/admin/'.$data['uid'],true);
+//                        } else {
+//                            $this->flashMessage('Could not update course','false');
+//                        }
+//                    } else {
+//                        $formerrors = $this->Course->invalidFields();
+//                        $this->set('formerrors',$formerrors);
+//                    }
+                }
+            }  else {
+                $this->permissionDenied('You are not a coordinator for this course');
+            }
+        } else {
+            $this->permissionDenied('Not an authorised administrator');
+        }
+    }
 	
 	public function admin($courseuid,$showclasslist='') {
 		ini_set('memory_limit','1024M');
