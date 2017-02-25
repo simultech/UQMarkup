@@ -189,7 +189,7 @@ class TutorController extends AppController {
 	        		}
 	        	}
 	        	//find submissions that belong to the user for the course
-		        $projects = array_keys($this->Project->find('list',array('conditions'=>array('course_id'=>$course_id))));
+		        $projects = array_keys($this->Project->find('list',array('conditions'=>array('course_id'=>$course_id, 'not'=>array('option_disable_autoassign'=>'1')))));
 		        $projects = array_diff($projects, $this->ignore_projects);
 		        $potentialsubmissions = $this->Activity->find('all',array('conditions'=>array('meta'=>$studentid,'state_id'=>1,'Submission.project_id'=>$projects)));
 		        foreach($potentialsubmissions as $potentialsubmission) {
