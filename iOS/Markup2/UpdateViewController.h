@@ -12,6 +12,7 @@
 - (IBAction)closeClicked:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *versionText;
 @property (weak, nonatomic) IBOutlet UITextView *releaseNotes;
+- (IBAction)openAppStoreToUpdate:(id)sender;
 
 @end
 

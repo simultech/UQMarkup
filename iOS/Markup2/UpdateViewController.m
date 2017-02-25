@@ -38,4 +38,8 @@
 - (IBAction)closeClicked:(id)sender {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+- (IBAction)openAppStoreToUpdate:(id)sender {
+    NSString *iTunesLink = @"itms://itunes.apple.com/au/app/uqmarkup/id705700092?mt=8";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+}
 @end
