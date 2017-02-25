@@ -283,6 +283,8 @@ class CourseController extends AppController {
 
                 //if we are saving data
                 if(!empty($this->data)) {
+                    print_r($this->data);
+                    die();
 //                    $this->Course->set($this->data);
 //                    if($this->Course->validates()) {
 //                        $data = $this->data;

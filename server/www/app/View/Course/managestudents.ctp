@@ -22,7 +22,9 @@
     }
     ?>
 </table>
-    <input type='submit' value='Update Tutor Assignments' class='btn btn-primary' />
+    <p>
+        <input type='submit' value='Update Tutor Assignments' class='btn btn-primary' />
+    </p>
 </form>
 <h3>Bulk Update Student Auto-assign</h3>
 <form method='POST' enctype="multipart/form-data" action="<?php echo $baseURL; ?>/course/updateassign/<?php echo $course['Course']['uid']; ?>">
