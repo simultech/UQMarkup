@@ -1426,10 +1426,15 @@ class ApiController extends AppController {
 	}
 	
 	public function isLatestVersion() {
-		$currentversion = '2.23';
+		$currentversion = '3.00';
 		$releasenotes = '
 RELEASE NOTES 
 ====
+3.00 - 25-02-2017
+- Moved from uqmarkup.ceit.uq.edu.au to markup.sbms.uq.edu.au
+- Significant core changes to UQMarkup
+---
+- Changed the front page headers
 2.23 - 11-02-2013
 ---
 - Changed the front page headers
