@@ -104,34 +104,51 @@ class ProjectsController extends AppController {
 	public function modifygrades($submission_id) {
 		$submission = $this->Submission->findById($submission_id);
 		$file = $this->Version->find('first',array('conditions'=>array('submission_id'=>$submission_id),'recursive'=>-1,'order'=>array('Version.updated'=>'desc')));
-		$path = $this->versionsdir.$submission_id.'/'.$file['Version']['path'];
-		$file = $path.'/marks.json';
-		if($file) {
-		    if (file_exists($file) && is_readable ($file)) {
-			    if(!empty($this->data)) {
-				    $filedata = file_get_contents($file);
-				    $fileobj = json_decode($filedata);
-				    foreach($this->data as $rubricid=>$rubricval) {
-					    if($rubricval != '') {
-						    foreach($fileobj->marks as &$mrk) {
-							    if($mrk->rubric_id==$rubricid) {
-								    $mrk->value=$rubricval;
+		if($this->courseadmin) {
+			$project = $this->Project->findById($submission['Project']['id']);
+			$course = $this->Course->findByUid($project['Course']['uid']);
+			if(empty($course)) {
+				$this->permissionDenied('Not a valid course');
+			}
+			//check if they are a course coordinator
+			if($this->Ldap->isCourseCoordinator($course['Course']['uid'])) {
+				$this->breadcrumbs = array('/course/admin/'.$course['Course']['uid']=>'Manage '.$course['Course']['coursecode'],'/projects/admin/'.$project['Project']['id']=>'Manage '.$project['Project']['name'],'/projects/submissionmanager/'.$project['Project']['id']=>'Submission Manager','/projects/modifygrades/'.$project['Project']['id']=>'Modify Grades');
+				$path = $this->versionsdir.$submission_id.'/'.$file['Version']['path'];
+				$file = $path.'/marks.json';
+				if($file) {
+				    if (file_exists($file) && is_readable ($file)) {
+					    if(!empty($this->data)) {
+						    $filedata = file_get_contents($file);
+						    $fileobj = json_decode($filedata);
+						    foreach($this->data as $rubricid=>$rubricval) {
+							    if($rubricval != '') {
+								    foreach($fileobj->marks as &$mrk) {
+									    if($mrk->rubric_id==$rubricid) {
+										    $mrk->value=$rubricval;
+									    }
+								    }
 							    }
 						    }
+						    $filewrite = json_encode($fileobj);
+						    file_put_contents($file, $filewrite);
+						    $this->flashMessage('Marks updated',$this->referer(),true);
 					    }
+					    $this->set('file',$file);
+					    $this->set('rubrics',$this->Rubric->find('all',array('order'=>array('Rubric.section'),'conditions'=>array('Rubric.project_id'=>$submission['Project']['id']))));
+					    $this->set('marks',json_decode(file_get_contents($file)));
+					    $this->set('submission',$submission);
+				    } else {
+					    $this->flashMessage('Bad marks',$this->referer(),true);
+					    die();
 				    }
-				    $filewrite = json_encode($fileobj);
-				    file_put_contents($file, $filewrite);
-				    $this->flashMessage('Marks updated',$this->referer(),true);
-			    }
-			    $this->set('file',$file);
-			    $this->set('rubrics',$this->Rubric->find('all',array('order'=>array('Rubric.section'),'conditions'=>array('Rubric.project_id'=>$submission['Project']['id']))));
-			    $this->set('marks',json_decode(file_get_contents($file)));
-			    $this->set('submission',$submission);
-		    } else {
-			    $this->flashMessage('Bad marks',$this->referer(),true);
-			    die();
-		    }
+				} else {
+					$this->flashMessage('Bad marks',$this->referer(),true);
+					die();
+				}
+			} else {
+				$this->flashMessage('Bad marks',$this->referer(),true);
+				die();
+			}
 		} else {
 			$this->flashMessage('Bad marks',$this->referer(),true);
 			die();

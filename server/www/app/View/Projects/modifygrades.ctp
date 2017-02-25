@@ -1,6 +1,9 @@
-<h2>Modify grades </h2>
-<p>PLEASE NOTE: THESE ARE DATABASE VALUES, NOT STUDENT FACING VALUES</p>
-<p><?php echo $file; ?></p>
+<h2>Modify grades for <?php echo $submission['Project']['name']; ?> (UQ ID: <?php echo $submission['Activity'][0]['meta']; ?>)</h2>
+<style>
+select, input {
+	width: 100%;
+}	
+</style>
 <form method='post'>
 <?php
 	foreach($rubrics as $rubric) {
@@ -12,8 +15,26 @@
 				break;
 			}
 		}
-		echo '<input type="text" name="'.$rubric['Rubric']['id'].'" value="'.$themark.'" />';
+		if ($rubric['Rubric']['type'] != 'table') {
+			echo '<input type="text" name="'.$rubric['Rubric']['id'].'" value="'.$themark.'" />';	
+		} else {
+			echo '<select name="'.$rubric['Rubric']['id'].'">';
+			$i = 0;
+			foreach(json_decode($rubric['Rubric']['meta']) as $score) {
+				$selected = '';
+				if ($i == $themark) {
+					$selected = 'selected="selected"';
+				}
+				echo '<option '.$selected.' value="'.$i.'">'.$score->name.' (Grade '.$score->grade.' - '.$score->description.')'.'</option>';
+				$i++;
+			}
+			echo '</select>';
+			//echo '<input type="text" name="'.$rubric['Rubric']['id'].'" value="'.$themark.'" />';	
+		}
 	}
 ?>
 	<p><input type='submit' class='btn btn-primary' value='Update grades' /></p>
 </form>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<p>Please note that this form may not support rich text characters.</p>
+<p>Raw marks available here: <?php echo $file; ?></p>
