@@ -4,9 +4,10 @@
     echo ' <a class="btn" href="'.$baseURL.'/course/refreshlist/'.$course['Course']['uid'].'">Refresh</a></p>';
 ?>
 <h3>Student List</h3>
+<form method="POST">
 <table>
     <thead>
-    <tr><th>UQ ID</th><th>Name</th><th>Email</th><th>Assigned To</th></tr>
+    <tr><th>UQ ID</th><th>Name</th><th>Email</th><th>Assigned To</th><th>Update</th></tr>
     </thead>
     <?php
     foreach($students as $student) {
@@ -16,10 +17,13 @@
         } else {
             echo '<td>Unassigned</td>';
         }
+        echo '<td><input type="text" name="studentassign['.$student['User']['uqid'].']" /></td>';
         echo '</tr>';
     }
     ?>
 </table>
+    <input type='submit' value='Update Tutor Assignments' class='btn btn-primary' />
+</form>
 <h3>Bulk Update Student Auto-assign</h3>
 <form method='POST' enctype="multipart/form-data" action="<?php echo $baseURL; ?>/course/updateassign/<?php echo $course['Course']['uid']; ?>">
     <div class="fileupload fileupload-new" data-provides="fileupload">

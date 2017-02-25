@@ -266,7 +266,7 @@ class CourseController extends AppController {
                 $this->permissionDenied('Not a valid course');
             }
             $coursecode = $course['Course']['coursecode'];
-            $this->breadcrumbs = array('/course/admin/'.$courseuid=>'Manage '.$coursecode);
+            $this->breadcrumbs = array('/course/admin/'.$courseuid=>'Manage '.$coursecode,'/course/managestudents/'.$courseuid=>'Manage Students');
             //check if they are a course coordinator
             if($this->Ldap->isCourseCoordinator($courseuid)) {
                 $this->set('course',$course);
