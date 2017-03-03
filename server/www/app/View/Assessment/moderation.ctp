@@ -1,3 +1,40 @@
+<style>
+body {
+  overflow-x:hidden;
+}
+div#header {
+  display:none;
+}
+div#contentwrapper {
+  margin-top:0;
+  padding-top:0;
+  width:100%;
+  border:0;
+}
+div#content {
+  width:100%;
+  padding:0;
+}
+div#iframewrapper {
+  width:100% !important;
+  border:0 !important;
+  padding:0 !important;
+  margin:0 !important;
+}
+form.well {
+  padding:22px !important;
+  padding-top:0 !important;
+}
+h3 {
+  margin:0 !important;
+  padding:0 15px !important;
+  background:#fafafa; 
+}
+ul.breadcrumb {
+  margin-top:0px !important;;
+  margin-bottom:0 !important;
+}
+</style>
 <div id='iframewrapper'>
 	<iframe src='<?php echo $baseURL;?>/assessment/view/<?php echo $submission_hash; ?>/nowrapper'></iframe>
 </div>

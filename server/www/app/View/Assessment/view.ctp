@@ -208,6 +208,15 @@ div#header h1 {
 div#header {
 	height:27px;
 }
+div#footer {
+	display:none;
+}
+div#details {
+	display:none;
+}
+a#toggleheader {
+	display:none;
+}
 <?php
 }
 ?>
