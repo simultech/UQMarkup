@@ -30,13 +30,12 @@ if($project['Project']['option_multiple_markers'] == 1) {
 ?>
 </p>
 </div>
-<h3>Turn It In Identification</h3>
+<h3>Student Identification</h3>
 <h5>Identify unidentified submissions with Turn-It-In CSV File (individual)</h5>
 <form method='post' enctype="multipart/form-data" action='<?php echo $baseURL; ?>/projects/parsewithturnitin/<?php echo $project['Project']['id']; ?>' class="well">
     P Group (eg. P4): <input type='text' name='prepend' />
     CSV File: <input type='file' name='csv' /><input class='btn' type='submit' value='Parse Turn-It-In CSV file' />
 </form>
-<h3>Additional Tasks</h3>
 <p><a id='automatedtoggle' href="javascript:toggleautomatedtasks();">Show additional tasks</a></p>
 <div id='automated' style='display:none'>
 <!--<h5>Add P group to existing Turn-It-In CSV File (individual)</h5>
