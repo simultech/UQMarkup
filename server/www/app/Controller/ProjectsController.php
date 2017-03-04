@@ -1648,7 +1648,7 @@ class ProjectsController extends AppController {
 								}
 							}
 						}
-						if(sizeOf($ids) == sizeOf(array_unique($ids))) {	
+						if(sizeOf($ids) == sizeOf(array_unique($ids))) { 
 							//no duplicates
 							$identified = 0;
 							$submissions = $this->Submission->find('all',array('conditions'=>array('project_id'=>$project_id)));
@@ -1656,6 +1656,11 @@ class ProjectsController extends AppController {
 								if(empty($submission['Activity'])) {
 									$attachmentprefix = $submission['Attachment'][0]['title'];
 									$attachmentprefix = substr($attachmentprefix,0,strpos($attachmentprefix, '-')+1);
+									if(!in_array($attachmentprefix, $ids)) {
+										//Try with a dash
+										$attachmentprefix = $submission['Attachment'][0]['title'];
+										$attachmentprefix = substr($attachmentprefix,0,strpos($attachmentprefix, '-', strpos($attachmentprefix, '-')+1)+1); print_r($attachmentprefix);
+									}
 									if(in_array($attachmentprefix, $ids)) {
 										$student_id = array_search($attachmentprefix,$ids);
 										if($student_id != '') {
