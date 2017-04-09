@@ -238,6 +238,11 @@ if($project['Project']['option_multiple_markers'] == 1) {
 			echo '<td>';
 				echo '<div class="btn-group">';
 					echo '<a title="Submission History" href="'.$baseURL.'/projects/submissionhistory/'.$submission['Submission']['id'].'" class="btn"><i class="icon-time"></i></a>';
+					if($current == 'marked') {
+						echo '<a title="Change Marks" target="_blank" href="'.$baseURL.'/projects/modifygrades/'.$submission['Submission']['id'].'" class="btn"><i class="icon-tasks"></i></a>';
+					} else {
+						echo '<a disabled title="Change Marks" class="btn"><i class="icon-tasks"></i></a>';
+					}
 					echo '<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret"></span></a>';
 					echo '<ul class="dropdown-menu">';
 						if($current < '4') {

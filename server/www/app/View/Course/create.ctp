@@ -2,7 +2,7 @@
 <form class="well" method="POST">
 	<?php
 		echo $this->element('formfield',array('label'=>'Course Code','placeholder'=>'Code','id'=>'coursecode'));
-		echo $this->element('formfield',array('label'=>'Shadow Course Code','placeholder'=>'No Shadow Course','id'=>'shadowcode'));
+		echo $this->element('formfield',array('label'=>'Shadow Course Code (comma separated)','placeholder'=>'No Shadow Course','id'=>'shadowcode'));
 		echo $this->element('formfield',array('label'=>'Course Title','placeholder'=>'Title','id'=>'name'));
 		echo $this->element('formfield',array('label'=>'Year','placeholder'=>'Year','id'=>'year','value'=>date('Y')));
 		$sem = 1;

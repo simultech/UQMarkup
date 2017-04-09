@@ -272,7 +272,12 @@ function getAudioDuration($audiopath) {
 		$course_id = $course['Course']['id'];
 		$users = $this->Ldap->getClassList($course['Course']['coursecode'],$course['Course']['year'],$course['Course']['semester']);	
 		if($course['Course']['shadowcode'] != '') {
-		    $masters = $this->Ldap->getClassList($course['Course']['shadowcode'],$course['Course']['year'],$course['Course']['semester']);	
+			$shadows = split(',', $course['Course']['shadowcode']);
+			$masters = array();
+			foreach($shadows as $shadow) {
+			    $newmasters = $this->Ldap->getClassList($shadow,$course['Course']['year'],$course['Course']['semester']);
+			    $masters = array_merge($masters,$newmasters);
+			}
 		    $users = array_merge($users,$masters);
 		}
 		$userids = array();
@@ -300,7 +305,12 @@ function getAudioDuration($audiopath) {
 		$course_id = $course['Course']['id'];
 		$users = $this->Ldap->getClassList($course['Course']['coursecode'],$course['Course']['year'],$course['Course']['semester']);	
 		if($course['Course']['shadowcode'] != '') {
-		    $masters = $this->Ldap->getClassList($course['Course']['shadowcode'],$course['Course']['year'],$course['Course']['semester']);	
+			$shadows = split(',', $course['Course']['shadowcode']);
+			$masters = array();
+			foreach($shadows as $shadow) {
+			    $newmasters = $this->Ldap->getClassList($shadow,$course['Course']['year'],$course['Course']['semester']);
+			    $masters = array_merge($masters,$newmasters);
+			}
 		    $users = array_merge($users,$masters);
 		}
 		$userids = array();
@@ -365,7 +375,7 @@ function getAudioDuration($audiopath) {
 		    			$extn = explode('.',$file);
 		    			$extn = array_pop($extn);
 		    			if (in_array(strtolower($extn),$allowedExtensions)) {
-		    				if($extn == 'pdf') {
+		    				if(strtolower($extn) == 'pdf') {
 		    					$binary = sha1($projectfolder.'/'.$file);
 		    					if(!file_exists($binary)) {
 		    						if(rename($folder.'/'.$file,$this->binarydir.$binary)) {

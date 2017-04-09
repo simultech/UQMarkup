@@ -214,10 +214,44 @@ class AdminController extends AppController {
 				$submissions = $this->Submission->find('all',array('conditions'=>array('project_id'=>$project_id)));
 				foreach($submissions as &$submission) {
 					$submission['marks'] = $this->marks($submission['Submission']['id']);
-					//print_r($submission['marks']);
 				}
-				$this->set('rubrics',$project['Rubric']);
+				$rubrics = $this->Rubric->find('all',array('conditions'=>array('project_id'=>$project_id), 'recursive' => -1, 'order'=>array('Rubric.section')));
+				$rubs = array();
+				foreach($rubrics as $rubric) {
+					$rubs[] = $rubric['Rubric'];
+				}
+				$this->set('rubrics',$rubs);
 				$this->set('submissions',$submissions);
+			} else {
+				$this->permissionDenied('You are not a coordinator for this course');
+			}
+		} else {
+			$this->permissionDenied('Not an authorised administrator');
+		}
+	}
+	
+	
+	
+	public function getMarksCsvTwo($project_id) {
+		ini_set('memory_limit','384M');
+		set_time_limit(180);
+		$this->set('project_id',$project_id);
+		$this->layout = null;
+		header("Content-type: text/csv");
+		header("Content-Disposition: attachment; filename=marks_".$project_id."_".date('Y_m_d').".csv");
+		header("Pragma: no-cache");
+		header("Expires: 0");
+		$project = $this->Project->find('first',array('conditions'=>array('Project.id'=>$project_id)));
+		$courseuid = $project['Course']['uid'];
+		if($this->courseadmin) {
+			$course = $this->Course->findByUid($courseuid);
+			if(empty($course) && $project_id != 0) {
+				$this->permissionDenied('Not a valid course');
+			}
+			//check if they are a course coordinator
+			if($this->Ldap->isCourseCoordinator($courseuid)) {
+				echo "AAA,BBB,CCC\nDDD,EEE,FFF";
+				die();
 			} else {
 				$this->permissionDenied('You are not a coordinator for this course');
 			}
@@ -1742,6 +1776,9 @@ class AdminController extends AppController {
 		    $file = $this->Version->find('first',array('conditions'=>array('Version.id'=>$file_id),'recursive'=>-1,'order'=>array('Version.updated'=>'desc')));
 		} else {
 		    $file = $this->Version->find('first',array('conditions'=>array('submission_id'=>$submission_id),'recursive'=>-1,'order'=>array('Version.updated'=>'desc')));
+		}
+		if (!$file) {
+			return array();
 		}
 		$path = $this->versionsdir.$submission_id.'/'.$file['Version']['path'];
 		$file = $path.'/marks.json';

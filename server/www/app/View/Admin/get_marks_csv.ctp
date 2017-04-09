@@ -31,7 +31,7 @@
 		$created = 'N/A';
 		foreach($submission['Activity'] as $activity) {
 			if($activity['state_id'] == 1) {
-				$student_id .= $activity['meta'].' ';
+				$student_id .= $activity['meta'];
 			}
 			if($activity['state_id'] == 2) {
 				$marker_id = $activity['meta'];
