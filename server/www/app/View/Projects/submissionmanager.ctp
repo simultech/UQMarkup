@@ -36,6 +36,13 @@ if($project['Project']['option_multiple_markers'] == 1) {
     P Group (eg. P4): <input type='text' name='prepend' />
     CSV File: <input type='file' name='csv' /><input class='btn' type='submit' value='Parse Turn-It-In CSV file' />
 </form>
+<?php if ($project['Project']['option_group_project'] == 1) { ?>
+<h3>Group Identification</h3>
+<h5>Identify unidentified submissions with Group CSV (<a href='<?php echo $baseURL; ?>/groupidentification.csv' target='_blank'>download template here</a>)</h5>
+<form method='post' enctype="multipart/form-data" action='<?php echo $baseURL; ?>/projects/groupidentification/<?php echo $project['Project']['id']; ?>' class="well">
+    CSV File: <input type='file' name='csv' /><input class='btn' type='submit' value='Parse Group Identification CSV file' />
+</form>
+<?php } ?>
 <p><a id='automatedtoggle' href="javascript:toggleautomatedtasks();">Show additional tasks</a></p>
 <div id='automated' style='display:none'>
 <!--<h5>Add P group to existing Turn-It-In CSV File (individual)</h5>

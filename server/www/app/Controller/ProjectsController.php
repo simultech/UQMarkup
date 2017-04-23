@@ -1596,6 +1596,94 @@ class ProjectsController extends AppController {
 		}
 	}
 	
+	public function groupidentification($project_id) {
+		$project = $this->Project->find('first',array('conditions'=>array('Project.id'=>$project_id)));
+		$coursecode = $project['Course']['coursecode'];
+		$courseuid = $project['Course']['uid'];
+		if($this->courseadmin) {
+			$course = $this->Course->findByUid($courseuid);
+			$coursecode = $course['Course']['coursecode'];
+			$this->breadcrumbs = array('/course/admin/'.$courseuid=>'Manage '.$coursecode,'/projects/create/'.$courseuid=>'Add assessment');
+			if(empty($course)) {
+				$this->permissionDenied('Not a valid course');
+			}
+			//check if they are a course coordinator
+			if($this->Ldap->isCourseCoordinator($courseuid)) {
+				if(isset($_FILES['csv']) && $_FILES['csv']['error'] == 0) {
+					if (($handle = fopen($_FILES['csv']['tmp_name'], "r")) !== FALSE) {
+						echo '<pre>';
+						$identified = 0;
+						$assigned = 0;
+						$csvdata = file_get_contents($_FILES['csv']['tmp_name']);
+						$csvdata = explode("\r",$csvdata);
+						$identifications = array();
+						foreach($csvdata as $csvline) {
+							$csvline = explode(",",$csvline);
+							if ($csvline[0] != 'Marker' && $csvline[3] != '') {
+								$filename = $csvline[1].$csvline[2];
+								$identline = array(
+									'marker'=>trim($csvline[0]),
+									'students'=>array()
+								);
+								for($i=3; $i<sizeOf($csvline); $i++) {
+									if (trim($csvline[$i]) != '') {
+										$identline['students'][] = $csvline[$i];	
+									}
+								}
+								$identifications[$filename] = $identline;
+							}
+						}
+						//print_r($identifications);
+						$submissions = $this->Submission->find('all',array('conditions'=>array('project_id'=>$project_id)));
+						foreach($submissions as $submission) {
+							$filename = substr(str_replace(' ', '', $submission['Attachment'][0]['title']), 0, -4);
+							if(isset($identifications[$filename])) {
+								//If empty, identify
+								if(sizeOf($submission['Activity']) == 0) {
+									$activitydata = array();
+									$users = $this->User->find('all',array('conditions'=>array('uqid'=>$identifications[$filename]['students']), 'recursive'=>-1));
+									if($users) {
+										foreach($users as $user) {
+											$courseroleuser = $this->CourseRoleUser->find('first',array('conditions'=>array('user_id'=>$user['User']['id'],'role_id'=>'1','course_id'=>$project['Course']['id'])));
+											$activitydata['course_role_users_id'] = $courseroleuser['CourseRoleUser']['id'];
+											$activitydata['state_id'] = $this->getStateID('Submitted');
+											$activitydata['submission_id'] = $submission['Submission']['id'];
+											$activitydata['meta'] = $user['User']['uqid'];
+											$this->Activity->create();
+											$this->Activity->save($activitydata);
+										}
+									}
+									$identified++;
+								}
+								//Assign marker
+								$user = $this->User->find('first',array('conditions'=>array('uqid'=>$identifications[$filename]['marker']), 'recursive'=>-1));
+								if($user) {
+									$courseroleuser = $this->CourseRoleUser->find('first',array('conditions'=>array('user_id'=>$user['User']['id'],'role_id >'=>'1','course_id'=>$project['Course']['id'])));
+									$activitydata['course_role_users_id'] = $courseroleuser['CourseRoleUser']['id'];
+									$activitydata['state_id'] = $this->getStateID('Identified');
+									$activitydata['submission_id'] = $submission['Submission']['id'];
+									$activitydata['meta'] = $user['User']['uqid'];
+									$this->Activity->create();
+									$this->Activity->save($activitydata);
+									$assigned++;
+								}
+							}
+						}
+						$this->flashMessage($identified.' submissions identified, '.$assigned.' submissions assigned','/projects/submissionmanager/'.$project_id,true);
+					}
+				} else {
+					$this->flashMessage('Please provide a CSV file (Turnitin save as CSV from Excel)','/projects/submissionmanager/'.$project_id);
+				}
+			}  else {
+				$this->permissionDenied('You are not a coordinator for this course');
+			}
+		} else {
+			$this->permissionDenied('Not an authorised administrator');
+		}
+		die();
+					
+	}
+	
 	public function parsewithturnitin($project_id) {
 		$project = $this->Project->find('first',array('conditions'=>array('Project.id'=>$project_id)));
 		$coursecode = $project['Course']['coursecode'];
