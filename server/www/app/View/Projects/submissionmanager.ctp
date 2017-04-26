@@ -42,6 +42,10 @@ if($project['Project']['option_multiple_markers'] == 1) {
 <form method='post' enctype="multipart/form-data" action='<?php echo $baseURL; ?>/projects/groupidentification/<?php echo $project['Project']['id']; ?>' class="well">
     CSV File: <input type='file' name='csv' /><input class='btn' type='submit' value='Parse Group Identification CSV file' />
 </form>
+<h5>TURNITIN - Identify unidentified submissions with Group CSV (<a href='<?php echo $baseURL; ?>/tiigroupidentification.csv' target='_blank'>download template here</a>)</h5>
+<form method='post' enctype="multipart/form-data" action='<?php echo $baseURL; ?>/projects/tiigroupidentification/<?php echo $project['Project']['id']; ?>' class="well">
+    CSV File: <input type='file' name='csv' /><input class='btn' type='submit' value='Parse TII Group Identification CSV file' />
+</form>
 <?php } ?>
 <p><a id='automatedtoggle' href="javascript:toggleautomatedtasks();">Show additional tasks</a></p>
 <div id='automated' style='display:none'>
