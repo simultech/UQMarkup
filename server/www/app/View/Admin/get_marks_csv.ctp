@@ -22,6 +22,7 @@
 	}
 	if($graded) {
 		echo ',Final Grade';
+		echo ',Final Grade (scaled)';
 	}
 	echo "\n";
 	foreach($submissions as $submission) {
@@ -67,6 +68,8 @@
 			}
 			if($graded) {
 				echo ','.$grade.'';
+				$rounded = round(intval($grade)/intval($submission['Project']['option_gradescaling']));
+				echo ','.$rounded.'';
 			}
 			echo "\n";
 		} else {

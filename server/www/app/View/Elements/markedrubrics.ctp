@@ -98,6 +98,8 @@
     }
     if($finalgrade && $submission['Project']['course_id'] != '31' && $submission['Project']['course_id'] != '37' && $submission['Project']['course_id'] != '44' && $submission['Project']['course_id'] != '51' && $submission['Project']['course_id'] != '56' && $submission['Project']['course_id'] != '58') {
     	if(intval($fullgradecount > 0)) {
+	    	$gradecount = round(intval($gradecount)/intval($submission['Project']['option_gradescaling']));
+	    	$fullgradecount = round(intval($fullgradecount)/intval($submission['Project']['option_gradescaling']));
 		    echo '<div class="rubric_header">Final Grade</div>';
 			echo '<strong>'.$gradecount.' / '.$fullgradecount.'</strong>';
 		}

@@ -27,12 +27,12 @@
 		echo $this->element('formfield',array('label'=>'Assessment Creation Date','placeholder'=>date('d-m-Y'),'id'=>'start_date','value'=>$project['Project']['start_date']));
 		echo $this->element('formfield',array('label'=>'Assessment Submission Date','placeholder'=>date('d-m-Y'),'id'=>'submission_date','value'=>$project['Project']['submission_date']));
 		echo $this->element('formfield',array('label'=>'Assessment Return Date','placeholder'=>date('d-m-Y'),'id'=>'end_date','value'=>$project['Project']['end_date']));
-		
 		echo $this->element('checkboxfield',array('label'=>'Group Project','placeholder'=>'','id'=>'option_group_project','value'=>$project['Project']['option_group_project']));
 		echo $this->element('checkboxfield',array('label'=>'Collaborative Marking','placeholder'=>'','id'=>'option_multiple_markers','value'=>$project['Project']['option_multiple_markers']));
 		echo $this->element('checkboxfield',array('label'=>'Students can download their feedback','placeholder'=>'','id'=>'option_downloadable','value'=>$project['Project']['option_downloadable']));
 		echo $this->element('checkboxfield',array('label'=>'Automatically publish feedback','placeholder'=>'','id'=>'option_autopublish','value'=>$project['Project']['option_autopublish']));
 		echo $this->element('checkboxfield',array('label'=>'Do not automatically assign submissions to tutors','placeholder'=>'','id'=>'option_disable_autoassign','value'=>$project['Project']['option_disable_autoassign']));
+		echo $this->element('formfield',array('label'=>'Grade Scaling','placeholder'=>'1','id'=>'option_gradescaling','value'=>$project['Project']['option_gradescaling']));
 		
 	?>
   <br />
