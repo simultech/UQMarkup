@@ -69,7 +69,11 @@
 			if($graded) {
 				echo ','.$grade.'';
 				$precision = $submission['Project']['option_gradeprecision'];
-				$rounded = round(intval($grade)/($submission['Project']['option_gradescaling']), $precision);
+				$gradescale = $submission['Project']['option_gradescaling'];
+				if ($gradescale == 0) {
+					$gradescale = 1;
+				}
+				$rounded = round(intval($grade)/($gradescale), $precision);
 				echo ','.$rounded.'';
 			}
 			echo "\n";

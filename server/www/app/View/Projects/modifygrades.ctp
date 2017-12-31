@@ -20,13 +20,18 @@ select, input {
 		} else {
 			echo '<select name="'.$rubric['Rubric']['id'].'">';
 			$i = 0;
+			$found = false;
 			foreach(json_decode($rubric['Rubric']['meta']) as $score) {
 				$selected = '';
-				if ($i == $themark) {
+				if ($i == $themark && $themark != '') {
 					$selected = 'selected="selected"';
+					$found = true;
 				}
 				echo '<option '.$selected.' value="'.$i.'">'.$score->name.' (Grade '.$score->grade.' - '.$score->description.')'.'</option>';
 				$i++;
+			}
+			if (!$found) {
+				echo '<option value="'.$themark.'" selected="selected">-- Not graded --</option>';
 			}
 			echo '</select>';
 			//echo '<input type="text" name="'.$rubric['Rubric']['id'].'" value="'.$themark.'" />';	

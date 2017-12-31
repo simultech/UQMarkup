@@ -118,14 +118,24 @@ class ProjectsController extends AppController {
 				if($file) {
 				    if (file_exists($file) && is_readable ($file)) {
 					    if(!empty($this->data)) {
+						    print_r($this->data);
 						    $filedata = file_get_contents($file);
 						    $fileobj = json_decode($filedata);
 						    foreach($this->data as $rubricid=>$rubricval) {
 							    if($rubricval != '') {
+								    $found = false;
 								    foreach($fileobj->marks as &$mrk) {
 									    if($mrk->rubric_id==$rubricid) {
 										    $mrk->value=$rubricval;
+										    $found = true;
 									    }
+								    }
+								    if (!$found) {
+									    $fileobj->marks[] = (object) array(
+										    'project_id' => $project['Project']['id'],
+										    'rubric_id' => $rubricid,
+										    'value' => $rubricval
+									    );
 								    }
 							    }
 						    }
