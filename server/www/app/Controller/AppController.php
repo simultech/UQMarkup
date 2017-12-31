@@ -451,11 +451,11 @@ function getAudioDuration($audiopath) {
 			$temp_file = tempnam(sys_get_temp_dir(), $zipname);
 			$zip = new ZipArchive;
 			$zip->open($temp_file, ZipArchive::CREATE);
-			$zip->addFile($pdffile,'/'.$zipname.'/'.$safefilename);
+			$zip->addFile($pdffile,$zipname.'/'.$safefilename);
 			foreach($annots as $annot) {
 				if($annot->type == 'Recording') {
 				    $audiopath = $path.'annots/'.$annot->filename;
-				    $zip->addFile($audiopath,'/'.$zipname.'/annots/'.$annot->title.'.'.substr($annot->filename,-3));
+				    $zip->addFile($audiopath,$zipname.'/annots/'.$annot->title.'.'.substr($annot->filename,-3));
 				}
 			}
 			$zip->close();

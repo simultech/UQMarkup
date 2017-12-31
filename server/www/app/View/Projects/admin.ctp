@@ -32,8 +32,11 @@
 		echo $this->element('checkboxfield',array('label'=>'Students can download their feedback','placeholder'=>'','id'=>'option_downloadable','value'=>$project['Project']['option_downloadable']));
 		echo $this->element('checkboxfield',array('label'=>'Automatically publish feedback','placeholder'=>'','id'=>'option_autopublish','value'=>$project['Project']['option_autopublish']));
 		echo $this->element('checkboxfield',array('label'=>'Do not automatically assign submissions to tutors','placeholder'=>'','id'=>'option_disable_autoassign','value'=>$project['Project']['option_disable_autoassign']));
-		echo $this->element('formfield',array('label'=>'Grade Scaling','placeholder'=>'1','id'=>'option_gradescaling','value'=>$project['Project']['option_gradescaling']));
-		
+		echo $this->element('formfield',array('label'=>'Grade Scaling (round divide final grade by this number, use 1 for no scaling)','placeholder'=>'1','id'=>'option_gradescaling','value'=>$project['Project']['option_gradescaling']));
+		echo $this->element('formfield',array('label'=>'Grade Precision (number of decimal places for grade scaling, default 0)','placeholder'=>'0','id'=>'option_gradeprecision','value'=>$project['Project']['option_gradeprecision']));
+		echo '<p><em>Grade scaling will dynamically modify the display of the final grade into something different than the sum of all rubrics.  <br /><br />Example: 47/60 => 3.13/4 (value 15 for grade scaling and 2 for precision)
+		<br />Example: 62/100 => 6.2/10 (value 10 for grade scaling and 1 for precision)
+		<br />Example: 77/100 => 8/10 (value 10 for grade scaling and 0 for precision)</em></p>';
 	?>
   <br />
   <button type="submit" class="btn btn-primary"><i class="icon-edit icon-white"></i> Update Assessment</button>

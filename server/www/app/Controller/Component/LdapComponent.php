@@ -9,7 +9,7 @@ class LdapComponent extends Component {
 	var $referer = '/';
 	var $admins = array('uqadekke');
 	var $superadmins = array('uqadekke');
-	var $adminemails = array();
+	var $adminemails = array('sbms@uq.edu.au');
 	var $basedn = '';
 	var $ldapmin = array();
 	var $semester = 2;
