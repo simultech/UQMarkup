@@ -50,5 +50,9 @@
 	<button class='btn'>Reassign</button>
 </form>
 <h2>Download:</h2>
+<?php if(isset($version['Version'])) {?>
 <p>Current Version (download): <em><a href='<?php echo $baseURL; ?>/projects/downloadsubmission/<?php echo $submissionhash; ?>'>/<?php echo $submission['Submission']['id']; ?>/<?php echo $version['Version']['path']; ?></a></em></p>
+<?php } else { ?>
+<p>Submission is not yet marked</p>
+<?php } ?>
 

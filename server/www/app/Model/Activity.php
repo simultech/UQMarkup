@@ -69,5 +69,12 @@ class Activity extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+	
+	public function beforeSave($options = array()) {
+		if(isset($this->data['Activity']['meta'])) {
+			$this->data['Activity']['meta'] = strtolower($this->data['Activity']['meta']);
+		}
+		return true;
+	}
 
 }
