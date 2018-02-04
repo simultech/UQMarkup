@@ -45,13 +45,41 @@
 }
 
 - (void)sliderMove:(id)theSlider {
-    int sliderValue = self.slider.value;
-    [self.value setText:[NSString stringWithFormat:@"%d",sliderValue]];
+    float step = 1;
+    if ([[self.data objectForKey:@"meta"] objectForKey:@"range"]) {
+        step = [[[self.data objectForKey:@"meta"] objectForKey:@"range"] floatValue];
+    }
+    float sliderValue = self.slider.value;
+    float remaining = floorf(sliderValue/step);
+    sliderValue = remaining*step;
+    NSString *sliderCalc = @"";
+    if (step >= 1) {
+        sliderCalc = [NSString stringWithFormat:@"%.0f",sliderValue];
+    } else if (step >= 0.1) {
+        sliderCalc = [NSString stringWithFormat:@"%.1f",sliderValue];
+    } else {
+        sliderCalc = [NSString stringWithFormat:@"%.2f",sliderValue];
+    }
+    [self.value setText:sliderCalc];
 }
 
 - (void)sliderEnd:(id)theSlider {
-    int sliderValue = self.slider.value;
-    [self sendUpdatedValue:[NSString stringWithFormat:@"%d",sliderValue]];
+    float step = 1;
+    if ([[self.data objectForKey:@"meta"] objectForKey:@"range"]) {
+        step = [[[self.data objectForKey:@"meta"] objectForKey:@"range"] floatValue];
+    }
+    float sliderValue = self.slider.value;
+    float remaining = floorf(sliderValue/step);
+    sliderValue = remaining*step;
+    NSString *sliderCalc = @"";
+    if (step >= 1) {
+        sliderCalc = [NSString stringWithFormat:@"%.0f",sliderValue];
+    } else if (step >= 0.1) {
+        sliderCalc = [NSString stringWithFormat:@"%.1f",sliderValue];
+    } else {
+        sliderCalc = [NSString stringWithFormat:@"%.2f",sliderValue];
+    }
+    [self sendUpdatedValue:sliderCalc];
 }
 
 
