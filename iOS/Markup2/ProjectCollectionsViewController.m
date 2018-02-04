@@ -675,7 +675,7 @@
                                           [ann.width floatValue]*pageRect.size.width,
                                           [ann.height floatValue]*pageRect.size.height);
             UIColor *textColour = [UIColor colorWithHexString:ann.colour];
-            UIFont *font = [UIFont systemFontOfSize:9.0*pdfScale];
+            UIFont *font = [UIFont systemFontOfSize:8.0*pdfScale];
             CGContextSetFillColorWithColor(ctx, textColour.CGColor);
             NSDictionary *dict = @{ NSFontAttributeName: font, NSForegroundColorAttributeName: textColour};
             [ann.title drawInRect:annotRect withAttributes:dict];

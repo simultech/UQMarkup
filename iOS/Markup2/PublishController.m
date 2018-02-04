@@ -216,7 +216,7 @@
         CGRect annotRect = CGRectMake(x + 4.0, y + 5.0, width, height);
         
         UIColor *textColour = [UIColor colorWithHexString:textAnnot.colour];
-        UIFont *font = [UIFont systemFontOfSize:9.0];
+        UIFont *font = [UIFont systemFontOfSize:8.0];
         
         CGContextSetFillColorWithColor(pdfContext, textColour.CGColor);
         //[textAnnot.title drawInRect:annotRect withFont:font];
