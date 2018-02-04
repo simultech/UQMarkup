@@ -96,35 +96,28 @@
         
         echo $output;
     }
-    if($finalgrade && $submission['Project']['course_id'] != '31' && $submission['Project']['course_id'] != '37' && $submission['Project']['course_id'] != '44' && $submission['Project']['course_id'] != '51' && $submission['Project']['course_id'] != '56' && $submission['Project']['course_id'] != '58') {
-    	if(intval($fullgradecount > 0)) {
-	    	$precision = $submission['Project']['option_gradeprecision'];
-	    	$gradecount = round(intval($gradecount)/($submission['Project']['option_gradescaling']), $precision);
-	    	$fullgradecount = round(intval($fullgradecount)/($submission['Project']['option_gradescaling']), $precision);
-		    echo '<div class="rubric_header">Final Grade</div>';
-			echo '<strong>'.$gradecount.' / '.$fullgradecount.'</strong>';
+    if($finalgrade && $submission['Project']['option_gradeshown'] == 1) {
+	    if ($submission['Project']['option_gradeusefunction'] == 0) {
+		    if($submission['Project']['course_id'] != '31' && $submission['Project']['course_id'] != '37' && $submission['Project']['course_id'] != '44' && $submission['Project']['course_id'] != '51' && $submission['Project']['course_id'] != '56' && $submission['Project']['course_id'] != '58') {
+		    	if(intval($fullgradecount > 0)) {
+			    	$precision = $submission['Project']['option_gradeprecision'];
+			    	$gradecount = round(intval($gradecount)/($submission['Project']['option_gradescaling']), $precision);
+			    	$fullgradecount = round(intval($fullgradecount)/($submission['Project']['option_gradescaling']), $precision);
+				    echo '<div class="rubric_header">Final Grade</div>';
+					echo '<strong>'.$gradecount.' / '.$fullgradecount.'</strong>';
+				}
+		    }
+		} else {
+			echo '<div class="rubric_header">Final Grade</div>';
+			echo '<div id="final_grade_output" style="font-weight:bold"></div>';
+			echo '
+			<script>
+			var grade_input = '.$gradecount.';
+			var grade_output = "";
+			'.$submission['Project']['option_gradefunction'].'
+			$("#final_grade_output").text(grade_output);
+			</script>';
 		}
-    }
-    if(($submission['Project']['course_id'] == '56' || $submission['Project']['course_id'] == '58')) {
-	    $averaged_to = 5;
-	    if(intval($fullgradecount > 0)) {
-		    $average = round($gradecount/$fullgradecount*$averaged_to, 1);
-			echo '<strong>'.$average.' / '.$averaged_to.'</strong>';
-		}
-    }
-    if(($finalgrade && $submission['Project']['id'] == '73') || ($finalgrade && $submission['Project']['id'] == '90') || ($finalgrade && $submission['Project']['id'] == '105')) {
-	    echo '<div class="rubric_header">Final Grade</div>';
-	    if($gradecount < 3) {
-		    echo '<strong>E</strong>';
-	    } else if($gradecount < 8) {
-		    echo '<strong>D</strong>';
-	    } else if($gradecount < 13) {
-		    echo '<strong>C</strong>';
-	    } else if($gradecount < 18) {
-		    echo '<strong>B</strong>';
-	    } else {
-		    echo '<strong>A</strong>';
-	    }
     }
     ?>
     <table class="table_rubric">

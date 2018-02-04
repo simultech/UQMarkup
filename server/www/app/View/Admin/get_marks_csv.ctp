@@ -23,6 +23,7 @@
 	if($graded) {
 		echo ',Final Grade';
 		echo ',Final Grade (scaled)';
+		echo ',Custom Function Grade';
 	}
 	echo "\n";
 	foreach($submissions as $submission) {
@@ -41,8 +42,6 @@
 				$created = $activity['created'];
 			}
 		}
-		//print_r($submission);
-		//die();
 		$orderedmarks = array();
 		if(!empty($submission['marks'])) {
 			foreach($submission['marks']->marks as $mark) {
@@ -75,6 +74,21 @@
 				}
 				$rounded = round(intval($grade)/($gradescale), $precision);
 				echo ','.$rounded.'';
+				if ($submission['Project']['option_gradeusefunction'] == 1) {
+					try {
+						$grade_input = intval($grade);
+						$grade_output = '';
+						$code = $submission['Project']['option_gradefunction'];
+						$code = str_replace('grade_input', '$grade_input', $code);
+						$code = str_replace('grade_output', '$grade_output', $code);
+						eval($code);
+						echo ','.$grade_output.'';
+					} catch (Exception $e) {
+						echo ',Could not calculate function.';
+					}
+				} else {
+					echo ',';
+				}
 			}
 			echo "\n";
 		} else {
