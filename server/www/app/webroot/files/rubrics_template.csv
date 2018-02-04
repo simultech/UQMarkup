@@ -1,1 +1,10 @@
-Name,Section,Type,Description,Max,Min,Table_Count,Table_Row_1,Table_Row_2,Table_Row_3,Table_Row_4,Table_Row_5Comments,Overall,Text,Overall comments,,,,,,,,Complete,Overall,Boolean,Completed the assessment,,,,,,,,Grade,Overall,Number,Percentage,0,100,,,,,,Assessment,Overall,Table,,,,2,Pass,Fail,,,,,,,,,,Passed the assessment,Failed the assessment,,,Methods,Methods,Table,,,,5,Excellent,Good,Satisfactory,Unsatisfactory,Missing,,,,,,,Good use of methods,Mostly good use of methods,Appropriate use of methods,Inappropriate use of methods,No methods
+Name,Section,Order,Type,Description,Max,Min,Number_Range,Table_Count,Table_Row_1,Table_Row_2,Table_Row_3,Table_Row_4,Table_Row_5,,<--- HEADERS HERE HELP EXPLAIN THE COLUMNS
+Comments,Overall,1,Text,Overall comments,,,,,,,,,,,<--- TEXT ONLY HAS A DESCRIPTION
+Complete,Overall,2,Boolean,Completed the assessment,,,,,,,,,,,<--- BOOLEAN ONLY HAS A DESCRIPTION
+Grade,Overall,3,Number,Percentage,0,100,1,,,,,,,,<--- NUMBERS YOU CAN SPECIFY THE RANGE
+Assessment,Overall,4,Table,,,,,2,Pass,Fail,,,,,"<--- TABLES HAVE THREE LINES, 1 - THE GRADE"
+,,,,,,,,,1,2,,,,,<--- 2 - THE OPTIONAL MARK
+,,,,,,,,,Passed the assessment,Failed the assessment,,,,,<--- 3 - THE DESCRIPTION
+Methods,Methods,1,Table,,,,,5,Excellent,Good,Satisfactory,Unsatisfactory,Missing,,"<--- TABLES HAVE THREE LINES, 1 - THE GRADE"
+,,,,,,,,,5,4,3,2,1,,<--- 2 - THE OPTIONAL MARK
+,,,,,,,,,Good use of methods,Mostly good use of methods,Appropriate use of methods,Inappropriate use of methods,No methods,,<--- 3 - THE DESCRIPTION

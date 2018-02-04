@@ -34,8 +34,9 @@
 			break;
 		case 'number':
 			echo '<div class="control-group"><label for="data_meta_description">Description:</label><input id="data_meta_description" type="text" name="data[meta][description]" /></div>';
-			echo '<div class="control-group"><label for="data_meta_min">Minimum Value:</label><input id="data_meta_min" type="text" name="data[meta][min]" value="0" /></div>';
-			echo '<div class="control-group"><label for="data_meta_max">Maximum Value:</label><input id="data_meta_max" type="text" name="data[meta][max]" value="100" /></div>';
+			echo '<div class="control-group"><label for="data_meta_min">Minimum Value:</label><input id="data_meta_min" type="text" name="data[meta][min]" value="'.$meta->min.'" /></div>';
+			echo '<div class="control-group"><label for="data_meta_max">Maximum Value:</label><input id="data_meta_max" type="text" name="data[meta][max]" value="'.$meta->max.'" /></div>';
+			echo '<div class="control-group"><label for="data_meta_range">Step:</label><input id="data_meta_range" type="text" name="data[meta][range]" value="'.$meta->range.'" /></div>';
 			break;
 	}
 	?>

@@ -38,7 +38,7 @@
 				$output .= "".$meta->description.': <input type="text" />';
 				break;
 			case "number":
-				$output .= "".$meta->description.': <input type="text" /> ('.$meta->min.'-'.$meta->max.')';
+				$output .= "".$meta->description.': <input type="text" /> ('.$meta->min.'-'.$meta->max.', step '.$meta->range.')';
 				break;
 		}
 		echo '<tr><td class="showrubric" colspan="5">'.$output.'</td></tr>';

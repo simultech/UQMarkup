@@ -28,6 +28,7 @@
 				$('#rubricdetails').append($('<div class="control-group"><label for="data_meta_description">Description:</label><input id="data_meta_description" type="text" name="data[meta][description]" /></div>'));
 				$('#rubricdetails').append($('<div class="control-group"><label for="data_meta_min">Minimum Value:</label><input id="data_meta_min" type="text" name="data[meta][min]" value="0" /></div>'));
 				$('#rubricdetails').append($('<div class="control-group"><label for="data_meta_max">Maximum Value:</label><input id="data_meta_max" type="text" name="data[meta][max]" value="100" /></div>'));
+				$('#rubricdetails').append($('<div class="control-group"><label for="data_meta_range">Step (gap per value):</label><input id="data_meta_range" type="text" name="data[meta][range]" value="1" /></div>'));
 				$('#createrubric').prop('disabled', false);
 				break;
 		}

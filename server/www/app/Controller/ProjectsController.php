@@ -818,33 +818,38 @@ class ProjectsController extends AppController {
 									$line++;
 									continue;
 								}
-								if($rubric_line[0] == '' && $rubric_line[2] == '') {
+								if($rubric_line[0] == '' && $rubric_line[3] == '') {
 									$line++;
 									continue;
 								}
-								$type = strtolower($rubric_line[2]);
+								$type = strtolower($rubric_line[3]);
 								$types = array('table','boolean','text','number');
 								if(!in_array($type, $types)) {
-									$errors[] = 'Invalid type '.$rubric_line[2];
+									$errors[] = 'Invalid type '.$rubric_line[3];
 									break;
+								}
+								$order = 99;
+								if($rubric_line[2] != '') {
+									$order = intval($rubric_line[2]);
 								}
 								$meta = array();
 								switch($type) {
 									case 'text':
 									case 'boolean':
-										$meta['description'] = $rubric_line[3];
+										$meta['description'] = $rubric_line[4];
 										break;
 									case 'number':
-										$meta['description'] = $rubric_line[3];
-										$meta['min'] = $rubric_line[4];
-										$meta['max'] = $rubric_line[5];
+										$meta['description'] = $rubric_line[4];
+										$meta['min'] = $rubric_line[5];
+										$meta['max'] = $rubric_line[6];
+										$meta['range'] = $rubric_line[7];
 										break;
 									case 'table':
-										$count = $rubric_line[6];
+										$count = $rubric_line[8];
 										for($i=0; $i<$count; $i++) {
-											if(isset($rubric_line[7+$i])) {
-												if(isset($rubric_array[$line+1][7+$i])) {
-													$meta[] = array('name'=>$rubric_line[7+$i],'description'=>$rubric_array[$line+1][7+$i]);
+											if(isset($rubric_line[9+$i])) {
+												if(isset($rubric_array[$line+1][9+$i])) {
+													$meta[] = array('name'=>$rubric_line[9+$i],'grade'=>$rubric_array[$line+1][9+$i],'description'=>$rubric_array[$line+2][9+$i]);
 												} else {
 													$errors[] = 'Invalid table structure for line '.($line+1);
 												}
@@ -859,6 +864,7 @@ class ProjectsController extends AppController {
 									'name'=>$rubric_line[0],
 									'type'=>$type,
 									'section'=>$rubric_line[1],
+									'order'=>$order,
 									'meta'=>json_encode($meta),
 								);
 								$this->Rubric->create();
