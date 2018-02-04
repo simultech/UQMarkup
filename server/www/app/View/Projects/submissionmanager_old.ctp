@@ -102,114 +102,32 @@ if($project['Project']['option_multiple_markers'] == 1) {
 		$tonotbepublished = '<strong>'.$tonotbepublished.'</strong> submissions';
 	}
 ?>
-<p><?php echo $tobepublished; ?> ready for publishing, <?php echo $tonotbepublished; ?> not ready for publishing</p>
+<p><?php echo $tobepublished; ?> ready for publishing</p>
+<p><?php echo $tonotbepublished; ?> not ready for publishing</p>
 <?php
 	echo $this->Html->link('Publish submissions',array('controller'=>'projects','action'=>'publishsubmissions',$project['Project']['id']),array('class'=>'btn btn-warning'),"Are you sure you are ready to publish ready submissions?");
 ?>
 <h3>Manage Submissions</h3>
+<a class='btn btn-default' style='float:right' id='selectall' onclick="selectallsubmissions();">Select All Submissions</a>
 <script src="<?php echo $baseURL; ?>/js/angular/controllers/userlookupController.js"></script>
-<div id="studentLookup">
-	<span id="studentLookupHelper">Quickly find the names or IDs of course students and staff</span>
 <div ng-app="uqmarkupApp">
 	<userlookup course="<?php echo $project['Project']['course_id']; ?>"></userlookup>
 </div>
-</div>
 <script type='text/javascript'>
-	var toggleType = 'or';
-	function toggleFilterType(type) {
-		toggleType = type;
-		if (toggleType == 'or') {
-			$('#type_or').addClass('btn-primary');
-			$('#type_and').removeClass('btn-primary');
-		} else {
-			$('#type_or').removeClass('btn-primary');
-			$('#type_and').addClass('btn-primary');
-		}
-		updateFilter();
-	}
-	$(document).ready(function() {
-		toggleFilterType('or');	
-	});
 	function selectallsubmissions() {
-		var allChecked = true;
-		$('.submissionrow:not(.hidden)').each(function(i,e) {
-			if (!$(e).find('.subcheck').prop('checked')) {
-				allChecked = false;
-			}
-		});
-		$('.submissionrow:not(.hidden)').each(function(i,e) {
-			$(e).find('.subcheck').prop('checked', !allChecked);
-			if (allChecked) {
-				$('#selectall').html('Select Visible Submissions');
-			} else {
-				$('#selectall').html('Deselect Visible Submissions');
-			}
-		});
-	}
-	function updateFilter() {
-		var newFilter = $('#filter').val().toLowerCase();
-		if (newFilter === '') {
-			$('.submissionrow').removeClass('hidden');
+		if($('#selectall').text() == 'Select All Submissions') {
+			$('.subcheck').prop('checked', true);
+			$('#selectall').text('Deslect All Submissions');
 		} else {
-			var allChecked = true;
-			newFilter = newFilter.split(' ');
-			$('.submissionrow').each(function(i,e) {
-				var el = $(e);
-				el.addClass('hidden');
-				var data = el.data('filter');
-				var stillValid = true;
-				for (var i=0; i<newFilter.length; i++) {
-					if (toggleType == 'or') {
-						if (data.indexOf(newFilter[i]) > -1) {
-							el.removeClass('hidden');
-							if (!el.find('.subcheck').prop('checked')) {
-								allChecked = false;
-							}
-							break;
-						}
-					} else {
-						if (data.indexOf(newFilter[i]) == -1) {
-							stillValid = false;
-						}
-					}
-				}
-				if (stillValid) {
-					el.removeClass('hidden');
-					if (!el.find('.subcheck').prop('checked')) {
-						allChecked = false;
-					}
-				}
-			});
-			if (allChecked) {
-				$('#selectall').html('Deselect Visible Submissions');
-			} else {
-				$('#selectall').html('Select Visible Submissions');
-			}
+			$('.subcheck').prop('checked', false);
+			$('#selectall').text('Select All Submissions');
 		}
-	}
-	function forceLower(strInput) {
-		strInput.value=strInput.value.toLowerCase();
-	}
-	function checkBulkSubmit() {
-		if($('#bulk_delete_radio').prop('checked')) {
-			return confirm('Are you sure you want to bulk delete?  This operation is not reversable!');
-		}
-		return true;
-	}
+	}	
 </script>
-<a class='btn btn-default' style='float:right' id='selectall' onclick="selectallsubmissions();">Select Visible Submissions</a>
-<div id='filterbox'>
-	<strong style="float:left; margin-right: 5px; margin-top:5px;">Live filter:</strong>
-	<input type="text" id="filter" style="width:300px; float:left; " onkeyup="updateFilter()" /></label>
-	<div class="btn-group" style="float:left">
-		<a class='btn btn-default' id='type_or' onclick="toggleFilterType('or');">Any terms</a>
-		<a class='btn btn-default' id='type_and' onclick="toggleFilterType('and');">All terms</a>
-	</div>
-</div>
-<form method='post' onsubmit="return checkBulkSubmit();">
+<form method='post'>
 <table>
 	<thead>
-		<tr><th></th><th>Status</th><th>ID</th><th>Filename</th><th>Next Action</th><th style="width:100px;">Actions</th></tr>
+		<tr><th></th><th>Status</th><th>ID</th><th>Filename</th><th>Next Action</th><th>Actions</th></tr>
 	</thead>
 <?php
 	foreach($submissions as $submission) {
@@ -271,12 +189,12 @@ if($project['Project']['option_multiple_markers'] == 1) {
 		switch($currentstate) {
 			case 1:
 				$status = 'Uploaded';
-				$nexttask = '<td>Link to student/s: <input name="data[identify]['.$submission['Submission']['id'].']" type="text" onkeyup="return forceLower(this);" /> <span class="label label-info">, separated</span></td>';		
+				$nexttask = '<td>Link to student/s: <input name="data[identify]['.$submission['Submission']['id'].']" type="text" /> <span class="label label-info">, separated</span></td>';		
 				break;
 			case 2:
 				$current = 'identified';
 				$status = 'Identified';
-				$nexttask = '<td>Assign to tutor: <input name="data[assign]['.$submission['Submission']['id'].']" type="text" onkeyup="return forceLower(this);" /> <span class="label label-info">, separated</span></td>';
+				$nexttask = '<td>Assign to tutor: <input name="data[assign]['.$submission['Submission']['id'].']" type="text" /> <span class="label label-info">, separated</span></td>';
 				break;
 			case 3:
 				$current = 'assigned';
@@ -316,18 +234,16 @@ if($project['Project']['option_multiple_markers'] == 1) {
 				$submissionlink = $baseURL.'/assessment/view/'.$submission['Submission']['encode_id'];
 				break;
 		}
-		$title = str_replace('.pdf','',$submission['Attachment'][0]['title']);
-		$fulltitle = $title;
-		$maxlength = 29;
-		if(strlen($title) > $maxlength) {
-			$title = substr($title,0,$maxlength).'...';
-		}
-		$filterdata = $status . ' ' . $submission['Submission']['id'] . ' ' . $nexttask . ' ' . $fulltitle;
-		$filterdata = str_replace('"','', strtolower($filterdata));
-		echo '<tr class="submissionrow" data-filter="'.$filterdata.'">';
+		echo '<tr>';
 			echo '<td><input type="checkbox" class="subcheck" name="data[submissionchecked]['.$submission['Submission']['id'].']" /></td>';
 			echo '<td class="state_'.$current.'">'.$status.'</td>';
 			echo '<td>'.$submission['Submission']['id'].'</td>';
+			$title = str_replace('.pdf','',$submission['Attachment'][0]['title']);
+			$fulltitle = $title;
+			$maxlength = 29;
+			if(strlen($title) > $maxlength) {
+				$title = substr($title,0,$maxlength).'...';
+			}
 			echo '<td><a style="font-size:90%;" href="'.$submissionlink.'" target="_blank" title="'.$fulltitle.'">'.$title.'</a></td>';
 			echo $nexttask;
 			echo '<td>';
@@ -338,7 +254,18 @@ if($project['Project']['option_multiple_markers'] == 1) {
 					} else {
 						echo '<a disabled title="Change Marks" class="btn"><i class="icon-tasks"></i></a>';
 					}
-					echo $this->Html->link('<i class="icon-remove"></i>',array('controller'=>'projects','action'=>'deletesubmission',$submission['Submission']['id']),array('class'=>'btn btn-danger', 'style'=> 'color:white', 'escape' => false),"Are you sure you wish to delete this submission? All information regarding this submission will be deleted.");
+					echo '<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret"></span></a>';
+					echo '<ul class="dropdown-menu">';
+						if($current < '4') {
+							echo '<li>'.$this->Html->link('Set to ready for publishing',array('controller'=>'projects','action'=>'submissionfinish',$submission['Submission']['id']),array(),"Are you sure you wish to bypass the marking step?").'</li>';
+						}
+						echo '<li>'.$this->Html->link('Submission History',array('controller'=>'projects','action'=>'submissionhistory',$submission['Submission']['id']),array()).'</li>';
+						if($current == 'marked') {
+							echo '<li>'.$this->Html->link('Modify Grades',array('controller'=>'projects','action'=>'modifygrades',$submission['Submission']['id']),array()).'</li>';
+						}
+						echo '<li class="divider"></li>';
+						echo '<li>'.$this->Html->link('Delete submission',array('controller'=>'projects','action'=>'deletesubmission',$submission['Submission']['id']),array(),"Are you sure you wish to delete this submission? All information regarding this submission will be deleted.").'</li>';
+					echo '</ul>';
 				echo '</div>';
 			echo '</td>';
 		echo '</tr>';
@@ -349,12 +276,12 @@ if($project['Project']['option_multiple_markers'] == 1) {
 <h5>Advanced Options:</h5>
 <p><a id='advancedtoggle' href="javascript:toggleadvancedoptions();">Show advanced options</a></p>
 <div id='advanced' style='display:none'>
-<label>Associate submissions to markers instead of students: <input type='checkbox' name='usetutors' id='usetutors' /></label>
 <div class='well'>
+	<label>Identify as tutors instead of students: <input type='checkbox' name='usetutors' id='usetutors' /></label>
 	<label>Selected - No action: <input type='radio' name='selected_action' value='none' checked='checked' /></label>
 	<label>Selected - Set selected as already marked: <input type='radio' name='selected_action' value='marked' /></label>
 	<label>Selected - Publish selected: <input type='radio' name='selected_action' value='publish' /></label>
-	<label>Selected - Delete submissions: <input type='radio' id='bulk_delete_radio' name='selected_action' value='delete' /></label>
+	<!--<label>Selected - Delete submissions: <input type='radio' name='selected_action' value='delete' /></label>-->
 </div>
 </div>
 	<input type='submit' value='Update Submissions' class='btn' />

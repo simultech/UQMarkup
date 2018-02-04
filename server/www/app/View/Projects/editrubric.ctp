@@ -6,6 +6,11 @@
 	<?php
 	echo $this->element('formfield',array('label'=>'Rubric Name','placeholder'=>'Rubric Name','id'=>'name','value'=>$rubric['Rubric']['name']));
 	echo $this->element('formfield',array('label'=>'Section (optional)','placeholder'=>'Section 1','id'=>'section','value'=>$rubric['Rubric']['section']));
+	$order = '';
+	if ($rubric['Rubric']['order'] < 99) {
+		$order = $rubric['Rubric']['order'];
+	}
+	echo $this->element('formfield',array('label'=>'Section Order (optional)','placeholder'=>'1','id'=>'order','value'=>$order));
 	switch($rubric['Rubric']['type']) {
 		case 'table':
 			echo '<div id="tabletypes">';

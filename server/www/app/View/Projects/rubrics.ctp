@@ -28,6 +28,7 @@
 	<?php
 		echo $this->element('formfield',array('label'=>'Rubric Name','placeholder'=>'Rubric Name','id'=>'name'));
 		echo $this->element('formfield',array('label'=>'Section (optional)','placeholder'=>'Section 1','id'=>'section'));
+		echo $this->element('formfield',array('label'=>'Section Order (optional)','placeholder'=>'99','id'=>'order'));
 		echo $this->element('rubrictypes');
 	?>
   <br />

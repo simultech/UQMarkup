@@ -73,7 +73,7 @@ class AdminController extends AppController {
 					}
 					//print_r($submission['marks']);
 				}
-				$rubrics = $this->Rubric->find('all',array('conditions'=>array('project_id'=>$project_id)));
+				$rubrics = $this->Rubric->find('all',array('order'=>array('Rubric.section','Rubric.order'),'conditions'=>array('project_id'=>$project_id)));
 				$this->set('rubrics',$rubrics);
 				$this->set('submissions',$submissions);
 				if(!empty($this->data)) {
@@ -132,7 +132,7 @@ class AdminController extends AppController {
 					}
 					//print_r($submission['marks']);
 				}
-				$rubrics = $this->Rubric->find('all',array('conditions'=>array('project_id'=>$project_id)));
+				$rubrics = $this->Rubric->find('all',array('order'=>array('Rubric.section','Rubric.order'),'conditions'=>array('project_id'=>$project_id)));
 				$this->set('rubrics',$rubrics);
 				$this->set('submissions',$submissions);
 			} else {
@@ -215,7 +215,7 @@ class AdminController extends AppController {
 				foreach($submissions as &$submission) {
 					$submission['marks'] = $this->marks($submission['Submission']['id']);
 				}
-				$rubrics = $this->Rubric->find('all',array('conditions'=>array('project_id'=>$project_id), 'recursive' => -1, 'order'=>array('Rubric.section')));
+				$rubrics = $this->Rubric->find('all',array('conditions'=>array('project_id'=>$project_id), 'recursive' => -1, 'order'=>array('Rubric.section','Rubric.order')));
 				$rubs = array();
 				foreach($rubrics as $rubric) {
 					$rubs[] = $rubric['Rubric'];
@@ -1661,7 +1661,7 @@ class AdminController extends AppController {
 	}
 	
 	function getRubricMarks($submission,$marks) {
-		$rubrics = $this->Rubric->find('all',array('conditions'=>array('project_id'=>$submission['Project']['id'])));
+		$rubrics = $this->Rubric->find('all',array('order'=>array('Rubric.section','Rubric.order'),'conditions'=>array('project_id'=>$submission['Project']['id'])));
 		$rubricmarks = array();
 		foreach($rubrics as $rubric) {
 			$themark = '';

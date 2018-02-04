@@ -187,7 +187,7 @@ class AssessmentController extends AppController {
 			$this->set('logactions',$logactions);
 			$this->set('annots',$this->annotations($submission_id,$selectedversion));
 			$this->set('marks',$this->marks($submission_id,$selectedversion));
-			$rubrics = $this->Rubric->find('all',array('conditions'=>array('project_id'=>$submission['Submission']['project_id']),'recursive'=>-1,'order'=>array('section', 'id')));
+			$rubrics = $this->Rubric->find('all',array('order'=>array('Rubric.section','Rubric.order'),'conditions'=>array('project_id'=>$submission['Submission']['project_id']),'recursive'=>-1));
 			if($submission['Project']['option_multiple_markers'] == 1) {
 				$marks = $this->Aggregatedmark->findBySubmissionId($submission_id);
 				$marks = (array)json_decode($marks['Aggregatedmark']['marks']);
@@ -280,7 +280,7 @@ class AssessmentController extends AppController {
 			$this->set('marks',$this->marks($submission_id));
 			$coursecode = $this->Course->find('first',array('conditions'=>array('Course.id'=>$submission['Project']['course_id']),'recursive'=>-1));
 			$this->set('submission',$submission);
-			$this->set('rubrics',$this->Rubric->find('all',array('conditions'=>array('project_id'=>$submission['Submission']['project_id']),'recursive'=>-1)));
+			$this->set('rubrics',$this->Rubric->find('all',array('order'=>array('Rubric.section','Rubric.order'),'conditions'=>array('project_id'=>$submission['Submission']['project_id']),'recursive'=>-1)));
 			$this->set('logtypes',$this->Logtype->find('list'));
 			$coursecode = $coursecode['Course']['coursecode'].' - '.$submission['Project']['name'];
 			$this->breadcrumbs = array('/course/create'=>'Moderation feedback for  <strong style="color:orange;">'.implode(',',array_values($students)).' ('.implode(',',array_keys($students)).')</strong>');	

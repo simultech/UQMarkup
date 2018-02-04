@@ -1534,13 +1534,19 @@ Initial release for 2013
 	}
 	
 	function rub_cmp($a, $b) {
-		return strcmp($a['id'], $b['id']);
+		if ($a['order'] == $b['order']) {
+        	if ($a['section'] == $b['section']) {
+        		return 0;
+			}
+			return ($a['section'] > $b['section']) ? -1 : 1;
+    	}
+		return ($a['order'] > $b['order']) ? -1 : 1;
 	}
 	
 	function detailProjects2($projectsarray) {
 		
 		foreach($projectsarray as $project_key=>&$project) {
-			usort($project['Rubric'], array($this, "rub_cmp"));
+			//usort($project['Rubric'], array($this, "rub_cmp"));
 			foreach($project['Rubric'] as &$rubric) {
 				$rubric['meta'] = json_decode($rubric['meta']);
 			}

@@ -48,7 +48,7 @@ class AppController extends Controller {
 
 	var $breadcrumbs = array();
 	
-	var $uses = array('Role','State','Logtype','User','Project','Course','Adminuser');
+	var $uses = array('Role','State','Logtype','User','Project','Course','Adminuser', 'Rubric');
 	
 	var $roles = array();
 	var $states = array();
@@ -65,7 +65,7 @@ class AppController extends Controller {
 	var $webdavsuburl = __WEBDAV_URL__;
 	
 	var $debugmode = true;
-	var $debug = false; //this will auto-get set to true if debugmode is true and its a developer
+	var $debug = true; //this will auto-get set to true if debugmode is true and its a developer
 	
 	function beforeFilter() {
 		if($_SERVER['SERVER_PORT'] != '443' && Configure::read('force_ssl')) {
@@ -457,6 +457,55 @@ function getAudioDuration($audiopath) {
 				    $audiopath = $path.'annots/'.$annot->filename;
 				    $zip->addFile($audiopath,$zipname.'/annots/'.$annot->title.'.'.substr($annot->filename,-3));
 				}
+			}
+			try {
+				$file = $path.'marks.json';
+				if($file) {
+				    if (file_exists($file) && is_readable ($file)) {
+					    $markscontent = '';
+					    $filedata = file_get_contents($file);
+					    $marks = json_decode($filedata);
+					    $rubrics = $this->Rubric->find('all',array('order'=>array('Rubric.section','Rubric.order'),'conditions'=>array('Rubric.project_id'=>$submission['Project']['id'])));
+					    foreach($rubrics as $rubric) {
+						    $meta = json_decode($rubric['Rubric']['meta']);
+						    $mark_value = null;
+					        foreach($marks->marks as $mark) {
+					            if ($mark->rubric_id == $rubric['Rubric']['id']) {
+					                $mark_value = $mark->value;
+					            }
+					        }
+						    $markscontent .= $rubric['Rubric']['section']."\n";
+						    $markscontent .= $rubric['Rubric']['name']."\n";
+						    switch($rubric['Rubric']['type']) {
+							    case "table":
+							    	$count = 0;
+									foreach($meta as $option) {
+										if (isset($mark_value) && intval($mark_value) == $count) {
+											$markscontent .= $option->name."\n";
+											$markscontent .= $option->description."\n";
+										}
+										$count++;	
+									}
+							    	break;
+							    case "boolean":
+							    	$markscontent .= $meta->description."\n";
+							    	$markscontent .= $mark_value."\n";
+							    	break;
+							    case "text":
+							    	$markscontent .= $meta->description."\n";
+							    	$markscontent .= $mark_value."\n";
+							    	break;
+							    case "number":
+							    	$markscontent .= $meta->description."\n";
+							    	$markscontent .= $mark_value."\n";
+							    	break;
+							}
+							$markscontent .= "\n\n";
+						}
+						$zip->addFromString('marks.txt', $markscontent);
+					}
+				}
+			} catch (MyException $e) {
 			}
 			$zip->close();
 			header('Content-Type: application/zip');

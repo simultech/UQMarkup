@@ -80,7 +80,7 @@ class Project extends AppModel {
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
-			'order' => '',
+			'order' => array('section','order'),
 			'limit' => '',
 			'offset' => '',
 			'exclusive' => '',

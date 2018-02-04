@@ -173,7 +173,20 @@ td.showrubric div.table p {
 }
 
 
-
+#studentLookup {
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	background:#333;
+	height:30px;
+	z-index:99999;
+}
+#studentLookupHelper {
+	float:right;
+	color:#ddd;
+	margin:5px;
+}
 
 
 
@@ -627,6 +640,9 @@ div#states {
 		position:absolute;
 		width:100%;
 		text-align:center;
+	}
+	tr.hidden td {
+		display: none;
 	}
 	div#workflowstates div.state {
 		border:1px solid #ccc;

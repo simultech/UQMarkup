@@ -7,11 +7,19 @@
 		$meta = json_decode($rubric['Rubric']['meta']);
 		$output = '';
 		if(isset($editrubrics) && $editrubrics == true) {
-			echo '<table class="rubricheader"><tr><th>Name</th><th>Section</th><th>Type</th><th>Actions</th></tr>';
-			echo '<tr><td><strong>'.$rubric['Rubric']['name'].'</strong></td><td>'.$rubric['Rubric']['section'].'</td><td>'.$rubrictypes[$rubric['Rubric']['type']].'</td>';
+			echo '<table class="rubricheader"><tr><th>Name</th><th>Section</th><th>Section Order</th><th>Type</th><th>Actions</th></tr>';
+			$order = '';
+			if ($rubric['Rubric']['order'] < 99) {
+				$order = $rubric['Rubric']['order'];
+			}
+			echo '<tr><td><strong>'.$rubric['Rubric']['name'].'</strong></td><td>'.$rubric['Rubric']['section'].'</td><td>'.$order.'</td><td>'.$rubrictypes[$rubric['Rubric']['type']].'</td>';
 			echo '<td style="text-align:center;">'.$this->Html->link('Edit',array('action'=>'editrubric',$rubric['Rubric']['id']),array()).' | '.$this->Html->link('Remove',array('action'=>'removerubric',$rubric['Rubric']['id']),array(),'Are you sure you wish to remove this rubric?').'</td></tr>';
 		} else {
-			$output .= '<p><strong>Section '.$rubric['Rubric']['section'].'</strong>: '.$rubric['Rubric']['name'].'</p>';
+			$output .= '<p><strong>Section '.$rubric['Rubric']['section'].'</strong>: '.$rubric['Rubric']['name'];
+			if ($rubric['Rubric']['order'] < 99) {
+				$output .= ' (section order '.$rubric['Rubric']['order'].')';
+			}
+			$output .= '</p>';
 		}
 		switch($rubric['Rubric']['type']) {
 			case "table":
@@ -33,7 +41,7 @@
 				$output .= "".$meta->description.': <input type="text" /> ('.$meta->min.'-'.$meta->max.')';
 				break;
 		}
-		echo '<tr><td class="showrubric" colspan="4">'.$output.'</td></tr>';
+		echo '<tr><td class="showrubric" colspan="5">'.$output.'</td></tr>';
 		if(isset($editrubrics) && $editrubrics == true) {
 			echo '</table>';
 		}

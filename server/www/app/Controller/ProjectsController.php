@@ -144,7 +144,7 @@ class ProjectsController extends AppController {
 						    $this->flashMessage('Marks updated',$this->referer(),true);
 					    }
 					    $this->set('file',$file);
-					    $this->set('rubrics',$this->Rubric->find('all',array('order'=>array('Rubric.section'),'conditions'=>array('Rubric.project_id'=>$submission['Project']['id']))));
+					    $this->set('rubrics',$this->Rubric->find('all',array('order'=>array('Rubric.section', 'Rubric.order'),'conditions'=>array('Rubric.project_id'=>$submission['Project']['id']))));
 					    $this->set('marks',json_decode(file_get_contents($file)));
 					    $this->set('submission',$submission);
 				    } else {
@@ -181,7 +181,7 @@ class ProjectsController extends AppController {
 				$this->set('project',$project);
 				$this->Submission->unBindModel(array('hasMany' => array('Log')));
 				$this->set('submissions',$this->Submission->find('all',array('conditions'=>array('project_id'=>$project_id))));
-				$rubrics = $this->Rubric->find('all',array('conditions'=>array('Rubric.project_id'=>$project_id)));
+				$rubrics = $this->Rubric->find('all',array('order'=>array('Rubric.section', 'Rubric.order'),'conditions'=>array('Rubric.project_id'=>$project_id)));
 				$this->set('rubrics',$rubrics);
 				$tags = $this->Tag->find('all',array('conditions'=>array('Tag.project_id'=>$project_id)));
 				$this->set('tags',$tags);
@@ -771,7 +771,7 @@ class ProjectsController extends AppController {
 			}
 			//check if they are a course coordinator
 			if($this->Ldap->isCourseCoordinator($courseuid)) {
-				$oldrubrics = $this->Rubric->find('all',array('conditions'=>array('project_id'=>$_POST['othercourse'])));
+				$oldrubrics = $this->Rubric->find('all',array('order'=>array('Rubric.section', 'Rubric.order'),'conditions'=>array('project_id'=>$_POST['othercourse'])));
 				foreach($oldrubrics as $oldrubric) {
 					$newrubric = $oldrubric['Rubric'];
 					unset($newrubric['id']);
@@ -805,7 +805,7 @@ class ProjectsController extends AppController {
 				$othercourses = $this->Course->find('all');
 				$this->set('othercourses',$othercourses,array('order'=>array('created'=>'desc')));
 				$this->set('project',$project);
-				$this->set('rubrics',$this->Rubric->find('all',array('conditions'=>array('Rubric.project_id'=>$project_id))));
+				$this->set('rubrics',$this->Rubric->find('all',array('order'=>array('Rubric.section', 'Rubric.order'),'conditions'=>array('Rubric.project_id'=>$project_id))));
 				if(!empty($this->data)) {
 					if(isset($this->data['importrubric'])) {
 						if(isset($_FILES['rubric']) && $_FILES['rubric']['error'] == 0) {
@@ -877,6 +877,9 @@ class ProjectsController extends AppController {
 					} else {
 						$rubricdata = $this->data;
 						$rubricdata['meta'] = json_encode($rubricdata['meta']);
+						if ($rubricdata['order'] == '') {
+							$rubricdata['order'] = 99;
+						}
 						$this->Rubric->set($rubricdata);
 						if($this->Rubric->validates()) {
 						    if($this->Rubric->save($rubricdata)) {
@@ -954,6 +957,9 @@ class ProjectsController extends AppController {
 				if(!empty($this->data)) {
 					$rubricdata = $this->data;
 					$rubricdata['meta'] = json_encode($this->data['meta']);
+					if ($rubricdata['order'] == '') {
+						$rubricdata['order'] = 99;
+					}
 					$this->Rubric->set($rubricdata);
 					if($this->Rubric->validates()) {
 						if($this->Rubric->save($rubricdata)) {
