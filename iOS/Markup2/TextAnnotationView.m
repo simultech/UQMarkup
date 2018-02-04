@@ -24,6 +24,7 @@ static int const autoCorrectHeightAddition = 20;
         // Initialization code
         CGRect tvF = CGRectMake(0.0, 0.0, frame.size.width, frame.size.height+autoCorrectHeightAddition);
         self.textView = [[UITextView alloc] initWithFrame:tvF];
+        [self.textView setAutocorrectionType:UITextAutocorrectionTypeNo];
         [self.textView setTextColor:[[AnnotationSettingsManager sharedManager] textColor]];
         [self.textView setBackgroundColor:[UIColor clearColor]];
         [self.textView setFont:[UIFont systemFontOfSize:14.0]];
