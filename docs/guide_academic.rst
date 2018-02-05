@@ -6,4 +6,12 @@
 Guide for Academics
 ====================================
 
-Coming soon
+Super Administration
+========================
+Super Admins are a list of users who can perform certain tasks in UQMarkup. Course Coordinators who need full control over their course should be added as Super Admins.  Super Admins can also choose to receive all System Email (such as feedback from students.)
+
+Creating Courses
+========================
+Only selected super users can create courses in UQMarkup (see Super Administration).
+
+
