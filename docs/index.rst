@@ -6,7 +6,7 @@
 UQMarkup Documentation
 ====================================
 
-UQMarkup is a research project which allows students to receive various forms of in-situ feedback for their assignments. 
+UQMarkup is a research project which allows students to receive various forms of in-situ feedback for their assignments.
 
 .. toctree::
    :maxdepth: 2
@@ -19,7 +19,7 @@ User Manual
 * :ref:`Guide for Tutors`
 * :ref:`Guide for Students`
 * :ref:`todo`
-
+* :doc:`todo`
 
 Contact
 ==================
