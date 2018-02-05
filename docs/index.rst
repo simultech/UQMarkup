@@ -11,15 +11,18 @@ UQMarkup is a research project which allows students to receive various forms of
 .. toctree::
    :maxdepth: 2
 
+System Manual
+==================
+
+* :doc:`guide_admin`
+
 User Manual
 ==================
 
-* :ref:`Guide for Administrators`
-* :ref:`Guide for Academics`
-* :ref:`Guide for Tutors`
-* :ref:`Guide for Students`
-* :ref:`todo`
-* :doc:`todo`
+* :doc:`guide_student`
+* :doc:`guide_markers`
+* :doc:`guide_academic`
+
 
 Contact
 ==================
