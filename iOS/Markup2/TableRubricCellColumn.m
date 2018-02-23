@@ -29,6 +29,7 @@
         self.descriptionView = [[UITextView alloc] initWithFrame:CGRectMake(0, 40, self.frame.size.width, self.frame.size.height)];
         [self.descriptionView setBackgroundColor:[UIColor whiteColor]];
         [self.descriptionView setEditable:NO];
+        [self.descriptionView setSelectable:NO];
         [self.descriptionView setFont:[UIFont systemFontOfSize:14.0]];
         [self addSubview:self.descriptionView];
         
